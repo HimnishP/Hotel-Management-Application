@@ -1,10 +1,14 @@
 package com.hotelmanagementapplication.controller;
 
+import com.hotelmanagementapplication.ManagerAnalyticsScreen;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ManagerLoginScreenController {
     public Button validateButton;
@@ -19,9 +23,10 @@ public class ManagerLoginScreenController {
      *
      * @param actionEvent Event
      */
-    public void validateButtonHandler(ActionEvent actionEvent) {
+    public void validateButtonHandler(ActionEvent actionEvent) throws IOException {
         if (validate()) {
-            // TODO switch screens here
+            Stage stage = new Stage();
+            ManagerAnalyticsScreen.launchManagerAnalyticsScreen(stage);
             System.out.println("Validation successful!");
         }
     }

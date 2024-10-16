@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ManagerLoginScreen {
     /**
-     * This method will load the login screen for customers
+     * This method will load the login screen for manager
      *
      * @param stage in which it will be loaded
      * @throws IOException Exception handling
