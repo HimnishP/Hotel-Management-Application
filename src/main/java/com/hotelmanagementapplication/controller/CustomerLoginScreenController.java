@@ -21,7 +21,7 @@ public class CustomerLoginScreenController {
      */
     public void validateButtonHandler(ActionEvent actionEvent) {
         if (validate()) {
-            // TODO switch screens here
+            // TODO switch screens here and implement Customers information here
             System.out.println("Validation successful!");
         }
     }
@@ -51,7 +51,7 @@ public class CustomerLoginScreenController {
             showAlert("A valid email is required.");
             return false;
         }
-        if (password.isEmpty() || password.length() < 6) {
+        if (password.length() < 6) {
             showAlert("Password must be at least 6 characters long.");
             return false;
         }

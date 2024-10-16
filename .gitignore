@@ -51,5 +51,6 @@ Thumbs.db
 *.tmp
 *.bak
 
-# IntelliJ IDEA project files
-.idea/
+# Ignore IDE settings
+.idea/workspace.xml
+.idea/*

@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="-modified .gitignore file">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/ManagerAnalyticsScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/ManagerAnalyticsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/hotelmanagementapplication/view/ManagerAnalyticsScreen.fxml" afterDir="false" />
+    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="-Modified GUI's ( made it so that once the screen changes it does not open a new page. It stays on the same stage)&#10;-Also modified comments and added TODO's in the controllers where we handle the User's information">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/ManagerLoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/ManagerLoginScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/CustomerLoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/CustomerLoginScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/ManagerLoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/ManagerLoginScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/WelcomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/WelcomeScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +128,8 @@
       <updated>1729013494983</updated>
       <workItem from="1729013496093" duration="18558000" />
       <workItem from="1729035657593" duration="49000" />
-      <workItem from="1729037494180" duration="5331000" />
+      <workItem from="1729037494180" duration="5616000" />
+      <workItem from="1729103846997" duration="960000" />
     </task>
     <task id="LOCAL-00001" summary="-Added the .gitignore file&#10;-Added the README.md file&#10;-Implemented the MVC architecture&#10;-Developed basic GUI's ( WelcomeScreen , CustomerLoginScreen , ManagerLoginScreen )">
       <option name="closed" value="true" />
@@ -163,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729033165068</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="-Added a new GUI screen which contains the staff/manager's analytic scree (where he can view list of customers , payments , check room statues and modify his own profile )">
+      <option name="closed" value="true" />
+      <created>1729050106671</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729050106671</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +193,8 @@
     <MESSAGE value="-.gitignorefile" />
     <MESSAGE value="-formated code &#10;-added extra comments&#10;-including pom.xml and module-info.java files in version control" />
     <MESSAGE value="-modified .gitignore file" />
-    <option name="LAST_COMMIT_MESSAGE" value="-modified .gitignore file" />
+    <MESSAGE value="-Added a new GUI screen which contains the staff/manager's analytic scree (where he can view list of customers , payments , check room statues and modify his own profile )" />
+    <MESSAGE value="-Modified GUI's ( made it so that once the screen changes it does not open a new page. It stays on the same stage)&#10;-Also modified comments and added TODO's in the controllers where we handle the User's information" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Modified GUI's ( made it so that once the screen changes it does not open a new page. It stays on the same stage)&#10;-Also modified comments and added TODO's in the controllers where we handle the User's information" />
   </component>
 </project>
