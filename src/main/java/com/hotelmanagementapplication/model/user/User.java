@@ -1,7 +1,14 @@
 package com.hotelmanagementapplication.model.user;
 
+import lombok.*;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@EqualsAndHashCode
 public class User {
     private static int userIdCounter = 0; // will be used to increment user id
     private String userId;

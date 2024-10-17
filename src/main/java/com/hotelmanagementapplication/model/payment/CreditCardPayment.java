@@ -1,5 +1,12 @@
 package com.hotelmanagementapplication.model.payment;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class CreditCardPayment implements PaymentMethod {
     private String creditCardNumber;
     private String cardHolderName;
