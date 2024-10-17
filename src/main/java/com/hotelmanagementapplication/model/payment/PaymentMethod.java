@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.model;
+package com.hotelmanagementapplication.model.payment;
 
 public interface PaymentMethod {
 

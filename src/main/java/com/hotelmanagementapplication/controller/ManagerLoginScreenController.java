@@ -1,6 +1,6 @@
 package com.hotelmanagementapplication.controller;
 
-import com.hotelmanagementapplication.ManagerAnalyticsScreen;
+import com.hotelmanagementapplication.guis.ManagerAnalyticsScreen;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;

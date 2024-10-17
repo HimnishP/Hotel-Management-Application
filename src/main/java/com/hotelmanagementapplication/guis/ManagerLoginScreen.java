@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication;
+package com.hotelmanagementapplication.guis;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ public class ManagerLoginScreen {
      * @throws IOException Exception handling
      */
     public static void launchManagerLoginScreen(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ManagerLoginScreen.class.getResource("view/ManagerLoginScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ManagerLoginScreen.class.getResource("/com/hotelmanagementapplication/view/ManagerLoginScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hotel Management Application - Manager Login");
         stage.setScene(scene);

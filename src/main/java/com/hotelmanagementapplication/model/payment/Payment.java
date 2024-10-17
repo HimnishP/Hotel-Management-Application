@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.model;
+package com.hotelmanagementapplication.model.payment;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -8,8 +8,7 @@ public class Payment {
     private PaymentMethod paymentMethod;
     private double amount;
     private LocalDate paymentDate;
-//    protected HashMap<List<Payment>> customerPurchases; // not working
-
+    private HashMap<String, List<Payment>> customerPurchases;
 
     public Payment(PaymentMethod paymentMethod, double amount, LocalDate paymentDate) {
         this.paymentMethod = paymentMethod;

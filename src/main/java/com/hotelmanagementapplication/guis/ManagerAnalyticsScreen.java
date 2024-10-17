@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication;
+package com.hotelmanagementapplication.guis;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ public class ManagerAnalyticsScreen {
      * @throws IOException Exception handling
      */
     public static void launchManagerAnalyticsScreen(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CustomerLoginScreen.class.getResource("view/ManagerAnalyticsScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CustomerLoginScreen.class.getResource("/com/hotelmanagementapplication/view/ManagerAnalyticsScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hotel Management Application - Manager Analytics");
         stage.setScene(scene);

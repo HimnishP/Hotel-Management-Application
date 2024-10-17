@@ -1,7 +1,7 @@
 package com.hotelmanagementapplication.controller;
 
-import com.hotelmanagementapplication.CustomerLoginScreen;
-import com.hotelmanagementapplication.ManagerLoginScreen;
+import com.hotelmanagementapplication.guis.CustomerLoginScreen;
+import com.hotelmanagementapplication.guis.ManagerLoginScreen;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;

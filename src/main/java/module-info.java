@@ -1,10 +1,12 @@
 module com.hotelmanagementapplication.hotelmanagementapplication {
     requires javafx.controls;
     requires javafx.fxml;
+    requires static lombok;
 
 
-    opens com.hotelmanagementapplication to javafx.fxml;
-    exports com.hotelmanagementapplication;
     exports com.hotelmanagementapplication.controller;
     opens com.hotelmanagementapplication.controller to javafx.fxml;
+    exports com.hotelmanagementapplication.guis;
+    opens com.hotelmanagementapplication.guis to javafx.fxml;
+
 }

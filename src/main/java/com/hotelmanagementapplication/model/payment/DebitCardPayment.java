@@ -1,6 +1,6 @@
-package com.hotelmanagementapplication.model;
+package com.hotelmanagementapplication.model.payment;
 
-public class DebitCardPayment implements PaymentMethod{
+public class DebitCardPayment implements PaymentMethod {
     private String debitCardNumber;
     private String cardHolderName;
     private String expirationDate;

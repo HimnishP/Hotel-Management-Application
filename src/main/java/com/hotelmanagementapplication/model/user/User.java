@@ -1,15 +1,18 @@
-package com.hotelmanagementapplication.model;
+package com.hotelmanagementapplication.model.user;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
-    private int userId;
+    private static int userIdCounter = 0; // will be used to increment user id
+    private String userId;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNum;
     private String password;
 
-    public User(int userId, String firstName, String lastName, String email, String phoneNum, String password) {
-        this.userId = userId;
+    public User(String firstName, String lastName, String email, String phoneNum, String password) {
+        this.userId = String.valueOf(++userIdCounter);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -18,7 +21,8 @@ public class User {
     }
 
     /**
-     * puts the first and last name together
+     * Puts the first and last name together.
+     *
      * @return the full name of the user
      */
     public String getFullName() {

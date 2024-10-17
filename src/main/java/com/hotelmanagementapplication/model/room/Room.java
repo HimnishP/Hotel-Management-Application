@@ -1,16 +1,17 @@
-package com.hotelmanagementapplication.model;
+package com.hotelmanagementapplication.model.room;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-    private int roomId;
+    private static int idCounter = 0; // will be used to increment room ids
+    private String roomId;
     private double price;
     private Status status;
     List<Room> listOfRooms;
 
-    public Room(int roomId, double price, Status status) {
-        this.roomId = roomId;
+    public Room(double price, Status status) {
+        this.roomId = String.valueOf(++idCounter);
         this.price = price;
         this.status = status;
         listOfRooms = new ArrayList<>();
