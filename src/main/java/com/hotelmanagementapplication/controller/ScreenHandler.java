@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 
 public class ScreenHandler {
     /**
@@ -17,7 +20,10 @@ public class ScreenHandler {
      * @throws IOException If there is an error loading the FXML file.
      */
     public static void switchScreens(Stage primaryStage, String fxmlFileName, String title) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ScreenHandler.class.getResource("/com/hotelmanagementapplication/view/" + fxmlFileName));
+        Locale locale = LocaleSingleton.getInstance().getCurrentLocale();
+        String baseName = "messages." + locale.getLanguage() + "_" + locale.getCountry().toLowerCase();
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale);
+        FXMLLoader fxmlLoader = new FXMLLoader(ScreenHandler.class.getResource("/com/hotelmanagementapplication/view/" + fxmlFileName), resourceBundle);
         Parent root = fxmlLoader.load();
         primaryStage.setTitle(title);
         primaryStage.setScene(new Scene(root));
