@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="-Modified GUI's ( made it so that once the screen changes it does not open a new page. It stays on the same stage)&#10;-Also modified comments and added TODO's in the controllers where we handle the User's information">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/ScreenHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="Made class ScreenHandler.java will handle switching screens">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/ScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/ScreenHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/WelcomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/WelcomeScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/ManagerLoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/ManagerLoginScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/WelcomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/WelcomeScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/guis/CustomerLoginScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/guis/ManagerAnalyticsScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/guis/ManagerLoginScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/guis/WelcomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/WelcomeScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +103,7 @@
       <module name="HotelManagementApplication" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.hotelmanagementapplication.*" />
+          <option name="PATTERN" value="com.hotelmanagementapplication.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -122,7 +116,7 @@
       <module name="HotelManagementApplication" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.hotelmanagementapplication.*" />
+          <option name="PATTERN" value="com.hotelmanagementapplication.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -158,7 +152,7 @@
       <workItem from="1729037494180" duration="5616000" />
       <workItem from="1729103846997" duration="960000" />
       <workItem from="1729117004340" duration="3962000" />
-      <workItem from="1729213167826" duration="1470000" />
+      <workItem from="1729213167826" duration="1846000" />
     </task>
     <task id="LOCAL-00001" summary="-Added the .gitignore file&#10;-Added the README.md file&#10;-Implemented the MVC architecture&#10;-Developed basic GUI's ( WelcomeScreen , CustomerLoginScreen , ManagerLoginScreen )">
       <option name="closed" value="true" />
@@ -200,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729050106671</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Made class ScreenHandler.java will handle switching screens">
+      <option name="closed" value="true" />
+      <created>1729216130403</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729216130403</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +226,7 @@
     <MESSAGE value="-modified .gitignore file" />
     <MESSAGE value="-Added a new GUI screen which contains the staff/manager's analytic scree (where he can view list of customers , payments , check room statues and modify his own profile )" />
     <MESSAGE value="-Modified GUI's ( made it so that once the screen changes it does not open a new page. It stays on the same stage)&#10;-Also modified comments and added TODO's in the controllers where we handle the User's information" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Modified GUI's ( made it so that once the screen changes it does not open a new page. It stays on the same stage)&#10;-Also modified comments and added TODO's in the controllers where we handle the User's information" />
+    <MESSAGE value="Made class ScreenHandler.java will handle switching screens" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made class ScreenHandler.java will handle switching screens" />
   </component>
 </project>

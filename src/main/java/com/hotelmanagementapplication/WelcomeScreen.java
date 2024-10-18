@@ -1,5 +1,6 @@
 package com.hotelmanagementapplication;
 
+import com.hotelmanagementapplication.controller.ScreenHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
