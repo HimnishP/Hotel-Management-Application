@@ -1,7 +1,6 @@
 package com.hotelmanagementapplication.controller;
 
-import com.hotelmanagementapplication.guis.CustomerLoginScreen;
-import com.hotelmanagementapplication.guis.ManagerLoginScreen;
+import com.hotelmanagementapplication.ScreenHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -16,8 +15,8 @@ public class WelcomeScreenController {
      * @throws IOException Exception
      */
     public void staffButtonHandler(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        ManagerLoginScreen.launchManagerLoginScreen(stage);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "ManagerLoginScreen.fxml", "Hotel Management Application - Manager Login Screen");
     }
 
     /**
@@ -27,7 +26,7 @@ public class WelcomeScreenController {
      * @throws IOException Exception
      */
     public void customerButtonHandler(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        CustomerLoginScreen.launchCustomerLoginScreen(stage);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "CustomerLoginScreen.fxml", "Hotel Management Application - Customer Login Screen");
     }
 }

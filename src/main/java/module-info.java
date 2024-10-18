@@ -6,7 +6,7 @@ module com.hotelmanagementapplication.hotelmanagementapplication {
 
     exports com.hotelmanagementapplication.controller;
     opens com.hotelmanagementapplication.controller to javafx.fxml;
-    exports com.hotelmanagementapplication.guis;
-    opens com.hotelmanagementapplication.guis to javafx.fxml;
+    exports com.hotelmanagementapplication;
+    opens com.hotelmanagementapplication to javafx.fxml;
 
 }

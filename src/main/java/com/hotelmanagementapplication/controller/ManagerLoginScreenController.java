@@ -1,6 +1,6 @@
 package com.hotelmanagementapplication.controller;
 
-import com.hotelmanagementapplication.guis.ManagerAnalyticsScreen;
+import com.hotelmanagementapplication.ScreenHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -28,7 +28,7 @@ public class ManagerLoginScreenController {
         if (validate()) {
             //TODO Implement Staff's / Managers information here
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            ManagerAnalyticsScreen.launchManagerAnalyticsScreen(stage);
+            ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml", "Hotel Management Application - Manager Analytics Screen");
         }
     }
 
