@@ -18,7 +18,7 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #808080;">
          <children>
-            <Label layoutX="23.0" layoutY="247.0" text="Hotel Management Application">
+            <Label layoutX="23.0" layoutY="247.0" text="%title.label">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
@@ -31,8 +31,8 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label layoutX="176.0" layoutY="526.0" text="Copyright All Rights Reserved" />
-            <Label layoutX="176.0" layoutY="565.0" text="Himnish Patel and Parth Patel" />
+            <Label layoutX="176.0" layoutY="526.0" text="%copyright.label" />
+            <Label layoutX="176.0" layoutY="565.0" text="%name.label" />
             <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="117.0" layoutY="537.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/CopyrightLogopng.png" />
@@ -62,22 +62,22 @@
       </AnchorPane>
       <AnchorPane prefHeight="563.0" prefWidth="501.0" style="-fx-background-color: #C0C0C0;">
          <children>
-            <Label layoutX="47.0" layoutY="88.0" text="Please fill out the form bellow">
+            <Label layoutX="47.0" layoutY="88.0" text="%form.prompt.label">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="47.0" layoutY="206.0" text="First Name :" />
-            <Label layoutX="47.0" layoutY="241.0" text="Last Name :" />
-            <Label layoutX="47.0" layoutY="279.0" text="Email :" />
-            <Label layoutX="47.0" layoutY="312.0" text="Password :" />
-            <Label layoutX="47.0" layoutY="349.0" text="Phone-Number :" />
-            <Button fx:id="validateButton" layoutX="70.0" layoutY="424.0" mnemonicParsing="false" onAction="#validateButtonHandler" prefHeight="31.0" prefWidth="340.0" text="Validate" />
-            <TextField fx:id="firstNameTF" layoutX="180.0" layoutY="201.0" prefHeight="31.0" prefWidth="220.0" promptText="John" />
-            <TextField fx:id="emailTF" layoutX="180.0" layoutY="274.0" prefHeight="31.0" prefWidth="220.0" promptText="example@gmail.com" />
-            <TextField fx:id="lastNameTF" layoutX="180.0" layoutY="236.0" prefHeight="31.0" prefWidth="220.0" promptText="Doe" />
-            <PasswordField fx:id="passwordTF" layoutX="180.0" layoutY="307.0" prefHeight="31.0" prefWidth="220.0" promptText="*********" />
-            <TextField fx:id="phoneNumberTF" layoutX="180.0" layoutY="344.0" prefHeight="31.0" prefWidth="220.0" promptText="123-456-7890" />
+            <Label layoutX="47.0" layoutY="206.0" text="%first.name.label" />
+            <Label layoutX="47.0" layoutY="241.0" text="%last.name.label" />
+            <Label layoutX="47.0" layoutY="279.0" text="%email.label" />
+            <Label layoutX="47.0" layoutY="312.0" text="%password.label" />
+            <Label layoutX="47.0" layoutY="349.0" text="%phone.number.label" />
+            <Button fx:id="validateButton" layoutX="70.0" layoutY="424.0" mnemonicParsing="false" onAction="#validateButtonHandler" prefHeight="31.0" prefWidth="340.0" text="%validate.button" />
+            <TextField fx:id="firstNameTF" layoutX="180.0" layoutY="201.0" prefHeight="31.0" prefWidth="220.0" promptText="%first.name.prompt" />
+            <TextField fx:id="emailTF" layoutX="180.0" layoutY="274.0" prefHeight="31.0" prefWidth="220.0" promptText="%email.prompt" />
+            <TextField fx:id="lastNameTF" layoutX="180.0" layoutY="236.0" prefHeight="31.0" prefWidth="220.0" promptText="%last.name.prompt" />
+            <PasswordField fx:id="passwordTF" layoutX="180.0" layoutY="307.0" prefHeight="31.0" prefWidth="220.0" promptText="%password.prompt" />
+            <TextField fx:id="phoneNumberTF" layoutX="180.0" layoutY="344.0" prefHeight="31.0" prefWidth="220.0" promptText="%phone.number.prompt" />
          </children>
       </AnchorPane>
    </children>

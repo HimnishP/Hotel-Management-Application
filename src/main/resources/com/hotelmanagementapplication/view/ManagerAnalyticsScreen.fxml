@@ -16,7 +16,7 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #808080;">
          <children>
-            <Label layoutX="23.0" layoutY="247.0" text="Hotel Management Application">
+            <Label layoutX="23.0" layoutY="247.0" fx:id="hotelManagementLabel" text="%hotelManagementApp">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
@@ -29,8 +29,8 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label layoutX="176.0" layoutY="526.0" text="Copyright All Rights Reserved" />
-            <Label layoutX="176.0" layoutY="565.0" text="Himnish Patel and Parth Patel" />
+            <Label layoutX="176.0" layoutY="526.0" fx:id="copyrightLabel" text="%copyrightText" />
+            <Label layoutX="176.0" layoutY="565.0" fx:id="authorsLabel" text="%authors" />
             <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="117.0" layoutY="537.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/CopyrightLogopng.png" />
@@ -60,11 +60,11 @@
       </AnchorPane>
       <AnchorPane prefHeight="563.0" prefWidth="501.0" style="-fx-background-color: #C0C0C0;">
          <children>
-            <Button layoutX="74.0" layoutY="310.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="View Payments" />
-            <Button layoutX="74.0" layoutY="240.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="View all users" />
-            <Button layoutX="74.0" layoutY="374.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="View Room Statuses" />
-            <Button layoutX="74.0" layoutY="178.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="Update Profile" />
-            <Label layoutX="143.0" layoutY="99.0" text="Hello, &quot;Manager Name&quot; !">
+            <Button layoutX="74.0" layoutY="310.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" fx:id="viewPaymentsButton" text="%viewPayments" />
+            <Button layoutX="74.0" layoutY="240.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" fx:id="viewAllUsersButton" text="%viewAllUsers" />
+            <Button layoutX="74.0" layoutY="374.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" fx:id="viewRoomStatusesButton" text="%viewRoomStatuses" />
+            <Button layoutX="74.0" layoutY="178.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" fx:id="updateProfileButton" text="%updateProfile" />
+            <Label layoutX="143.0" layoutY="99.0" fx:id="helloManagerLabel" text="%helloManager">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>

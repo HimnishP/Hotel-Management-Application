@@ -7,10 +7,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class WelcomeScreenController {
-
     public RadioButton englishRadioButton;
     public RadioButton frenchRadioButton;
 
@@ -22,7 +20,7 @@ public class WelcomeScreenController {
      */
     public void staffButtonHandler(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        ScreenHandler.switchScreens(primaryStage, "ManagerLoginScreen.fxml", "Hotel Management Application - Manager Login Screen");
+        ScreenHandler.switchScreens(primaryStage, "ManagerLoginScreen.fxml");
     }
 
     /**
@@ -33,7 +31,7 @@ public class WelcomeScreenController {
      */
     public void customerButtonHandler(ActionEvent event) throws IOException {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        ScreenHandler.switchScreens(primaryStage, "CustomerLoginScreen.fxml", "Hotel Management Application - Customer Login Screen");
+        ScreenHandler.switchScreens(primaryStage, "CustomerLoginScreen.fxml");
     }
 
     /**
@@ -59,15 +57,9 @@ public class WelcomeScreenController {
     private void updateLocale() {
         Stage stage = (Stage) englishRadioButton.getScene().getWindow();
         try {
-            Locale locale = LocaleSingleton.getInstance().getCurrentLocale();
-            String baseName = "messages." + locale.getLanguage() + "_" + locale.getCountry().toLowerCase();
-            ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale);
-            String windowTitle = resourceBundle.getString("title.label_main");
-            ScreenHandler.switchScreens(stage, "WelcomeScreen.fxml", windowTitle);
+            ScreenHandler.switchScreens(stage, "WelcomeScreen.fxml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }

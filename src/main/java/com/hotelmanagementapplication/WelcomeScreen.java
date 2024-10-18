@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class WelcomeScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-     ScreenHandler.switchScreens(primaryStage,"WelcomeScreen.fxml","Hotel Management Application - Welcome Screen");
+        ScreenHandler.switchScreens(primaryStage, "WelcomeScreen.fxml");
     }
 
     public static void main(String[] args) {

@@ -27,7 +27,7 @@ public class ManagerLoginScreenController {
         if (validate()) {
             //TODO Implement Staff's / Managers information here
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml", "Hotel Management Application - Manager Analytics Screen");
+            ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml");
         }
     }
 
