@@ -39,7 +39,7 @@ public class WelcomeScreenController {
      *
      * @param actionEvent Event
      */
-    public void handleEnglishRadioButton(ActionEvent actionEvent) {
+    public void handleEnglishRadioButton(ActionEvent actionEvent) throws IOException {
         LocaleSingleton.getInstance().setCurrentLocale(Locale.of("en", "US"));
         updateLocale();
     }
@@ -49,17 +49,14 @@ public class WelcomeScreenController {
      *
      * @param actionEvent Event
      */
-    public void handleFrenchRadioButton(ActionEvent actionEvent) {
+    public void handleFrenchRadioButton(ActionEvent actionEvent) throws IOException {
         LocaleSingleton.getInstance().setCurrentLocale(Locale.of("fr", "CA"));
         updateLocale();
     }
 
-    private void updateLocale() {
+    private void updateLocale() throws IOException {
         Stage stage = (Stage) englishRadioButton.getScene().getWindow();
-        try {
-            ScreenHandler.switchScreens(stage, "WelcomeScreen.fxml");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ScreenHandler.switchScreens(stage, "WelcomeScreen.fxml");
+
     }
 }
