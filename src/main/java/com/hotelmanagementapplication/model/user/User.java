@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @EqualsAndHashCode
 public class User {
     private static int userIdCounter = 0; // will be used to increment user id
-    private String userId;
+    private int userId;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     public User(String firstName, String lastName, String email, String phoneNum, String password) {
-        this.userId = String.valueOf(++userIdCounter);
+        this.userId = ++userIdCounter;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

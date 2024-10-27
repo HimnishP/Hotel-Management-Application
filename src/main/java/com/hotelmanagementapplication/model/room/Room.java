@@ -12,15 +12,13 @@ import java.util.List;
 @ToString
 public class Room {
     private static int idCounter = 0; // will be used to increment room ids
-    private String roomId;
+    private int roomId;
     private double price;
     private Status status;
-    List<Room> listOfRooms;
 
     public Room(double price, Status status) {
-        this.roomId = String.valueOf(++idCounter);
+        this.roomId = ++idCounter;
         this.price = price;
         this.status = status;
-        listOfRooms = new ArrayList<>();
     }
 }
