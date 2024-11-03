@@ -18,14 +18,18 @@ public class ScreenHandler {
      * @throws IOException If there is an error loading the FXML file.
      */
     public static void switchScreens(Stage primaryStage, String fxmlFileName) throws IOException {
-        Locale locale = LocaleSingleton.getInstance().getCurrentLocale();
-        String baseName = "messages." + locale.getLanguage() + "_" + locale.getCountry().toLowerCase();
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale);
+        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
         FXMLLoader fxmlLoader = new FXMLLoader(ScreenHandler.class.getResource("/com/hotelmanagementapplication/view/" + fxmlFileName), resourceBundle);
         Parent root = fxmlLoader.load();
         String windowTitle = resourceBundle.getString("title.label_main");
         primaryStage.setTitle(windowTitle);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    public static ResourceBundle getResourceBundle() {
+        Locale locale = LocaleSingleton.getInstance().getCurrentLocale();
+        String baseName = "messages." + locale.getLanguage() + "_" + locale.getCountry().toLowerCase();
+        return ResourceBundle.getBundle(baseName, locale);
     }
 }
