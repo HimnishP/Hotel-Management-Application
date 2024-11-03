@@ -35,7 +35,7 @@ class HotelManagementSystemTest {
      */
     @Test
     void removeUser_ShouldRemoveUserSuccessfully() {
-        User manager = new Manager("Bob", "Smith", "bob@example.com", "0987654321", "password");
+        User manager = new Manager("Bob", "Smith", "bob@example.com", "098-765-4321", "password");
         hotelManagementSystem.addUser(manager);
         User removedUser = hotelManagementSystem.removeUser(manager.getUserId());
         assertEquals(manager, removedUser);
@@ -48,12 +48,28 @@ class HotelManagementSystemTest {
      */
     @Test
     void removeUser_ShouldThrowExceptionIfUserDoesNotExist() {
-        // Assert
         assertThrows(NoSuchElementException.class, () -> hotelManagementSystem.removeUser(999));
     }
 
+    /**
+     * Tests retrieval of a user by their ID.
+     * Asserts that the correct user is returned when a valid ID is provided.
+     */
     @Test
-    void getUserById() {
+    void getUserById_ShouldReturnUser() {
+        User customer = new Customer("Charlie", "Brown", "charlie@example.com", "111-222-3333", "password");
+        hotelManagementSystem.addUser(customer);
+        User retrievedUser = hotelManagementSystem.getUserById(customer.getUserId());
+        assertEquals(customer, retrievedUser);
+    }
+
+    /**
+     * Tests retrieval of a user by an ID that does not exist.
+     * Asserts that an exception is thrown when attempting to get a non-existing user.
+     */
+    @Test
+    void getUserById_ShouldThrowExceptionIfUserDoesNotExist() {
+        assertThrows(NoSuchElementException.class, () -> hotelManagementSystem.getUserById(999));
     }
 
     @Test
