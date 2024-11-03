@@ -1,5 +1,8 @@
 package com.hotelmanagementapplication.controller;
 
+import com.hotelmanagementapplication.model.HotelManagementSystem;
+import com.hotelmanagementapplication.model.user.Customer;
+import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,6 +17,7 @@ public class CustomerLoginScreenController {
     public PasswordField passwordTF;
     public TextField phoneNumberTF;
 
+    HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
     /**
      * This button event handler will validate the customers information and switch screens
      *
@@ -21,8 +25,13 @@ public class CustomerLoginScreenController {
      */
     public void validateButtonHandler(ActionEvent actionEvent) {
         if (validate()) {
-            // TODO switch screens here and implement Customers information here
-            System.out.println("Validation successful!");
+            String firstName = firstNameTF.getText();
+            String lastName = lastNameTF.getText();
+            String email = emailTF.getText();
+            String password = passwordTF.getText();
+            String phoneNumber = phoneNumberTF.getText();
+            User customer = new Customer(firstName, lastName, email, phoneNumber, password);
+            hotelManagementSystem.addUser(customer);
         }
     }
 

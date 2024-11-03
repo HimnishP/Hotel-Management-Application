@@ -1,6 +1,10 @@
 package com.hotelmanagementapplication.controller;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
+import com.hotelmanagementapplication.model.HotelManagementSystem;
+import com.hotelmanagementapplication.model.user.Customer;
+import com.hotelmanagementapplication.model.user.Manager;
+import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -18,6 +22,7 @@ public class ManagerLoginScreenController {
     public TextField lastNameTF;
     public PasswordField passwordTF;
     public TextField phoneNumberTF;
+    HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
 
     /**
      * This button event handler will validate the customers information and switch screens to the manager analytics screen
@@ -26,7 +31,13 @@ public class ManagerLoginScreenController {
      */
     public void validateButtonHandler(ActionEvent actionEvent) throws IOException {
         if (validate()) {
-            //TODO Implement Staff's / Managers information here
+            String firstName = firstNameTF.getText();
+            String lastName = lastNameTF.getText();
+            String email = emailTF.getText();
+            String password = passwordTF.getText();
+            String phoneNumber = phoneNumberTF.getText();
+            User manager = new Manager(firstName, lastName, email, phoneNumber, password);
+            hotelManagementSystem.addUser(manager);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml");
         }
