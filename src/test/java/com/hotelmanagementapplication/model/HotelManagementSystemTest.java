@@ -6,6 +6,8 @@ import com.hotelmanagementapplication.model.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class HotelManagementSystemTest {
@@ -40,8 +42,14 @@ class HotelManagementSystemTest {
         assertFalse(hotelManagementSystem.userExists(manager.getUserId()));
     }
 
+    /**
+     * Tests the removal of a user that does not exist.
+     * Asserts that an exception is thrown when attempting to remove a non-existing user.
+     */
     @Test
-    void removeUser() {
+    void removeUser_ShouldThrowExceptionIfUserDoesNotExist() {
+        // Assert
+        assertThrows(NoSuchElementException.class, () -> hotelManagementSystem.removeUser(999));
     }
 
     @Test
