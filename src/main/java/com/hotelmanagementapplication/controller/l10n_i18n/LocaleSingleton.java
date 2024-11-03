@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.controller;
+package com.hotelmanagementapplication.controller.l10n_i18n;
 
 import lombok.Getter;
 import lombok.Setter;

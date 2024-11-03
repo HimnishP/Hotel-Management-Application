@@ -1,5 +1,7 @@
 package com.hotelmanagementapplication.controller;
 
+import com.hotelmanagementapplication.controller.l10n_i18n.LocaleSingleton;
+import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
