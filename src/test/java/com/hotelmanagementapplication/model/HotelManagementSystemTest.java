@@ -1,6 +1,7 @@
 package com.hotelmanagementapplication.model;
 
 import com.hotelmanagementapplication.model.user.Customer;
+import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,9 +27,17 @@ class HotelManagementSystemTest {
         assertTrue(hotelManagementSystem.userExists(customer.getUserId()));
     }
 
-
+    /**
+     * Tests the removal of a user from the system.
+     * Asserts that the correct user is removed and can no longer be found in the system.
+     */
     @Test
-    void addUser() {
+    void removeUser_ShouldRemoveUserSuccessfully() {
+        User manager = new Manager("Bob", "Smith", "bob@example.com", "0987654321", "password");
+        hotelManagementSystem.addUser(manager);
+        User removedUser = hotelManagementSystem.removeUser(manager.getUserId());
+        assertEquals(manager, removedUser);
+        assertFalse(hotelManagementSystem.userExists(manager.getUserId()));
     }
 
     @Test
