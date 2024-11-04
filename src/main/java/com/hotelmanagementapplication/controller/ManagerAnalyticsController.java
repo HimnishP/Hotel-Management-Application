@@ -12,7 +12,7 @@ public class ManagerAnalyticsController {
     @FXML
     private Label helloManagerLabel;
 
-    HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+    private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
 
     @FXML
     public void initialize() {

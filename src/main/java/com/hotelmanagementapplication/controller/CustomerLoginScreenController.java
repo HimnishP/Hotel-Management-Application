@@ -21,7 +21,7 @@ public class CustomerLoginScreenController {
     @FXML
     private TextField phoneNumberTF;
 
-    HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+    private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
 
     /**
      * This button event handler will validate the customers information and switch screens
