@@ -9,7 +9,8 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ManagerAnalyticsController {
-    public Label helloManagerLabel;
+    @FXML
+    private Label helloManagerLabel;
 
     HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
 

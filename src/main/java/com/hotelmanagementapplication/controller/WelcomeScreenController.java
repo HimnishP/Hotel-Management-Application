@@ -3,6 +3,7 @@ package com.hotelmanagementapplication.controller;
 import com.hotelmanagementapplication.controller.l10n_i18n.LocaleSingleton;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
@@ -11,8 +12,8 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class WelcomeScreenController {
-    public RadioButton englishRadioButton;
-    public RadioButton frenchRadioButton;
+    @FXML
+    private RadioButton englishRadioButton;
 
     /**
      * Once the button is clicked it will load the manager login screen

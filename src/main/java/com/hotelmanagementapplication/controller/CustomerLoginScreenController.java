@@ -4,20 +4,25 @@ import com.hotelmanagementapplication.model.HotelManagementSystem;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class CustomerLoginScreenController {
-    public Button validateButton;
-    public TextField firstNameTF;
-    public TextField emailTF;
-    public TextField lastNameTF;
-    public PasswordField passwordTF;
-    public TextField phoneNumberTF;
+    @FXML
+    private TextField firstNameTF;
+    @FXML
+    private TextField emailTF;
+    @FXML
+    private TextField lastNameTF;
+    @FXML
+    private PasswordField passwordTF;
+    @FXML
+    private TextField phoneNumberTF;
 
     HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+
     /**
      * This button event handler will validate the customers information and switch screens
      *
