@@ -14,12 +14,14 @@ public class DebitCardPayment implements PaymentMethod {
     }
 
     @Override
-    public boolean validatePayment() {
+    public boolean validatePayment(double amount)
+    {
+        if (debitCardNumber != null && cardHolderName != null && expirationDate != null && securityCode != null) {
+            System.out.println(amount + " is processed.");
+            return true;
+        }
         return false;
     }
 
-    @Override
-    public void processPayment(double amount) {
 
-    }
 }
