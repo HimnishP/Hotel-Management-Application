@@ -1,5 +1,12 @@
 package com.hotelmanagementapplication.model.payment;
 
+import lombok.*;
+
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
+@EqualsAndHashCode
 public class DebitCardPayment implements PaymentMethod {
     private String debitCardNumber;
     private String cardHolderName;
@@ -13,6 +20,11 @@ public class DebitCardPayment implements PaymentMethod {
         this.securityCode = securityCode;
     }
 
+    /**
+     * it validates the payment by making sure all the information is taken
+     * @param amount the amount
+     * @return if the payment is valid and processed.
+     */
     @Override
     public boolean validatePayment(double amount)
     {
