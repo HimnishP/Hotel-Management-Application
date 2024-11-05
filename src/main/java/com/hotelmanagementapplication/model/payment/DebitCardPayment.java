@@ -17,7 +17,7 @@ public class DebitCardPayment implements PaymentMethod {
     public boolean validatePayment(double amount)
     {
         if (debitCardNumber != null && cardHolderName != null && expirationDate != null && securityCode != null) {
-            System.out.println(amount + " is processed.");
+            System.out.println(amount + " is processed for your debit card.");
             return true;
         }
         return false;

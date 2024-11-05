@@ -21,12 +21,13 @@ public class CreditCardPayment implements PaymentMethod {
     }
 
     @Override
-    public boolean validatePayment() {
+    public boolean validatePayment(double amount) {
+        if (creditCardNumber != null && cardHolderName != null && expirationDate != null && securityCode != null) {
+            System.out.println(amount + " is processed for your credit card.");
+            return true;
+        }
         return false;
     }
 
-    @Override
-    public void processPayment(double amount) {
 
-    }
 }
