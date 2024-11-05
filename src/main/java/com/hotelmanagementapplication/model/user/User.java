@@ -35,4 +35,26 @@ public class User {
     public String getFullName() {
         return firstName + " " + lastName;
     }
+
+    /**
+     * Method will validate email based on predefined format (example@gmail.com)
+     *
+     * @param email the email which user entered
+     * @return true if valid or false if not valid
+     */
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        return email.matches(emailRegex);
+    }
+
+    /**
+     * Method will validate phone number based on predefined format (123-456-7890)
+     *
+     * @param phoneNumber the phone number which user entered
+     * @return true if valid or false if not valid
+     */
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        String phoneRegex = "^(\\d{3}-\\d{3}-\\d{4})$";
+        return phoneNumber.matches(phoneRegex);
+    }
 }

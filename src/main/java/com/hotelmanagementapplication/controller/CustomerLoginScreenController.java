@@ -9,6 +9,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import static com.hotelmanagementapplication.model.user.User.isValidEmail;
+import static com.hotelmanagementapplication.model.user.User.isValidPhoneNumber;
+
 public class CustomerLoginScreenController {
     @FXML
     private TextField firstNameTF;
@@ -87,27 +90,5 @@ public class CustomerLoginScreenController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    /**
-     * Method will validate email based on predefined format (example@gmail.com)
-     *
-     * @param email the email which user entered
-     * @return true if valid or false if not valid
-     */
-    private boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        return email.matches(emailRegex);
-    }
-
-    /**
-     * Method will validate phone number based on predefined format (123-456-7890)
-     *
-     * @param phoneNumber the phone number which user entered
-     * @return true if valid or false if not valid
-     */
-    private boolean isValidPhoneNumber(String phoneNumber) {
-        String phoneRegex = "^(\\d{3}-\\d{3}-\\d{4})$";
-        return phoneNumber.matches(phoneRegex);
     }
 }

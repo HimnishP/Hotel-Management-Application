@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.hotelmanagementapplication.model.user.User.isValidEmail;
+import static com.hotelmanagementapplication.model.user.User.isValidPhoneNumber;
+
 public class ManagerLoginScreenController {
     @FXML
     private TextField firstNameTF;
@@ -72,7 +75,7 @@ public class ManagerLoginScreenController {
             showAlert("A valid email is required.");
             return false;
         }
-        if (password.isEmpty() || password.length() < 6) {
+        if (password.length() < 6) {
             showAlert("Password must be at least 6 characters long.");
             return false;
         }
@@ -94,28 +97,6 @@ public class ManagerLoginScreenController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    /**
-     * Method will validate email based on predefined format (example@gmail.com)
-     *
-     * @param email the email which user entered
-     * @return true if valid or false if not valid
-     */
-    private boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        return email.matches(emailRegex);
-    }
-
-    /**
-     * Method will validate phone number based on predefined format (123-456-7890)
-     *
-     * @param phoneNumber the phone number which user entered
-     * @return true if valid or false if not valid
-     */
-    private boolean isValidPhoneNumber(String phoneNumber) {
-        String phoneRegex = "^(\\d{3}-\\d{3}-\\d{4})$";
-        return phoneNumber.matches(phoneRegex);
     }
 }
 
