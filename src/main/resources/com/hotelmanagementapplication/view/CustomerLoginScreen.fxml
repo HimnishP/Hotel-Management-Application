@@ -73,11 +73,11 @@
             <Label layoutX="47.0" layoutY="312.0" text="%password.label" />
             <Label layoutX="47.0" layoutY="349.0" text="%phone.number.label" />
             <Button fx:id="validateButton" layoutX="70.0" layoutY="424.0" mnemonicParsing="false" onAction="#validateButtonHandler" prefHeight="31.0" prefWidth="340.0" text="%validate.button" />
-            <TextField fx:id="firstNameTF" layoutX="180.0" layoutY="201.0" prefHeight="31.0" prefWidth="220.0" promptText="%first.name.prompt" />
-            <TextField fx:id="emailTF" layoutX="180.0" layoutY="274.0" prefHeight="31.0" prefWidth="220.0" promptText="%email.prompt" />
-            <TextField fx:id="lastNameTF" layoutX="180.0" layoutY="236.0" prefHeight="31.0" prefWidth="220.0" promptText="%last.name.prompt" />
-            <PasswordField fx:id="passwordTF" layoutX="180.0" layoutY="307.0" prefHeight="31.0" prefWidth="220.0" promptText="%password.prompt" />
-            <TextField fx:id="phoneNumberTF" layoutX="180.0" layoutY="344.0" prefHeight="31.0" prefWidth="220.0" promptText="%phone.number.prompt" />
+            <TextField fx:id="firstNameTF" layoutX="208.0" layoutY="201.0" prefHeight="31.0" prefWidth="220.0" promptText="%first.name.prompt" />
+            <TextField fx:id="lastNameTF" layoutX="208.0" layoutY="236.0" prefHeight="31.0" prefWidth="220.0" promptText="%last.name.prompt" />
+            <TextField fx:id="emailTF" layoutX="208.0" layoutY="274.0" prefHeight="31.0" prefWidth="220.0" promptText="%email.prompt" />
+            <PasswordField fx:id="passwordTF" layoutX="208.0" layoutY="307.0" prefHeight="31.0" prefWidth="220.0" promptText="%password.prompt" />
+            <TextField fx:id="phoneNumberTF" layoutX="208.0" layoutY="344.0" prefHeight="31.0" prefWidth="220.0" promptText="%phone.number.prompt" />
          </children>
       </AnchorPane>
    </children>
