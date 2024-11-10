@@ -22,5 +22,4 @@ public class ManagerAnalyticsController {
         String formattedManagerText = MessageFormat.format(managerText, managerName);
         helloManagerLabel.setText(formattedManagerText);
     }
-
 }
