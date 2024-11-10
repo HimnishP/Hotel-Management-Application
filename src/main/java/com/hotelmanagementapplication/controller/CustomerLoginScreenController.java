@@ -1,13 +1,18 @@
 package com.hotelmanagementapplication.controller;
 
+import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.HotelManagementSystem;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 import static com.hotelmanagementapplication.model.user.User.isValidEmail;
 import static com.hotelmanagementapplication.model.user.User.isValidPhoneNumber;
@@ -27,11 +32,11 @@ public class CustomerLoginScreenController {
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
 
     /**
-     * This button event handler will validate the customers information and switch screens
+     * This button event handler will validate the customers information and switch screens to the bookings screen
      *
      * @param actionEvent Event
      */
-    public void validateButtonHandler(ActionEvent actionEvent) {
+    public void validateButtonHandler(ActionEvent actionEvent) throws IOException {
         if (validate()) {
             String firstName = firstNameTF.getText();
             String lastName = lastNameTF.getText();
@@ -40,6 +45,8 @@ public class CustomerLoginScreenController {
             String phoneNumber = phoneNumberTF.getText();
             User customer = new Customer(firstName, lastName, email, phoneNumber, password);
             hotelManagementSystem.addUser(customer);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            ScreenHandler.switchScreens(stage, "CustomerBookingScreen.fxml");
         }
     }
 
