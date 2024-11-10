@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotelmanagementapplication.controller.CustomerBookingScreenController">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="967.0" style="-fx-background-color: #C0C0C0;" />
+   </children>
+</HBox>
