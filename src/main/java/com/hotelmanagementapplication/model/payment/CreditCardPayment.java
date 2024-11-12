@@ -15,10 +15,13 @@ public class CreditCardPayment extends Payment implements PaymentMethod {
     private String expirationDate;
     private String securityCode;
 
-    public CreditCardPayment(int paymentId, PaymentMethod paymentMethod, double amount, LocalDate paymentDate) {
-        super(paymentId, paymentMethod, amount, paymentDate);
+    public CreditCardPayment(String creditCardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
+        super(amount);
+        this.creditCardNumber = creditCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
     }
-
 
     /**
      * it validates the payment by making sure all the information is taken
@@ -34,6 +37,4 @@ public class CreditCardPayment extends Payment implements PaymentMethod {
         }
         return false;
     }
-
-
 }

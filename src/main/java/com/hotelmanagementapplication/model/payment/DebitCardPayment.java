@@ -2,6 +2,7 @@ package com.hotelmanagementapplication.model.payment;
 
 import lombok.*;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -15,13 +16,16 @@ public class DebitCardPayment extends Payment implements PaymentMethod {
     private String expirationDate;
     private String securityCode;
 
-    public DebitCardPayment(int paymentId, PaymentMethod paymentMethod, double amount, LocalDate paymentDate) {
-        super(paymentId, paymentMethod, amount, paymentDate);
+    public DebitCardPayment(String debitCardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
+        super(amount);
+        this.debitCardNumber = debitCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
     }
 
-
     /**
-     * it validates the payment by making sure all the information is taken
+     * Method validates the payment by making sure all the information is taken
      *
      * @param amount the amount
      * @return if the payment is valid and processed.
@@ -34,6 +38,4 @@ public class DebitCardPayment extends Payment implements PaymentMethod {
         }
         return false;
     }
-
-
 }

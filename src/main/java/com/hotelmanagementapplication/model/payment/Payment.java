@@ -1,26 +1,26 @@
 package com.hotelmanagementapplication.model.payment;
 
+import com.hotelmanagementapplication.controller.l10n_i18n.LocaleSingleton;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.util.Date;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class Payment {
     private int paymentId;
     private static int paymentIdIncrement = 0;
-    private PaymentMethod paymentMethod;
     private double amount;
-    private LocalDate paymentDate;
+    private String paymentDate;
+    private DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, LocaleSingleton.getInstance().getCurrentLocale()); // (e.g : en = 11/11/24) (e.g : fr = 2024-11-11)
 
-    public Payment(PaymentMethod paymentMethod, double amount, LocalDate paymentDate) {
+    public Payment(double amount) {
         this.paymentId = ++paymentIdIncrement;
-        this.paymentMethod = paymentMethod;
         this.amount = amount;
-        this.paymentDate = paymentDate;
+        this.paymentDate = dateFormat.format(new Date());
     }
 }
