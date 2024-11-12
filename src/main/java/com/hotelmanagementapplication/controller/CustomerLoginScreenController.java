@@ -1,7 +1,7 @@
 package com.hotelmanagementapplication.controller;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
-import com.hotelmanagementapplication.model.HotelManagementSystem;
+import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;

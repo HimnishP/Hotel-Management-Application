@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.model;
+package com.hotelmanagementapplication.model.system;
 
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
@@ -9,39 +9,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class HotelManagementSystem {
-    private static HotelManagementSystem instance;
-    // Users
-    private Map<Integer, User> userMap = new HashMap<>(); // key : userID , value : user
-
-    private HotelManagementSystem() {
-    }
-
-    public static HotelManagementSystem getInstance() {
-        if (instance == null) {
-            synchronized (HotelManagementSystem.class) {
-                if (instance == null) {
-                    instance = new HotelManagementSystem();
-                }
-            }
-        }
-        return instance;
-    }
+public class UserSystem {
+    private final Map<Integer, User> userMap = new HashMap<>(); // key : userID , value : user
 
     /**
-     * Adds a user to the map
+     * Adds a user to the system.
      *
-     * @param user which will be added
+     * @param user the user to add
      */
     public void addUser(User user) {
         userMap.put(user.getUserId(), user);
     }
 
     /**
-     * Removes user based on ID
+     * Removes a user by ID.
      *
-     * @param userId of the user
-     * @return the removed user, if any or else throws exception
+     * @param userId the ID of the user to remove
+     * @return the removed user
      */
     public User removeUser(int userId) {
         if (!userExists(userId)) {
@@ -51,10 +35,10 @@ public class HotelManagementSystem {
     }
 
     /**
-     * Returns the user by its id
+     * Finds a user by ID.
      *
-     * @param userId the id
-     * @return the user, if any or else throws exception
+     * @param userId the ID of the user to find
+     * @return the user
      */
     public User getUserById(int userId) {
         if (!userExists(userId)) {
@@ -64,26 +48,20 @@ public class HotelManagementSystem {
     }
 
     /**
-     * Method will return a list of all users
+     * Lists all users.
      *
-     * @return the list of users
+     * @return a list of all users
      */
     public List<User> getAllUsers() {
-        if (userMap.isEmpty()) {
-            throw new NoSuchElementException("There are no users");
-        }
         return userMap.values().stream().toList();
     }
 
     /**
-     * Method will return a list of all managers
+     * Lists all managers.
      *
-     * @return list of managers
+     * @return a list of managers
      */
     public List<Manager> getAllManagers() {
-        if (userMap.isEmpty()) {
-            throw new NoSuchElementException("There are no users");
-        }
         return userMap.values().stream()
                 .filter(user -> user instanceof Manager)
                 .map(user -> (Manager) user)
@@ -91,14 +69,11 @@ public class HotelManagementSystem {
     }
 
     /**
-     * Method will return a list of customers
+     * Lists all customers.
      *
-     * @return list of customers
+     * @return a list of customers
      */
     public List<Customer> getAllCustomers() {
-        if (userMap.isEmpty()) {
-            throw new NoSuchElementException("There are no users");
-        }
         return userMap.values().stream()
                 .filter(user -> user instanceof Customer)
                 .map(user -> (Customer) user)
@@ -106,23 +81,22 @@ public class HotelManagementSystem {
     }
 
     /**
-     * Updates the information of an existing user in the map.
+     * Updates an existing user.
      *
      * @param user the user with updated information
-     * @throws NoSuchElementException if the user does not exist in the map
      */
     public void updateUser(User user) {
-        if (!userMap.containsValue(user)) {
+        if (!userExists(user.getUserId())) {
             throw new NoSuchElementException("ERROR: User with id " + user.getUserId() + " does not exist!");
         }
         userMap.put(user.getUserId(), user);
     }
 
     /**
-     * Finds users in the map based on their name.
+     * Finds users by name.
      *
      * @param name the name to search for
-     * @return a list of users whose names contain the specified name
+     * @return a list of matching users
      */
     public List<User> findUsersByName(String name) {
         return userMap.values().stream()
@@ -131,7 +105,7 @@ public class HotelManagementSystem {
     }
 
     /**
-     * Checks if a user exists in the map by their ID.
+     * Checks if a user exists by ID.
      *
      * @param userId the ID of the user
      * @return true if the user exists, false otherwise
@@ -141,16 +115,16 @@ public class HotelManagementSystem {
     }
 
     /**
-     * Returns the total number of users in the map.
+     * Counts the total users.
      *
-     * @return the count of users
+     * @return the total number of users
      */
     public int getUserCount() {
         return userMap.size();
     }
 
     /**
-     * Lists all user IDs present in the map.
+     * Lists all user IDs.
      *
      * @return a list of user IDs
      */

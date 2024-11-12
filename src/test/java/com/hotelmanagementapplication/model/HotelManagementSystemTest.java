@@ -1,5 +1,6 @@
 package com.hotelmanagementapplication.model;
 
+import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
