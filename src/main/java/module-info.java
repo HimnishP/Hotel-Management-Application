@@ -2,6 +2,7 @@ module com.hotelmanagementapplication.hotelmanagementapplication {
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
+    requires java.sql;
 
 
     exports com.hotelmanagementapplication.controller;

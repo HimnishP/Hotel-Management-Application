@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.model.payment.utility;
+package com.hotelmanagementapplication.model.payment.utility.paymentutil;
 
 public class PaymentValidationUtil {
 
