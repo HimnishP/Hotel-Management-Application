@@ -5,10 +5,14 @@ import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 
 public class PaymentFactory {
     /**
-     * creates a payment type depending on the customer's selection type.
-     *
-     * @param type the type of payment the customer wants to pay.
-     * @return the payment type based on the selection.
+     * creates the payment based on it's type
+     * @param type type of payment
+     * @param cardNumber the card number
+     * @param cardHolderName name of cardholder
+     * @param expirationDate expiration date on the card
+     * @param securityCode the security code on the card
+     * @param amount amount they need to pay for their booking
+     * @return the type of payment that will be made.
      */
     public static PaymentMethod createPayment(String type, String cardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
         if (type.equalsIgnoreCase("debit")) {
