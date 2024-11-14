@@ -1,6 +1,8 @@
 package com.hotelmanagementapplication.model.utildatabase;
 
-import java.sql.*;
+import java
+        .sql.*;
+
 
 public class DatabaseUtil {
     private static String path = "jdbc:sqlite:./src/main/resources/database/database.db";
@@ -66,5 +68,34 @@ public class DatabaseUtil {
         } catch (SQLException e) {
             System.out.println("Error inserting user: " + e.getMessage());
         }
+    }
+
+    /**
+     * reads the users as plaintext from the user table
+     *
+     * @return the users as plaintext from user table
+     */
+    public static String selectUsers() {
+        String sql = "SELECT * FROM User";
+
+        StringBuilder builder = new StringBuilder();
+        try (Connection conn = connect();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                int userID = rs.getInt("userId");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String email = rs.getString("email");
+                String phone = rs.getString("phoneNum");
+                String password = rs.getString("password");
+
+                builder.append(String.format("User ID: %d, First Name: %s, Last Name: %s, Email: %s, " +
+                        "Phone Number: %s, Password: %s%n", userID, firstName, lastName, email, phone, password));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return builder.toString();
     }
 }
