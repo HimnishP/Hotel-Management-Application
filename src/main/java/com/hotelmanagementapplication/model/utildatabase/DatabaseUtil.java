@@ -114,4 +114,44 @@ public class DatabaseUtil {
                 phoneLabel, phone,
                 passwordLabel, password);
     }
+
+    /**
+     * Method will create manager table
+     */
+    public static void createTableManager() {
+        String sql =
+                """
+                        CREATE TABLE IF NOT EXISTS Manager (
+                            userId INTEGER PRIMARY KEY,
+                            FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+                        );
+                        """;
+        try (Connection conn = connect();
+             Statement statement = conn.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Manager table created successfully");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Method will create customer table
+     */
+    public static void createTableCustomer() {
+        String sql =
+                """
+                        CREATE TABLE IF NOT EXISTS Customer (
+                            userId INTEGER PRIMARY KEY,
+                            FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+                        );
+                        """;
+        try (Connection conn = connect();
+             Statement statement = conn.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Customer table created successfully");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
