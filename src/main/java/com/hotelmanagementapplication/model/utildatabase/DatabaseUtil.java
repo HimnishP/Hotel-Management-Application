@@ -79,33 +79,39 @@ public class DatabaseUtil {
         String sql = "SELECT * FROM User";
         StringBuilder builder = new StringBuilder();
         ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
+        try (Connection conn = connect();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                builder.append(formatUserDetails(rs, resourceBundle));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private static String formatUserDetails(ResultSet rs, ResourceBundle resourceBundle) throws SQLException {
         String userIDLabel = resourceBundle.getString("user_id");
         String firstNameLabel = resourceBundle.getString("first_name");
         String lastNameLabel = resourceBundle.getString("last_name");
         String emailLabel = resourceBundle.getString("email");
         String phoneLabel = resourceBundle.getString("phone_number");
         String passwordLabel = resourceBundle.getString("password");
-        try (Connection conn = connect();
-             Statement statement = conn.createStatement();
-             ResultSet rs = statement.executeQuery(sql)) {
-            while (rs.next()) {
-                int userID = rs.getInt("userId");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                String email = rs.getString("email");
-                String phone = rs.getString("phoneNum");
-                String password = rs.getString("password");
-                builder.append(String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
-                        userIDLabel, userID,
-                        firstNameLabel, firstName,
-                        lastNameLabel, lastName,
-                        emailLabel, email,
-                        phoneLabel, phone,
-                        passwordLabel, password));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return builder.toString();
+
+        int userID = rs.getInt("userId");
+        String firstName = rs.getString("firstName");
+        String lastName = rs.getString("lastName");
+        String email = rs.getString("email");
+        String phone = rs.getString("phoneNum");
+        String password = rs.getString("password");
+
+        return String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
+                userIDLabel, userID,
+                firstNameLabel, firstName,
+                lastNameLabel, lastName,
+                emailLabel, email,
+                phoneLabel, phone,
+                passwordLabel, password);
     }
 }
