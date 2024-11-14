@@ -2,22 +2,30 @@ package com.hotelmanagementapplication.controller;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
+import com.hotelmanagementapplication.model.utildatabase.DatabaseUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ManagerAnalyticsController {
     @FXML
+    private VBox vBoxLayout;
+    @FXML
+    private ListView listView;
+    @FXML
     private Label helloManagerLabel;
+
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+    private final ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
+
 
     @FXML
     public void initialize() {
-        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
         String managerName = hotelManagementSystem.getAllManagers().getLast().getFullName();
         String managerText = resourceBundle.getString("helloManager");
         String formattedManagerText = MessageFormat.format(managerText, managerName);
@@ -42,6 +50,10 @@ public class ManagerAnalyticsController {
      * @param actionEvent the event triggered by the "View All Users" button click
      */
     public void handleViewAllUsersButton(ActionEvent actionEvent) {
+        listView.getItems().clear();
+        listView.getItems().addAll(DatabaseUtil.selectUsers());
+        vBoxLayout.setVisible(true);
+        listView.setVisible(true);
     }
 
     /**
@@ -83,5 +95,4 @@ public class ManagerAnalyticsController {
      */
     public void handleViewCustomersButton(ActionEvent actionEvent) {
     }
-
 }

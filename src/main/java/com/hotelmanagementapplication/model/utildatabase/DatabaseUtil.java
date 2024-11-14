@@ -1,12 +1,12 @@
 package com.hotelmanagementapplication.model.utildatabase;
 
-import java
-        .sql.*;
+import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 
+import java.sql.*;
+import java.util.ResourceBundle;
 
 public class DatabaseUtil {
     private static String path = "jdbc:sqlite:./src/main/resources/database/database.db";
-
     /**
      * establishes a connection with SQLite Database
      *
@@ -77,8 +77,14 @@ public class DatabaseUtil {
      */
     public static String selectUsers() {
         String sql = "SELECT * FROM User";
-
         StringBuilder builder = new StringBuilder();
+        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
+        String userIDLabel = resourceBundle.getString("user_id");
+        String firstNameLabel = resourceBundle.getString("first_name");
+        String lastNameLabel = resourceBundle.getString("last_name");
+        String emailLabel = resourceBundle.getString("email");
+        String phoneLabel = resourceBundle.getString("phone_number");
+        String passwordLabel = resourceBundle.getString("password");
         try (Connection conn = connect();
              Statement statement = conn.createStatement();
              ResultSet rs = statement.executeQuery(sql)) {
@@ -89,13 +95,18 @@ public class DatabaseUtil {
                 String email = rs.getString("email");
                 String phone = rs.getString("phoneNum");
                 String password = rs.getString("password");
-
-                builder.append(String.format("User ID: %d, First Name: %s, Last Name: %s, Email: %s, " +
-                        "Phone Number: %s, Password: %s%n", userID, firstName, lastName, email, phone, password));
+                builder.append(String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
+                        userIDLabel, userID,
+                        firstNameLabel, firstName,
+                        lastNameLabel, lastName,
+                        emailLabel, email,
+                        phoneLabel, phone,
+                        passwordLabel, password));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
         return builder.toString();
     }
 }
