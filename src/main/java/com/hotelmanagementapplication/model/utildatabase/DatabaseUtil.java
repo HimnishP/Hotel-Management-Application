@@ -106,7 +106,6 @@ public class DatabaseUtil {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return builder.toString();
     }
 }
