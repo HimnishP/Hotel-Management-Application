@@ -84,6 +84,10 @@ public class ManagerAnalyticsController {
      * @param actionEvent the event triggered by the "View Managers" button click
      */
     public void handleViewManagersButton(ActionEvent actionEvent) {
+        listView.getItems().clear();
+        listView.getItems().addAll(DatabaseUtil.selectManagers());
+        vBoxLayout.setVisible(true);
+        listView.setVisible(true);
     }
 
     /**
@@ -94,5 +98,9 @@ public class ManagerAnalyticsController {
      * @param actionEvent the event triggered by the "View Customers" button click
      */
     public void handleViewCustomersButton(ActionEvent actionEvent) {
+        listView.getItems().clear();
+        listView.getItems().addAll(DatabaseUtil.selectCustomers());
+        vBoxLayout.setVisible(true);
+        listView.setVisible(true);
     }
 }
