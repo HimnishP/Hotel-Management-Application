@@ -171,6 +171,45 @@ public class DatabaseUtil {
         return builder.toString();
     }
 
+    /**
+     * Method will join the PKs to retrieve manager data
+     * @return the manager data
+     */
+    public static String selectManagers() {
+        String sql = """
+        SELECT * FROM User u
+        JOIN Manager m ON u.userId = m.userId
+        """;
+        return selectUsersByQuery(sql);
+    }
+
+    /**
+     * Method will join the PKs to retrieve customer data
+     * @return the customer data
+     */
+    public static String selectCustomers() {
+        String sql = """
+        SELECT * FROM User u
+        JOIN Customer c ON u.userId = c.userId
+        """;
+        return selectUsersByQuery(sql);
+    }
+
+    private static String selectUsersByQuery(String sql) {
+        StringBuilder builder = new StringBuilder();
+        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
+        try (Connection conn = connect();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                builder.append(formatUserDetails(rs, resourceBundle));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
     private static String formatUserDetails(ResultSet rs, ResourceBundle resourceBundle) throws SQLException {
         String userIDLabel = resourceBundle.getString("user_id");
         String firstNameLabel = resourceBundle.getString("first_name");
