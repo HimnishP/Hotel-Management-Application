@@ -211,20 +211,21 @@ public class DatabaseUtil {
     }
 
     private static String formatUserDetails(ResultSet rs, ResourceBundle resourceBundle) throws SQLException {
+        //Localize strings
         String userIDLabel = resourceBundle.getString("user_id");
         String firstNameLabel = resourceBundle.getString("first_name");
         String lastNameLabel = resourceBundle.getString("last_name");
         String emailLabel = resourceBundle.getString("email");
         String phoneLabel = resourceBundle.getString("phone_number");
         String passwordLabel = resourceBundle.getString("password");
-
+        //Result Set
         int userID = rs.getInt("userId");
         String firstName = rs.getString("firstName");
         String lastName = rs.getString("lastName");
         String email = rs.getString("email");
         String phone = rs.getString("phoneNum");
         String password = rs.getString("password");
-
+        //Format String
         return String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
                 userIDLabel, userID,
                 firstNameLabel, firstName,

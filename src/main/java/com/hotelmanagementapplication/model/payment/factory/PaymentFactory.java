@@ -5,7 +5,7 @@ import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 
 public class PaymentFactory {
     /**
-     * creates the payment based on it's type
+     * Creates the payment based on it's type
      *
      * @param type           type of payment
      * @param cardNumber     the card number

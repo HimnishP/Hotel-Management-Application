@@ -4,7 +4,6 @@ import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
@@ -13,12 +12,6 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class CustomerBookingScreenController {
-    @FXML
-    private Button handleProcessPayments;
-    @FXML
-    private Button singleBedButton;
-    @FXML
-    private Button doubleBedButton;
     @FXML
     private Label welcomeCustomerLabel;
     @FXML
@@ -42,7 +35,6 @@ public class CustomerBookingScreenController {
      *
      * @param actionEvent button click
      */
-
     public void handleSingleBedButton(ActionEvent actionEvent) {
         //TODO implement DB to retrieve data here
         // Simulated data for testing (replace with DB call later)
