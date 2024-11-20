@@ -9,7 +9,7 @@ public class DatabaseUtil {
     private static String path = "jdbc:sqlite:./src/main/resources/database/database.db";
 
     /**
-     * establishes a connection with SQLite Database
+     * Establishes a connection with SQLite Database
      *
      * @return the database connection
      */
@@ -25,65 +25,66 @@ public class DatabaseUtil {
         return conn;
     }
 
-    public static void createTableUser() {
-        String sql =
-                """
-                        CREATE TABLE IF NOT EXISTS User (
-                            userId INTEGER PRIMARY KEY AUTOINCREMENT,
-                            firstName TEXT NOT NULL,
-                            lastName TEXT NOT NULL,
-                            email TEXT UNIQUE NOT NULL,
-                            phoneNum TEXT,
-                            password TEXT NOT NULL
-                        );
-                        """;
+    /**
+     * Helper method for methods requiring executing update ( create table)
+     *
+     * @param sql    SQL statement
+     * @param params Parameters
+     */
+    private static void executeUpdate(String sql, Object... params) {
         try (Connection conn = connect();
-             Statement statement = conn.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Table created successfully");
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+            pstmt.executeUpdate();
+            System.out.println("SQL executed successfully: " + sql);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error executing SQL: " + sql, e);
         }
+    }
+
+    /**
+     * Method will create the user table
+     */
+    public static void createTableUser() {
+        String sql = """
+                CREATE TABLE IF NOT EXISTS User (
+                    userId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    firstName TEXT NOT NULL,
+                    lastName TEXT NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    phoneNum TEXT,
+                    password TEXT NOT NULL
+                );
+                """;
+        executeUpdate(sql);
     }
 
     /**
      * Method will create manager table
      */
     public static void createTableManager() {
-        String sql =
-                """
-                        CREATE TABLE IF NOT EXISTS Manager (
-                            userId INTEGER PRIMARY KEY,
-                            FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
-                        );
-                        """;
-        try (Connection conn = connect();
-             Statement statement = conn.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Manager table created successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = """
+                CREATE TABLE IF NOT EXISTS Manager (
+                    userId INTEGER PRIMARY KEY,
+                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+                );
+                """;
+        executeUpdate(sql);
     }
 
     /**
      * Method will create customer table
      */
     public static void createTableCustomer() {
-        String sql =
-                """
-                        CREATE TABLE IF NOT EXISTS Customer (
-                            userId INTEGER PRIMARY KEY,
-                            FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
-                        );
-                        """;
-        try (Connection conn = connect();
-             Statement statement = conn.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Customer table created successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = """
+                CREATE TABLE IF NOT EXISTS Customer (
+                    userId INTEGER PRIMARY KEY,
+                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+                );
+                """;
+        executeUpdate(sql);
     }
 
     /**
