@@ -104,11 +104,6 @@ public class DatabaseUtil {
         System.out.println("Customer data inserted successfully.");
     }
 
-    @FunctionalInterface
-    interface ResultSetProcessor {
-        String process(ResultSet rs) throws SQLException;
-    }
-
     /**
      * reads the users as plaintext from the user table
      *
@@ -185,6 +180,11 @@ public class DatabaseUtil {
             throw new RuntimeException("Error executing insert: " + sql, e);
         }
         return -1;
+    }
+
+    @FunctionalInterface
+    interface ResultSetProcessor {
+        String process(ResultSet rs) throws SQLException;
     }
 
     /**
