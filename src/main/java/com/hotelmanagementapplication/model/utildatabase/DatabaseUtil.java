@@ -9,7 +9,7 @@ public class DatabaseUtil {
     private static String path = "jdbc:sqlite:./src/main/resources/database/database.db";
 
     /**
-     * establishes a connection with SQLite Database
+     * Establishes a connection with SQLite Database
      *
      * @return the database connection
      */
@@ -25,65 +25,47 @@ public class DatabaseUtil {
         return conn;
     }
 
+    /**
+     * Method will create the user table
+     */
     public static void createTableUser() {
-        String sql =
-                """
-                        CREATE TABLE IF NOT EXISTS User (
-                            userId INTEGER PRIMARY KEY AUTOINCREMENT,
-                            firstName TEXT NOT NULL,
-                            lastName TEXT NOT NULL,
-                            email TEXT UNIQUE NOT NULL,
-                            phoneNum TEXT,
-                            password TEXT NOT NULL
-                        );
-                        """;
-        try (Connection conn = connect();
-             Statement statement = conn.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Table created successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = """
+                CREATE TABLE IF NOT EXISTS User (
+                    userId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    firstName TEXT NOT NULL,
+                    lastName TEXT NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    phoneNum TEXT,
+                    password TEXT NOT NULL
+                );
+                """;
+        executeUpdate(sql);
     }
 
     /**
      * Method will create manager table
      */
     public static void createTableManager() {
-        String sql =
-                """
-                        CREATE TABLE IF NOT EXISTS Manager (
-                            userId INTEGER PRIMARY KEY,
-                            FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
-                        );
-                        """;
-        try (Connection conn = connect();
-             Statement statement = conn.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Manager table created successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = """
+                CREATE TABLE IF NOT EXISTS Manager (
+                    userId INTEGER PRIMARY KEY,
+                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+                );
+                """;
+        executeUpdate(sql);
     }
 
     /**
      * Method will create customer table
      */
     public static void createTableCustomer() {
-        String sql =
-                """
-                        CREATE TABLE IF NOT EXISTS Customer (
-                            userId INTEGER PRIMARY KEY,
-                            FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
-                        );
-                        """;
-        try (Connection conn = connect();
-             Statement statement = conn.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Customer table created successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = """
+                CREATE TABLE IF NOT EXISTS Customer (
+                    userId INTEGER PRIMARY KEY,
+                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+                );
+                """;
+        executeUpdate(sql);
     }
 
     /**
@@ -97,23 +79,7 @@ public class DatabaseUtil {
      */
     public static int insertUser(String firstName, String lastName, String email, String phoneNum, String password) {
         String sql = "INSERT INTO User(firstName, lastName, email, phoneNum, password) VALUES(?, ?, ?, ?, ?)";
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            pstmt.setString(1, firstName);
-            pstmt.setString(2, lastName);
-            pstmt.setString(3, email);
-            pstmt.setString(4, phoneNum);
-            pstmt.setString(5, password);
-            pstmt.executeUpdate();
-            ResultSet keys = pstmt.getGeneratedKeys();
-            if (keys.next()) {
-                return keys.getInt(1);
-            }
-            System.out.println("User data inserted successfully.");
-        } catch (SQLException e) {
-            System.out.println("Error inserting user: " + e.getMessage());
-        }
-        return -1;
+        return executeInsert(sql, firstName, lastName, email, phoneNum, password);
     }
 
     /**
@@ -123,14 +89,8 @@ public class DatabaseUtil {
      */
     public static void insertManager(int userId) {
         String sql = "INSERT INTO Manager (userId) VALUES(?)";
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.executeUpdate();
-            System.out.println("Manager data updated successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        executeInsert(sql, userId);
+        System.out.println("Manager data inserted successfully.");
     }
 
     /**
@@ -140,14 +100,8 @@ public class DatabaseUtil {
      */
     public static void insertCustomer(int userId) {
         String sql = "INSERT INTO Customer(userId) VALUES(?)";
-        try (Connection conn = connect();
-             PreparedStatement pstm = conn.prepareStatement(sql)) {
-            pstm.setInt(1, userId);
-            pstm.executeUpdate();
-            System.out.println("Customer data updated successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        executeInsert(sql, userId);
+        System.out.println("Customer data inserted successfully.");
     }
 
     /**
@@ -157,18 +111,7 @@ public class DatabaseUtil {
      */
     public static String selectUsers() {
         String sql = "SELECT * FROM User";
-        StringBuilder builder = new StringBuilder();
-        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
-        try (Connection conn = connect();
-             Statement statement = conn.createStatement();
-             ResultSet rs = statement.executeQuery(sql)) {
-            while (rs.next()) {
-                builder.append(formatUserDetails(rs, resourceBundle));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return builder.toString();
+        return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
     }
 
     /**
@@ -179,8 +122,8 @@ public class DatabaseUtil {
         String sql = """
         SELECT * FROM User u
         JOIN Manager m ON u.userId = m.userId
-        """;
-        return selectUsersByQuery(sql);
+                                               \s""";
+        return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
     }
 
     /**
@@ -191,47 +134,109 @@ public class DatabaseUtil {
         String sql = """
         SELECT * FROM User u
         JOIN Customer c ON u.userId = c.userId
-        """;
-        return selectUsersByQuery(sql);
+                                                               \s""";
+        return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
     }
 
-    private static String selectUsersByQuery(String sql) {
-        StringBuilder builder = new StringBuilder();
-        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
+    /**
+     * Helper method for methods requiring executing update ( create table)
+     *
+     * @param sql    SQL statement
+     * @param params Parameters
+     */
+    private static void executeUpdate(String sql, Object... params) {
         try (Connection conn = connect();
-             Statement statement = conn.createStatement();
-             ResultSet rs = statement.executeQuery(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+            pstmt.executeUpdate();
+            System.out.println("SQL executed successfully: " + sql);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error executing SQL: " + sql, e);
+        }
+    }
+
+    /**
+     * Helper method for executing insert
+     *
+     * @param sql    SQL Statement
+     * @param params The parameters
+     * @return The generated key
+     */
+    private static int executeInsert(String sql, Object... params) {
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+            pstmt.executeUpdate();
+            ResultSet keys = pstmt.getGeneratedKeys();
+            if (keys.next()) {
+                return keys.getInt(1); // Return the generated key
+            }
+            System.out.println("Data inserted successfully: " + sql);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error executing insert: " + sql, e);
+        }
+        return -1;
+    }
+
+    @FunctionalInterface
+    interface ResultSetProcessor {
+        String process(ResultSet rs) throws SQLException;
+    }
+
+    /**
+     * Helper method for executing queries (selecting)
+     *
+     * @param sql       SQL statement
+     * @param processor ResultSet
+     * @return The result
+     */
+    private static String executeQuery(String sql, ResultSetProcessor processor) {
+        StringBuilder builder = new StringBuilder();
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                builder.append(formatUserDetails(rs, resourceBundle));
+                builder.append(processor.process(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error executing query: " + sql, e);
         }
         return builder.toString();
     }
 
-    private static String formatUserDetails(ResultSet rs, ResourceBundle resourceBundle) throws SQLException {
-        //Localize strings
-        String userIDLabel = resourceBundle.getString("user_id");
-        String firstNameLabel = resourceBundle.getString("first_name");
-        String lastNameLabel = resourceBundle.getString("last_name");
-        String emailLabel = resourceBundle.getString("email");
-        String phoneLabel = resourceBundle.getString("phone_number");
-        String passwordLabel = resourceBundle.getString("password");
-        //Result Set
-        int userID = rs.getInt("userId");
-        String firstName = rs.getString("firstName");
-        String lastName = rs.getString("lastName");
-        String email = rs.getString("email");
-        String phone = rs.getString("phoneNum");
-        String password = rs.getString("password");
-        //Format String
-        return String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
-                userIDLabel, userID,
-                firstNameLabel, firstName,
-                lastNameLabel, lastName,
-                emailLabel, email,
-                phoneLabel, phone,
-                passwordLabel, password);
-    }
+    /**
+     * Formats user details retrieved from the database as a localized string.
+     *
+     * @param rs             The ResultSet containing user data from the database.
+     * @param resourceBundle The ResourceBundle containing localized labels for user attributes.
+     * @return A formatted string containing the user details with localized labels.
+     * @throws SQLException If an error occurs while accessing the ResultSet.
+     */
+  private static String formatUserDetails(ResultSet rs, ResourceBundle resourceBundle) throws SQLException {
+    // Localize strings
+    String userIDLabel = resourceBundle.getString("user_id");
+    String firstNameLabel = resourceBundle.getString("first_name");
+    String lastNameLabel = resourceBundle.getString("last_name");
+    String emailLabel = resourceBundle.getString("email");
+    String phoneLabel = resourceBundle.getString("phone_number");
+    String passwordLabel = resourceBundle.getString("password");
+    // Retrieve user data from the ResultSet
+    int userID = rs.getInt("userId");
+    String firstName = rs.getString("firstName");
+    String lastName = rs.getString("lastName");
+    String email = rs.getString("email");
+    String phone = rs.getString("phoneNum");
+    String password = rs.getString("password");
+    // Format and return the user details as a string
+    return String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
+            userIDLabel, userID,
+            firstNameLabel, firstName,
+            lastNameLabel, lastName,
+            emailLabel, email,
+            phoneLabel, phone,
+            passwordLabel, password);
 }
