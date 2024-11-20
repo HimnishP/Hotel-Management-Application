@@ -6,7 +6,6 @@ import com.hotelmanagementapplication.model.room.SingleBed;
 import com.hotelmanagementapplication.model.room.Status;
 
 public class RoomFactory {
-
     /**
      * Creates a room
      *

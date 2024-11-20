@@ -23,7 +23,6 @@ public class ManagerAnalyticsController {
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
     private final ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
 
-
     @FXML
     public void initialize() {
         String managerName = hotelManagementSystem.getAllManagers().getLast().getFullName();
