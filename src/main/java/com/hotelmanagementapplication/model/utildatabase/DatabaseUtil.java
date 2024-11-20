@@ -116,25 +116,27 @@ public class DatabaseUtil {
 
     /**
      * Method will join the PKs to retrieve manager data
+     *
      * @return the manager data
      */
     public static String selectManagers() {
         String sql = """
-        SELECT * FROM User u
-        JOIN Manager m ON u.userId = m.userId
-                                               \s""";
+                SELECT * FROM User u
+                JOIN Manager m ON u.userId = m.userId
+                                                       \s""";
         return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
     }
 
     /**
      * Method will join the PKs to retrieve customer data
+     *
      * @return the customer data
      */
     public static String selectCustomers() {
         String sql = """
-        SELECT * FROM User u
-        JOIN Customer c ON u.userId = c.userId
-                                                               \s""";
+                SELECT * FROM User u
+                JOIN Customer c ON u.userId = c.userId
+                                                                       \s""";
         return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
     }
 
@@ -216,27 +218,28 @@ public class DatabaseUtil {
      * @return A formatted string containing the user details with localized labels.
      * @throws SQLException If an error occurs while accessing the ResultSet.
      */
-  private static String formatUserDetails(ResultSet rs, ResourceBundle resourceBundle) throws SQLException {
-    // Localize strings
-    String userIDLabel = resourceBundle.getString("user_id");
-    String firstNameLabel = resourceBundle.getString("first_name");
-    String lastNameLabel = resourceBundle.getString("last_name");
-    String emailLabel = resourceBundle.getString("email");
-    String phoneLabel = resourceBundle.getString("phone_number");
-    String passwordLabel = resourceBundle.getString("password");
-    // Retrieve user data from the ResultSet
-    int userID = rs.getInt("userId");
-    String firstName = rs.getString("firstName");
-    String lastName = rs.getString("lastName");
-    String email = rs.getString("email");
-    String phone = rs.getString("phoneNum");
-    String password = rs.getString("password");
-    // Format and return the user details as a string
-    return String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
-            userIDLabel, userID,
-            firstNameLabel, firstName,
-            lastNameLabel, lastName,
-            emailLabel, email,
-            phoneLabel, phone,
-            passwordLabel, password);
+    private static String formatUserDetails(ResultSet rs, ResourceBundle resourceBundle) throws SQLException {
+        // Localize strings
+        String userIDLabel = resourceBundle.getString("user_id");
+        String firstNameLabel = resourceBundle.getString("first_name");
+        String lastNameLabel = resourceBundle.getString("last_name");
+        String emailLabel = resourceBundle.getString("email");
+        String phoneLabel = resourceBundle.getString("phone_number");
+        String passwordLabel = resourceBundle.getString("password");
+        // Retrieve user data from the ResultSet
+        int userID = rs.getInt("userId");
+        String firstName = rs.getString("firstName");
+        String lastName = rs.getString("lastName");
+        String email = rs.getString("email");
+        String phone = rs.getString("phoneNum");
+        String password = rs.getString("password");
+        // Format and return the user details as a string
+        return String.format("%s%d, %s%s, %s%s, %s%s, %s%s, %s%s%n",
+                userIDLabel, userID,
+                firstNameLabel, firstName,
+                lastNameLabel, lastName,
+                emailLabel, email,
+                phoneLabel, phone,
+                passwordLabel, password);
+    }
 }
