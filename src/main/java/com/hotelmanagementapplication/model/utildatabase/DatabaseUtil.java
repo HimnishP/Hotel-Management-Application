@@ -4,9 +4,13 @@ import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 
 import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class DatabaseUtil {
-    private static String path = "jdbc:sqlite:./src/main/resources/database/database.db";
+    private final static String PATH_DATABASE = "jdbc:sqlite:./src/main/resources/database/database.db";
+    private final static ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private final static ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
+    private final static ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
 
     /**
      * Establishes a connection with SQLite Database
@@ -14,15 +18,11 @@ public class DatabaseUtil {
      * @return the database connection
      */
     private static Connection connect() {
-        String url = path;
-        Connection conn;
         try {
-            conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
+            return DriverManager.getConnection(PATH_DATABASE);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return conn;
     }
 
     /**
@@ -167,6 +167,7 @@ public class DatabaseUtil {
      * @return The generated key
      */
     private static int executeInsert(String sql, Object... params) {
+        writeLock.lock();
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             for (int i = 0; i < params.length; i++) {
@@ -180,6 +181,8 @@ public class DatabaseUtil {
             System.out.println("Data inserted successfully: " + sql);
         } catch (SQLException e) {
             throw new RuntimeException("Error executing insert: " + sql, e);
+        } finally {
+            writeLock.unlock();
         }
         return -1;
     }
@@ -197,6 +200,7 @@ public class DatabaseUtil {
      * @return The result
      */
     private static String executeQuery(String sql, ResultSetProcessor processor) {
+        readLock.lock();
         StringBuilder builder = new StringBuilder();
         try (Connection conn = connect();
              Statement stmt = conn.createStatement();
@@ -206,6 +210,8 @@ public class DatabaseUtil {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error executing query: " + sql, e);
+        } finally {
+            readLock.unlock();
         }
         return builder.toString();
     }
