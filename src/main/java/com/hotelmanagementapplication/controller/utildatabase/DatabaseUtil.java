@@ -13,8 +13,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class DatabaseUtil {
     private final static String PATH_DATABASE = "jdbc:sqlite:./src/main/resources/database/database.db";
     private final static ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-    private final static ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
-    private final static ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
+    private final static ReentrantReadWriteLock.ReadLock READ_LOCK = lock.readLock();
+    private final static ReentrantReadWriteLock.WriteLock WRITE_LOCK = lock.writeLock();
 
     /**
      * Establishes a connection with SQLite Database
@@ -30,7 +30,7 @@ public class DatabaseUtil {
     }
 
     /**
-     * Helper method for methods requiring executing update ( create table)
+     * Helper method for methods requiring executing update (UPDATE,DELETE,ALTER,CREATE,DROP)
      *
      * @param sql    SQL statement
      * @param params Parameters
@@ -49,14 +49,14 @@ public class DatabaseUtil {
     }
 
     /**
-     * Helper method for executing insert
+     * Helper method for executing INSERT
      *
      * @param sql    SQL Statement
      * @param params The parameters
      * @return The generated key
      */
     public static int executeInsert(String sql, Object... params) {
-        writeLock.lock();
+        WRITE_LOCK.lock();
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             for (int i = 0; i < params.length; i++) {
@@ -71,11 +71,42 @@ public class DatabaseUtil {
         } catch (SQLException e) {
             throw new RuntimeException("Error executing insert: " + sql, e);
         } finally {
-            writeLock.unlock();
+            WRITE_LOCK.unlock();
         }
         return -1;
     }
 
+    /**
+     * Helper method for executing queries (SELECTING)
+     *
+     * @param sql       SQL statement
+     * @param processor ResultSet
+     * @return The list
+     */
+    public static <T> List<T> executeQuery(String sql, ResultSetProcessor<T> processor) {
+        READ_LOCK.lock();
+        List<T> resultList = new ArrayList<>();
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                resultList.add(processor.process(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error executing query: " + sql, e);
+        } finally {
+            READ_LOCK.unlock();
+        }
+        return resultList;
+    }
+
+    /**
+     * Method will return user object
+     *
+     * @param rs The ResultSet
+     * @return User object
+     * @throws SQLException When SQL error occurs
+     */
     public static User mapUser(ResultSet rs) throws SQLException {
         // Map common fields for the User class
         int userId = rs.getInt("userId");
@@ -87,6 +118,13 @@ public class DatabaseUtil {
         return new User(userId, firstName, lastName, email, phoneNum, password);
     }
 
+    /**
+     * Method will return manager object
+     *
+     * @param rs The ResultSet
+     * @return User object
+     * @throws SQLException When SQL error occurs
+     */
     public static Manager mapManager(ResultSet rs) throws SQLException {
         User user = mapUser(rs);
         return new Manager(
@@ -98,6 +136,18 @@ public class DatabaseUtil {
         );
     }
 
+    @FunctionalInterface
+    public interface ResultSetProcessor<T> {
+        T process(ResultSet rs) throws SQLException;
+    }
+
+    /**
+     * Method will return customer object
+     *
+     * @param rs The ResultSet
+     * @return User object
+     * @throws SQLException When SQL error occurs
+     */
     public static Customer mapCustomer(ResultSet rs) throws SQLException {
         User user = mapUser(rs);
         return new Customer(
@@ -108,37 +158,6 @@ public class DatabaseUtil {
                 user.getPassword()
         );
     }
-
-
-    @FunctionalInterface
-    public interface ResultSetProcessor<T> {
-        T process(ResultSet rs) throws SQLException;
-    }
-
-    /**
-     * Helper method for executing queries (selecting)
-     *
-     * @param sql       SQL statement
-     * @param processor ResultSet
-     * @return The list
-     */
-    public static <T> List<T> executeQuery(String sql, ResultSetProcessor<T> processor) {
-        readLock.lock();
-        List<T> resultList = new ArrayList<>();
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                resultList.add(processor.process(rs));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error executing query: " + sql, e);
-        } finally {
-            readLock.unlock();
-        }
-        return resultList;
-    }
-
 
     /**
      * Formats user details retrieved from the database as a localized string.

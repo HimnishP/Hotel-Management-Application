@@ -49,7 +49,7 @@ public class ManagerAnalyticsController {
      */
     public void handleViewAllUsersButton(ActionEvent actionEvent) {
         listView.getItems().clear();
-        listView.getItems().addAll(DatabaseController.selectUsers());
+        listView.getItems().addAll(hotelManagementSystem.getAllUsers());
         vBoxLayout.setVisible(true);
         listView.setVisible(true);
     }
@@ -83,7 +83,7 @@ public class ManagerAnalyticsController {
      */
     public void handleViewManagersButton(ActionEvent actionEvent) {
         listView.getItems().clear();
-        listView.getItems().addAll(DatabaseController.selectManagers());
+        listView.getItems().addAll(hotelManagementSystem.getAllManagers());
         vBoxLayout.setVisible(true);
         listView.setVisible(true);
     }
@@ -97,7 +97,7 @@ public class ManagerAnalyticsController {
      */
     public void handleViewCustomersButton(ActionEvent actionEvent) {
         listView.getItems().clear();
-        listView.getItems().addAll(DatabaseController.selectCustomers());
+        listView.getItems().addAll(hotelManagementSystem.getAllCustomers());
         vBoxLayout.setVisible(true);
         listView.setVisible(true);
     }
