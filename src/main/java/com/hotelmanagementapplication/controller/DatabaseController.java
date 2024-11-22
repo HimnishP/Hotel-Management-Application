@@ -1,7 +1,11 @@
 package com.hotelmanagementapplication.controller;
 
-import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
+import com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil;
+import com.hotelmanagementapplication.model.user.Customer;
+import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
+
+import java.util.List;
 
 import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.*;
 
@@ -105,36 +109,36 @@ public class DatabaseController {
     /**
      * reads the users as plaintext from the user table
      *
-     * @return the users as plaintext from user table
+     * @return the users
      */
-    public static String selectUsers() {
+    public static List<User> selectUsers() {
         String sql = "SELECT * FROM User";
-        return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
+        return executeQuery(sql, DatabaseUtil::mapUser);
     }
 
     /**
      * Method will join the PKs to retrieve manager data
      *
-     * @return the manager data
+     * @return the managers
      */
-    public static String selectManagers() {
+    public static List<Manager> selectManagers() {
         String sql = """
                 SELECT * FROM User u
                 JOIN Manager m ON u.userId = m.userId
-                                                       \s""";
-        return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
+                """;
+        return executeQuery(sql, DatabaseUtil::mapManager);
     }
 
     /**
      * Method will join the PKs to retrieve customer data
      *
-     * @return the customer data
+     * @return the customers
      */
-    public static String selectCustomers() {
+    public static List<Customer> selectCustomers() {
         String sql = """
                 SELECT * FROM User u
                 JOIN Customer c ON u.userId = c.userId
-                                                                       \s""";
-        return executeQuery(sql, rs -> formatUserDetails(rs, ScreenHandler.getResourceBundle()));
+                """;
+        return executeQuery(sql, DatabaseUtil::mapCustomer);
     }
 }

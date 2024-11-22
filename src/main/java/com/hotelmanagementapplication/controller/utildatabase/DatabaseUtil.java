@@ -1,6 +1,12 @@
 package com.hotelmanagementapplication.controller.utildatabase;
 
+import com.hotelmanagementapplication.model.user.Customer;
+import com.hotelmanagementapplication.model.user.Manager;
+import com.hotelmanagementapplication.model.user.User;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -70,9 +76,43 @@ public class DatabaseUtil {
         return -1;
     }
 
+    public static User mapUser(ResultSet rs) throws SQLException {
+        // Map common fields for the User class
+        int userId = rs.getInt("userId");
+        String firstName = rs.getString("firstName");
+        String lastName = rs.getString("lastName");
+        String email = rs.getString("email");
+        String phoneNum = rs.getString("phoneNum");
+        String password = rs.getString("password");
+        return new User(userId, firstName, lastName, email, phoneNum, password);
+    }
+
+    public static Manager mapManager(ResultSet rs) throws SQLException {
+        User user = mapUser(rs);
+        return new Manager(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPhoneNum(),
+                user.getPassword()
+        );
+    }
+
+    public static Customer mapCustomer(ResultSet rs) throws SQLException {
+        User user = mapUser(rs);
+        return new Customer(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPhoneNum(),
+                user.getPassword()
+        );
+    }
+
+
     @FunctionalInterface
-    public interface ResultSetProcessor {
-        String process(ResultSet rs) throws SQLException;
+    public interface ResultSetProcessor<T> {
+        T process(ResultSet rs) throws SQLException;
     }
 
     /**
@@ -80,24 +120,25 @@ public class DatabaseUtil {
      *
      * @param sql       SQL statement
      * @param processor ResultSet
-     * @return The result
+     * @return The list
      */
-    public static String executeQuery(String sql, ResultSetProcessor processor) {
+    public static <T> List<T> executeQuery(String sql, ResultSetProcessor<T> processor) {
         readLock.lock();
-        StringBuilder builder = new StringBuilder();
+        List<T> resultList = new ArrayList<>();
         try (Connection conn = connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                builder.append(processor.process(rs));
+                resultList.add(processor.process(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error executing query: " + sql, e);
         } finally {
             readLock.unlock();
         }
-        return builder.toString();
+        return resultList;
     }
+
 
     /**
      * Formats user details retrieved from the database as a localized string.
