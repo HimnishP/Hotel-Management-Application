@@ -1,6 +1,7 @@
 package com.hotelmanagementapplication.controller;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
+import com.hotelmanagementapplication.model.user.User;
 
 import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.*;
 
@@ -51,11 +52,28 @@ public class DatabaseController {
     /**
      * Insert data into the User table and method will return the generated ID
      *
+     * @param user The user to be inserted
+     * @return The generated key
+     */
+    public static int insertUser(User user) {
+        String sql = "INSERT INTO User(firstName, lastName, email, phoneNum, password) VALUES(?, ?, ?, ?, ?)";
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        String email = user.getEmail();
+        String phoneNum = user.getPhoneNum();
+        String password = user.getPassword();
+        return executeInsert(sql, firstName, lastName, email, phoneNum, password);
+    }
+
+    /**
+     * Insert data into the User table and method will return the generated ID
+     *
      * @param firstName The first name of the user.
      * @param lastName  The last name of the user.
      * @param email     The email address of the user (unique).
      * @param phoneNum  The phone number of the user.
      * @param password  The password of the user.
+     * @return The generated key
      */
     public static int insertUser(String firstName, String lastName, String email, String phoneNum, String password) {
         String sql = "INSERT INTO User(firstName, lastName, email, phoneNum, password) VALUES(?, ?, ?, ?, ?)";
