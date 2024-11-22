@@ -111,10 +111,14 @@ public class DatabaseController {
      *
      * @param userId The userId of the user
      */
-    public static void removeUser(int userId) {
-        String sql = "DELETE FROM users WHERE user_id = ?";
-        executeUpdate(sql, userId);
-        System.out.println("User with ID " + userId + " removed from the database.");
+    public static void removeUser(int userId) throws IllegalStateException {
+        String sql = "DELETE FROM users WHERE userId = ?";
+        try {
+            executeUpdate(sql, userId);
+            System.out.println("User with ID " + userId + " removed from the database.");
+        } catch (RuntimeException e) {
+            throw new IllegalStateException("Failed to remove user with ID: " + userId, e);
+        }
     }
 
     /**
@@ -122,11 +126,19 @@ public class DatabaseController {
      *
      * @param user The user to be removed
      */
-    public static void removeUser(User user) {
+    public static void removeUser(User user) throws IllegalStateException {
         int userId = user.getUserId();
-        String sql = "DELETE FROM users WHERE user_id = ?";
-        executeUpdate(sql, userId);
-        System.out.println("User with ID " + userId + " removed from the database.");
+        removeUser(userId);
+    }
+
+    /**
+     * Method will alter user table
+     *
+     * @param user User to be altered
+     */
+    public static void alterUser(User user) {
+        String sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_num = ?, password = ? WHERE user_id = ?";
+        executeUpdate(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNum(), user.getPassword(), user.getUserId());
     }
 
     /**

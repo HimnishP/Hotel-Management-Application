@@ -30,7 +30,7 @@ public class DatabaseUtil {
     }
 
     /**
-     * Helper method for methods requiring executing update ( create table)
+     * Helper method for methods requiring executing update (UPDATE,DELETE,ALTER,CREATE,DROP)
      *
      * @param sql    SQL statement
      * @param params Parameters
@@ -49,7 +49,7 @@ public class DatabaseUtil {
     }
 
     /**
-     * Helper method for executing insert
+     * Helper method for executing INSERT
      *
      * @param sql    SQL Statement
      * @param params The parameters
@@ -76,47 +76,8 @@ public class DatabaseUtil {
         return -1;
     }
 
-    public static User mapUser(ResultSet rs) throws SQLException {
-        // Map common fields for the User class
-        int userId = rs.getInt("userId");
-        String firstName = rs.getString("firstName");
-        String lastName = rs.getString("lastName");
-        String email = rs.getString("email");
-        String phoneNum = rs.getString("phoneNum");
-        String password = rs.getString("password");
-        return new User(userId, firstName, lastName, email, phoneNum, password);
-    }
-
-    public static Manager mapManager(ResultSet rs) throws SQLException {
-        User user = mapUser(rs);
-        return new Manager(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhoneNum(),
-                user.getPassword()
-        );
-    }
-
-    public static Customer mapCustomer(ResultSet rs) throws SQLException {
-        User user = mapUser(rs);
-        return new Customer(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhoneNum(),
-                user.getPassword()
-        );
-    }
-
-
-    @FunctionalInterface
-    public interface ResultSetProcessor<T> {
-        T process(ResultSet rs) throws SQLException;
-    }
-
     /**
-     * Helper method for executing queries (selecting)
+     * Helper method for executing queries (SELECTING)
      *
      * @param sql       SQL statement
      * @param processor ResultSet
@@ -139,6 +100,64 @@ public class DatabaseUtil {
         return resultList;
     }
 
+    /**
+     * Method will return user object
+     *
+     * @param rs The ResultSet
+     * @return User object
+     * @throws SQLException When SQL error occurs
+     */
+    public static User mapUser(ResultSet rs) throws SQLException {
+        // Map common fields for the User class
+        int userId = rs.getInt("userId");
+        String firstName = rs.getString("firstName");
+        String lastName = rs.getString("lastName");
+        String email = rs.getString("email");
+        String phoneNum = rs.getString("phoneNum");
+        String password = rs.getString("password");
+        return new User(userId, firstName, lastName, email, phoneNum, password);
+    }
+
+    /**
+     * Method will return manager object
+     *
+     * @param rs The ResultSet
+     * @return User object
+     * @throws SQLException When SQL error occurs
+     */
+    public static Manager mapManager(ResultSet rs) throws SQLException {
+        User user = mapUser(rs);
+        return new Manager(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPhoneNum(),
+                user.getPassword()
+        );
+    }
+
+    @FunctionalInterface
+    public interface ResultSetProcessor<T> {
+        T process(ResultSet rs) throws SQLException;
+    }
+
+    /**
+     * Method will return customer object
+     *
+     * @param rs The ResultSet
+     * @return User object
+     * @throws SQLException When SQL error occurs
+     */
+    public static Customer mapCustomer(ResultSet rs) throws SQLException {
+        User user = mapUser(rs);
+        return new Customer(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPhoneNum(),
+                user.getPassword()
+        );
+    }
 
     /**
      * Formats user details retrieved from the database as a localized string.

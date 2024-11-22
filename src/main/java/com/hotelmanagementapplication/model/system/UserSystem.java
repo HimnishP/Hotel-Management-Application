@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class UserSystem {
@@ -30,7 +31,14 @@ public class UserSystem {
     public void addUser(User user) {
         EXECUTOR_SERVICE.submit(() -> {
             userMap.put(user.getUserId(), user);
-            DatabaseController.insertUser(user);
+            int id = DatabaseController.insertUser(user);
+            if (user instanceof Manager) {
+                DatabaseController.insertManager(id);
+            } else if (user instanceof Customer) {
+                DatabaseController.insertCustomer(id);
+            } else {
+                throw new IllegalArgumentException("Must be a user ");
+            }
         });
     }
 
@@ -40,12 +48,17 @@ public class UserSystem {
      * @param userId the ID of the user to remove
      * @return the removed user
      */
-    public User removeUser(int userId) {
-        EXECUTOR_SERVICE.submit(() -> {
-            if (!userExists(userId)) {
+    public Future<User> removeUser(int userId) {
+        return EXECUTOR_SERVICE.submit(() -> {
+            boolean userExists = userExistsAsync(userId).get();
+            if (!userExists) {
                 throw new NoSuchElementException("ERROR: User with id " + userId + " does not exist!");
             }
-            //TODO : Implement a remove user row method in database util
+            try {
+                DatabaseController.removeUser(userId);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to remove user with id " + userId + " from the database.", e);
+            }
             return userMap.remove(userId);
         });
     }
@@ -56,11 +69,13 @@ public class UserSystem {
      * @param userId the ID of the user to find
      * @return the user
      */
-    public User getUserById(int userId) {
-        if (!userExists(userId)) {
-            throw new NoSuchElementException("ERROR: User with id " + userId + " does not exist!");
-        }
-        return userMap.get(userId);
+    public Future<User> getUserById(int userId) {
+        return EXECUTOR_SERVICE.submit(() -> {
+            if (!userExistsAsync(userId).get()) {
+                throw new NoSuchElementException("ERROR: User with id " + userId + " does not exist!");
+            }
+            return userMap.get(userId);
+        });
     }
 
     /**
@@ -68,8 +83,8 @@ public class UserSystem {
      *
      * @return a list of all users
      */
-    public List<User> getAllUsers() {
-        return userMap.values().stream().toList();
+    public Future<List<User>> getAllUsers() {
+        return EXECUTOR_SERVICE.submit(() -> userMap.values().stream().toList());
     }
 
     /**
@@ -77,11 +92,11 @@ public class UserSystem {
      *
      * @return a list of managers
      */
-    public List<Manager> getAllManagers() {
-        return userMap.values().stream()
+    public Future<List<Manager>> getAllManagers() {
+        return EXECUTOR_SERVICE.submit(() -> userMap.values().stream()
                 .filter(user -> user instanceof Manager)
                 .map(user -> (Manager) user)
-                .toList();
+                .toList());
     }
 
     /**
@@ -89,11 +104,11 @@ public class UserSystem {
      *
      * @return a list of customers
      */
-    public List<Customer> getAllCustomers() {
-        return userMap.values().stream()
+    public Future<List<Customer>> getAllCustomers() {
+        return EXECUTOR_SERVICE.submit(() -> userMap.values().stream()
                 .filter(user -> user instanceof Customer)
                 .map(user -> (Customer) user)
-                .toList();
+                .toList());
     }
 
     /**
@@ -101,11 +116,15 @@ public class UserSystem {
      *
      * @param user the user with updated information
      */
-    public void updateUser(User user) {
-        if (!userExists(user.getUserId())) {
-            throw new NoSuchElementException("ERROR: User with id " + user.getUserId() + " does not exist!");
-        }
-        userMap.put(user.getUserId(), user);
+    public Future<Void> updateUser(User user) {
+        return EXECUTOR_SERVICE.submit(() -> {
+            if (!userExistsAsync(user.getUserId()).get()) {
+                throw new NoSuchElementException("ERROR: User with id " + user.getUserId() + " does not exist!");
+            }
+            DatabaseController.alterUser(user);
+            userMap.put(user.getUserId(), user);
+            return null;
+        });
     }
 
     /**
@@ -114,10 +133,10 @@ public class UserSystem {
      * @param name the name to search for
      * @return a list of matching users
      */
-    public List<User> findUsersByName(String name) {
-        return userMap.values().stream()
+    public Future<List<User>> findUsersByName(String name) {
+        return EXECUTOR_SERVICE.submit(() -> userMap.values().stream()
                 .filter(user -> user.getFullName().contains(name))
-                .toList();
+                .toList());
     }
 
     /**
@@ -126,8 +145,8 @@ public class UserSystem {
      * @param userId the ID of the user
      * @return true if the user exists, false otherwise
      */
-    public boolean userExists(int userId) {
-        return userMap.containsKey(userId);
+    public Future<Boolean> userExistsAsync(int userId) {
+        return EXECUTOR_SERVICE.submit(() -> userMap.containsKey(userId));
     }
 
     /**
@@ -135,8 +154,8 @@ public class UserSystem {
      *
      * @return the total number of users
      */
-    public int getUserCount() {
-        return userMap.size();
+    public Future<Integer> getUserCount() {
+        return EXECUTOR_SERVICE.submit(userMap::size);
     }
 
     /**
@@ -144,7 +163,9 @@ public class UserSystem {
      *
      * @return a list of user IDs
      */
-    public List<Integer> listUserIds() {
-        return userMap.keySet().stream().toList();
+    public Future<List<Integer>> listUserIds() {
+        return EXECUTOR_SERVICE.submit(() -> userMap.keySet()
+                .stream()
+                .toList());
     }
 }
