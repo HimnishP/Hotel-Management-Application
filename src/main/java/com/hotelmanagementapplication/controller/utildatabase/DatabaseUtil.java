@@ -13,8 +13,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class DatabaseUtil {
     private final static String PATH_DATABASE = "jdbc:sqlite:./src/main/resources/database/database.db";
     private final static ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-    private final static ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
-    private final static ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
+    private final static ReentrantReadWriteLock.ReadLock READ_LOCK = lock.readLock();
+    private final static ReentrantReadWriteLock.WriteLock WRITE_LOCK = lock.writeLock();
 
     /**
      * Establishes a connection with SQLite Database
@@ -56,7 +56,7 @@ public class DatabaseUtil {
      * @return The generated key
      */
     public static int executeInsert(String sql, Object... params) {
-        writeLock.lock();
+        WRITE_LOCK.lock();
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             for (int i = 0; i < params.length; i++) {
@@ -71,7 +71,7 @@ public class DatabaseUtil {
         } catch (SQLException e) {
             throw new RuntimeException("Error executing insert: " + sql, e);
         } finally {
-            writeLock.unlock();
+            WRITE_LOCK.unlock();
         }
         return -1;
     }
@@ -123,7 +123,7 @@ public class DatabaseUtil {
      * @return The list
      */
     public static <T> List<T> executeQuery(String sql, ResultSetProcessor<T> processor) {
-        readLock.lock();
+        READ_LOCK.lock();
         List<T> resultList = new ArrayList<>();
         try (Connection conn = connect();
              Statement stmt = conn.createStatement();
@@ -134,7 +134,7 @@ public class DatabaseUtil {
         } catch (SQLException e) {
             throw new RuntimeException("Error executing query: " + sql, e);
         } finally {
-            readLock.unlock();
+            READ_LOCK.unlock();
         }
         return resultList;
     }

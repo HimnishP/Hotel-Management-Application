@@ -107,6 +107,29 @@ public class DatabaseController {
     }
 
     /**
+     * Method will remove user from database
+     *
+     * @param userId The userId of the user
+     */
+    public static void removeUser(int userId) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        executeUpdate(sql, userId);
+        System.out.println("User with ID " + userId + " removed from the database.");
+    }
+
+    /**
+     * Method will remove user from database
+     *
+     * @param user The user to be removed
+     */
+    public static void removeUser(User user) {
+        int userId = user.getUserId();
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        executeUpdate(sql, userId);
+        System.out.println("User with ID " + userId + " removed from the database.");
+    }
+
+    /**
      * reads the users as plaintext from the user table
      *
      * @return the users
