@@ -31,10 +31,12 @@ public class UserSystem {
     public void addUser(User user) {
         EXECUTOR_SERVICE.submit(() -> {
             userMap.put(user.getUserId(), user);
-            int id = DatabaseController.insertUser(user);
+            int id = 0;
             if (user instanceof Manager) {
+                id = DatabaseController.insertUser(user, "Manager");
                 DatabaseController.insertManager(id);
             } else if (user instanceof Customer) {
+                id = DatabaseController.insertUser(user, "Customer");
                 DatabaseController.insertCustomer(id);
             } else {
                 throw new IllegalArgumentException("Must be a user ");

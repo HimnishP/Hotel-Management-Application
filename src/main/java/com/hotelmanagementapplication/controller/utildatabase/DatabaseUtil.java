@@ -127,18 +127,7 @@ public class DatabaseUtil {
      */
     public static Manager mapManager(ResultSet rs) throws SQLException {
         User user = mapUser(rs);
-        return new Manager(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhoneNum(),
-                user.getPassword()
-        );
-    }
-
-    @FunctionalInterface
-    public interface ResultSetProcessor<T> {
-        T process(ResultSet rs) throws SQLException;
+        return new Manager(user);
     }
 
     /**
@@ -150,13 +139,12 @@ public class DatabaseUtil {
      */
     public static Customer mapCustomer(ResultSet rs) throws SQLException {
         User user = mapUser(rs);
-        return new Customer(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPhoneNum(),
-                user.getPassword()
-        );
+        return new Customer(user);
+    }
+
+    @FunctionalInterface
+    public interface ResultSetProcessor<T> {
+        T process(ResultSet rs) throws SQLException;
     }
 
     /**

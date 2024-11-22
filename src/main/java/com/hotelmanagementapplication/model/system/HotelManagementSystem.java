@@ -30,6 +30,7 @@ public class HotelManagementSystem {
      * Adds a user to the system asynchronously.
      *
      * @param user the user to add
+     * @return
      */
     public void addUser(User user) {
         userSystem.addUser(user);
