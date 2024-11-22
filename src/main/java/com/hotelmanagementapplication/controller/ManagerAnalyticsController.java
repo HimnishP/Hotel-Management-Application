@@ -2,7 +2,6 @@ package com.hotelmanagementapplication.controller;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
-import com.hotelmanagementapplication.model.utildatabase.DatabaseUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -50,7 +49,7 @@ public class ManagerAnalyticsController {
      */
     public void handleViewAllUsersButton(ActionEvent actionEvent) {
         listView.getItems().clear();
-        listView.getItems().addAll(DatabaseUtil.selectUsers());
+        listView.getItems().addAll(DatabaseController.selectUsers());
         vBoxLayout.setVisible(true);
         listView.setVisible(true);
     }
@@ -84,7 +83,7 @@ public class ManagerAnalyticsController {
      */
     public void handleViewManagersButton(ActionEvent actionEvent) {
         listView.getItems().clear();
-        listView.getItems().addAll(DatabaseUtil.selectManagers());
+        listView.getItems().addAll(DatabaseController.selectManagers());
         vBoxLayout.setVisible(true);
         listView.setVisible(true);
     }
@@ -98,7 +97,7 @@ public class ManagerAnalyticsController {
      */
     public void handleViewCustomersButton(ActionEvent actionEvent) {
         listView.getItems().clear();
-        listView.getItems().addAll(DatabaseUtil.selectCustomers());
+        listView.getItems().addAll(DatabaseController.selectCustomers());
         vBoxLayout.setVisible(true);
         listView.setVisible(true);
     }

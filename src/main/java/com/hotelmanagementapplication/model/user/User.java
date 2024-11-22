@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 public class User {
