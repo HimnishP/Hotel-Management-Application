@@ -124,9 +124,10 @@ public class DatabaseController {
      *
      * @param user User to be altered
      */
-    public static void alterUser(User user) {
-        String sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone_num = ?, password = ? WHERE user_id = ?";
-        executeUpdate(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNum(), user.getPassword(), user.getUserId());
+    public static void alterUser(int id, User user) {
+        String sql = "UPDATE User SET firstName = ?, lastName = ?, email = ?, phoneNum = ?, password = ? WHERE userId = ?";
+        System.out.println("In alter user");
+        executeUpdate(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNum(), user.getPassword(), id);
     }
 
     /**

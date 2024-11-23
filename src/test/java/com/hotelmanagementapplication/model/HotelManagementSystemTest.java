@@ -131,7 +131,7 @@ class HotelManagementSystemTest {
         User customer = new Customer("Alice", "Johnson", "alice@example.com", "123-456-7890", "password");
         hotelManagementSystem.addUser(customer);
         customer.setEmail("newalice@example.com");
-        hotelManagementSystem.updateUser(customer);
+        hotelManagementSystem.updateUser(customer.getUserId(),customer);
         User updatedUser = hotelManagementSystem.getUserById(customer.getUserId());
         assertEquals("newalice@example.com", updatedUser.getEmail());
     }
@@ -143,7 +143,7 @@ class HotelManagementSystemTest {
     @Test
     void updateUser_ShouldThrowExceptionIfUserDoesNotExist() {
         User customer = new Customer("Alice", "Johnson", "alice@example.com", "123-456-7890", "password");
-        assertThrows(NoSuchElementException.class, () -> hotelManagementSystem.updateUser(customer));
+        assertThrows(NoSuchElementException.class, () -> hotelManagementSystem.updateUser(customer.getUserId(), customer));
     }
 
     /**

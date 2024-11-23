@@ -117,14 +117,15 @@ public class UserSystem {
      * Updates an existing user.
      *
      * @param user the user with updated information
+     * @param id id of user
      */
-    public Future<Void> updateUser(User user) {
+    public Future<Void> updateUser(int id, User user) {
         return EXECUTOR_SERVICE.submit(() -> {
-            if (!userExistsAsync(user.getUserId()).get()) {
-                throw new NoSuchElementException("ERROR: User with id " + user.getUserId() + " does not exist!");
+            if (!userExistsAsync(id).get()) {
+                throw new NoSuchElementException("ERROR: User with id " + id + " does not exist!");
             }
-            DatabaseController.alterUser(user);
-            userMap.put(user.getUserId(), user);
+            DatabaseController.alterUser(id, user);
+            userMap.put(id, user);
             return null;
         });
     }

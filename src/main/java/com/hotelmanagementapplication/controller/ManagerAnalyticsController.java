@@ -4,10 +4,13 @@ import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -71,7 +74,9 @@ public class ManagerAnalyticsController {
      *
      * @param actionEvent the event triggered by the "Update Profile" button click
      */
-    public void handleUpdateProfileButton(ActionEvent actionEvent) {
+    public void handleUpdateProfileButton(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "UpdateUserScreen.fxml");
     }
 
     /**

@@ -107,9 +107,10 @@ public class HotelManagementSystem {
      * Updates a user asynchronously.
      *
      * @param user the user with updated information
+     * @param id the id of the user
      */
-    public void updateUser(User user) {
-        userSystem.updateUser(user);
+    public void updateUser(int id, User user) {
+        userSystem.updateUser(id, user);
     }
 
     /**
