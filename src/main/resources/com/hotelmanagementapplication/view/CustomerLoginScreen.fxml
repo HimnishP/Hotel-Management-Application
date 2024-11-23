@@ -78,6 +78,7 @@
             <TextField fx:id="emailTF" layoutX="208.0" layoutY="274.0" prefHeight="31.0" prefWidth="220.0" promptText="%email.prompt" />
             <PasswordField fx:id="passwordTF" layoutX="208.0" layoutY="307.0" prefHeight="31.0" prefWidth="220.0" promptText="%password.prompt" />
             <TextField fx:id="phoneNumberTF" layoutX="208.0" layoutY="344.0" prefHeight="31.0" prefWidth="220.0" promptText="%phone.number.prompt" />
+            <Button fx:id="returnToWelcomeScreenButton" layoutX="72.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleReturnToWelcomeScreenButton" prefHeight="31.0" prefWidth="340.0" text="%goBackToWelcomeScreen.button" />
          </children>
       </AnchorPane>
    </children>

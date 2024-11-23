@@ -1,8 +1,6 @@
 package com.hotelmanagementapplication;
 
-import com.hotelmanagementapplication.controller.DatabaseController;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
-import com.hotelmanagementapplication.model.user.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

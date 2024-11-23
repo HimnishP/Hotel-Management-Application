@@ -98,5 +98,15 @@ public class ManagerLoginScreenController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Method will switch back to the welcome screen
+     *
+     * @param actionEvent The event
+     */
+    public void handleReturnToWelcomeScreenButton(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "WelcomeScreen.fxml");
+    }
 }
 
