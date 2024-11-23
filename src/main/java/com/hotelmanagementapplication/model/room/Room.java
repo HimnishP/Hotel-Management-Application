@@ -1,9 +1,7 @@
 package com.hotelmanagementapplication.model.room;
 
+import com.hotelmanagementapplication.model.user.User;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +13,26 @@ public class Room {
     private int roomId;
     private double price;
     private Status status;
+    private User purchasedBy;
 
     public Room(double price, Status status) {
         this.roomId = ++idCounter;
         this.price = price;
         this.status = status;
+    }
+
+    /**
+     * Assigns a room to a user
+     *
+     * @param room The room to assign
+     * @param user The user purchasing the room
+     */
+    public static void assignRoomToUser(Room room, User user) {
+        if (room.getStatus() == Status.AVAILABLE) {
+            room.setPurchasedBy(user);
+            room.setStatus(Status.BOOKED);
+        } else {
+            throw new IllegalStateException("Room is not available for purchase");
+        }
     }
 }

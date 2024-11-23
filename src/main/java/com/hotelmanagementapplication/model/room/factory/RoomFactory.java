@@ -21,4 +21,16 @@ public class RoomFactory {
             default -> throw new IllegalArgumentException("Invalid Type: " + type);
         };
     }
+
+    /**
+     * Creates room
+     * @param type Type of room
+     * @param room The room
+     * @return The type of room
+     */
+    public static Room createRoom(String type, Room room) {
+        double price = room.getPrice();
+        Status status = room.getStatus();
+        return createRoom(type, price, status);
+    }
 }
