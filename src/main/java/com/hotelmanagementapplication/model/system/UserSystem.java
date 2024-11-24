@@ -171,4 +171,20 @@ public class UserSystem {
                 .stream()
                 .toList());
     }
+
+    /**
+     * Method will check if there is an existing user based on email and password
+     *
+     * @param email    The email
+     * @param password The password
+     * @return True if user found or false if not found
+     */
+    public Future<Boolean> validateExistingCustomer(String email, String password) {
+        return EXECUTOR_SERVICE.submit(() -> {
+            boolean isValid;
+            return isValid = userMap.values().stream()
+                    .anyMatch(user -> user.getEmail().equals(email)
+                            && user.getPassword().equals(password));
+        });
+    }
 }

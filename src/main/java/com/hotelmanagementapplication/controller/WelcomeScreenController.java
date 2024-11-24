@@ -69,8 +69,10 @@ public class WelcomeScreenController {
 
     }
 
-    public void handleYesRadioButton(ActionEvent actionEvent) {
+    public void handleYesRadioButton(ActionEvent actionEvent) throws IOException {
         isExistingUser = true;
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "ExistingUser.fxml");
     }
 
     public void handleNoRadioButton(ActionEvent actionEvent) {

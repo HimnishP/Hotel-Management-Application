@@ -30,7 +30,6 @@ public class HotelManagementSystem {
      * Adds a user to the system asynchronously.
      *
      * @param user the user to add
-     * @return
      */
     public void addUser(User user) {
         userSystem.addUser(user);
@@ -164,6 +163,21 @@ public class HotelManagementSystem {
             return userSystem.listUserIds().get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException("Failed to list user IDs", e);
+        }
+    }
+
+    /**
+     * Method will check if there is an existing user based on email and password
+     *
+     * @param email    The email
+     * @param password The password
+     * @return True if user found or false if not found
+     */
+    public boolean validateExistingCustomer(String email, String password) {
+        try {
+            return userSystem.validateExistingCustomer(email, password).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
         }
     }
 }
