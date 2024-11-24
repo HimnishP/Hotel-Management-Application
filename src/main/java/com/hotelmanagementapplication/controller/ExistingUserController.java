@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ExistingUserController {
-    private static boolean isManger = false;
-    private static boolean isCustomer = false;
     @FXML
     private TextField emailTB;
     @FXML
@@ -29,36 +27,14 @@ public class ExistingUserController {
      */
     public void handleValidateButton(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        boolean isValidUser = hotelManagementSystem.validateExistingCustomer(emailTB.getText(), passwordTB.getText());
-        if (isValidUser && isCustomer) {
+        String userType = hotelManagementSystem.validateExistingCustomer(emailTB.getText(), passwordTB.getText());
+        if (userType.equals("Customer")) {
             ScreenHandler.switchScreens(stage, "CustomerBookingScreen.fxml");
-        } else if (isValidUser && isManger) {
+        } else if (userType.equals("Manager")) {
             ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml");
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Validation Failed");
-            alert.setHeaderText("Invalid Credentials");
-            alert.setContentText("The email or password you entered is incorrect. Please try again.");
-            alert.showAndWait();
+            showAlertBox();
         }
-    }
-
-    /**
-     * Method will check if user is a manager
-     *
-     * @param actionEvent The Event
-     */
-    public void handleManagerRadioButton(ActionEvent actionEvent) {
-        isManger = true;
-    }
-
-    /**
-     * Method will check if user is a customer
-     *
-     * @param actionEvent The Event
-     */
-    public void handleCustomerRadioButton(ActionEvent actionEvent) {
-        isCustomer = true;
     }
 
     /**
@@ -70,5 +46,16 @@ public class ExistingUserController {
     public void handleGoBackToWelcomeScreen(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         ScreenHandler.switchScreens(primaryStage, "WelcomeScreen.fxml");
+    }
+
+    /**
+     * Shows Alert Box
+     */
+    private static void showAlertBox() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validation Failed");
+        alert.setHeaderText("Invalid Credentials");
+        alert.setContentText("The email or password you entered is incorrect. Please try again.");
+        alert.showAndWait();
     }
 }

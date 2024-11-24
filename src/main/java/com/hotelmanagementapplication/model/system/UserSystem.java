@@ -177,14 +177,23 @@ public class UserSystem {
      *
      * @param email    The email
      * @param password The password
-     * @return True if user found or false if not found
+     * @return The type of user found
      */
-    public Future<Boolean> validateExistingCustomer(String email, String password) {
+    public Future<String> validateAndReturnUserType(String email, String password) {
         return EXECUTOR_SERVICE.submit(() -> {
-            boolean isValid;
-            return isValid = userMap.values().stream()
-                    .anyMatch(user -> user.getEmail().equals(email)
-                            && user.getPassword().equals(password));
+            return userMap.values().stream()
+                    .filter(user -> user.getEmail().equals(email)
+                            && user.getPassword().equals(password))
+                    .map(user -> {
+                        if (user instanceof Manager) {
+                            return "Manager";
+                        } else if (user instanceof Customer) {
+                            return "Customer";
+                        }
+                        return "Unknown";
+                    })
+                    .findFirst()
+                    .orElse(null);
         });
     }
 }

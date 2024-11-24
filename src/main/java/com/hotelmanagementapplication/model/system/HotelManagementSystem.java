@@ -171,11 +171,11 @@ public class HotelManagementSystem {
      *
      * @param email    The email
      * @param password The password
-     * @return True if user found or false if not found
+     * @return The type of user found
      */
-    public boolean validateExistingCustomer(String email, String password) {
+    public String validateExistingCustomer(String email, String password) {
         try {
-            return userSystem.validateExistingCustomer(email, password).get();
+            return userSystem.validateAndReturnUserType(email, password).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
