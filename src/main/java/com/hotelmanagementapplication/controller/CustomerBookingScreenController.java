@@ -1,15 +1,11 @@
 package com.hotelmanagementapplication.controller;
 
-import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
-
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
 
 public class CustomerBookingScreenController {
     @FXML
@@ -20,16 +16,6 @@ public class CustomerBookingScreenController {
     private ListView listView;
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
-
-    @FXML
-    public void initialize() {
-        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
-        String customerName = hotelManagementSystem.getAllCustomers().getLast().getFullName();
-        String customerText = resourceBundle.getString("welcomeCustomer");
-        String formattedCustomerText = MessageFormat.format(customerText, customerName);
-        welcomeCustomerLabel.setText(formattedCustomerText);
-    }
-
     /**
      * Button will set the vBox and list view visible. It will update the list view by retrieving data from the database for the rooms
      *

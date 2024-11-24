@@ -5,33 +5,19 @@ import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
 
 public class ManagerAnalyticsController {
     @FXML
     private VBox vBoxLayout;
     @FXML
     private ListView listView;
-    @FXML
-    private Label helloManagerLabel;
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
-    private final ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
-
-    @FXML
-    public void initialize() {
-        String managerName = hotelManagementSystem.getAllManagers().getLast().getFullName();
-        String managerText = resourceBundle.getString("helloManager");
-        String formattedManagerText = MessageFormat.format(managerText, managerName);
-        helloManagerLabel.setText(formattedManagerText);
-    }
 
     /**
      * Handles the event triggered when the "View Payments" button is clicked.
