@@ -15,6 +15,8 @@ public class WelcomeScreenController {
     @FXML
     private RadioButton englishRadioButton;
 
+    private static boolean isExistingUser = false;
+
     /**
      * Once the button is clicked it will load the manager login screen
      *
@@ -22,8 +24,10 @@ public class WelcomeScreenController {
      * @throws IOException Exception
      */
     public void staffButtonHandler(ActionEvent actionEvent) throws IOException {
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        ScreenHandler.switchScreens(primaryStage, "ManagerLoginScreen.fxml");
+        if (!isExistingUser) {
+            Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            ScreenHandler.switchScreens(primaryStage, "ManagerLoginScreen.fxml");
+        }
     }
 
     /**
@@ -33,8 +37,10 @@ public class WelcomeScreenController {
      * @throws IOException Exception
      */
     public void customerButtonHandler(ActionEvent event) throws IOException {
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        ScreenHandler.switchScreens(primaryStage, "CustomerLoginScreen.fxml");
+        if (!isExistingUser) {
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ScreenHandler.switchScreens(primaryStage, "CustomerLoginScreen.fxml");
+        }
     }
 
     /**
@@ -61,5 +67,13 @@ public class WelcomeScreenController {
         Stage stage = (Stage) englishRadioButton.getScene().getWindow();
         ScreenHandler.switchScreens(stage, "WelcomeScreen.fxml");
 
+    }
+
+    public void handleYesRadioButton(ActionEvent actionEvent) {
+        isExistingUser = true;
+    }
+
+    public void handleNoRadioButton(ActionEvent actionEvent) {
+        isExistingUser = false;
     }
 }

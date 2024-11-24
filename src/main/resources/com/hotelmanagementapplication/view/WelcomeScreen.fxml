@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotelmanagementapplication.controller.WelcomeScreenController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotelmanagementapplication.controller.WelcomeScreenController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #808080;">
          <children>
@@ -83,6 +77,9 @@
             </Label>
             <RadioButton fx:id="englishRadioButton" layoutX="320.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleEnglishRadioButton" text="%english.radiobutton" />
             <RadioButton fx:id="frenchRadioButton" layoutX="320.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleFrenchRadioButton" text="%french.radiobutton" />
+            <Label layoutX="32.0" layoutY="459.0" text="%existingUser.label" />
+            <RadioButton fx:id="yesRadioButton" layoutX="14.0" layoutY="503.0" mnemonicParsing="false" onAction="#handleYesRadioButton" text="%yes.rb" />
+            <RadioButton fx:id="noRadioButton" layoutX="17.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleNoRadioButton" text="%no.rb" />
          </children>
       </AnchorPane>
    </children>
