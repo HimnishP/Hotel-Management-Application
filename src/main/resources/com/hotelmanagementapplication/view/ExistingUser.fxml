@@ -60,15 +60,12 @@
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="54.0" layoutY="238.0" text="%email.label" />
-            <Label layoutX="53.0" layoutY="290.0" text="%password.label" />
-            <TextField fx:id="emailTB" layoutX="175.0" layoutY="233.0" prefHeight="31.0" prefWidth="310.0" promptText="%email.prompt" />
-            <RadioButton fx:id="customerRadioButton" layoutX="96.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleCustomerRadioButton" text="%user.label" />
-            <RadioButton fx:id="mangerRadioButton" layoutX="264.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleManagerRadioButton" text="%manager.label" />
-            <Label alignment="CENTER" contentDisplay="RIGHT" layoutY="351.0" prefHeight="21.0" prefWidth="501.0" text="%question.label" textAlignment="CENTER" />
-            <Button fx:id="validateButton" layoutX="124.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleValidateButton" prefHeight="31.0" prefWidth="264.0" text="%validate.button" />
-            <PasswordField fx:id="passwordTB" layoutX="175.0" layoutY="285.0" prefHeight="31.0" prefWidth="310.0" promptText="%password.prompt" />
-            <Button layoutX="124.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleGoBackToWelcomeScreen" prefHeight="31.0" prefWidth="264.0" text="%goBackToWelcomeScreen.button" />
+            <Label layoutX="54.0" layoutY="254.0" text="%email.label" />
+            <Label layoutX="54.0" layoutY="316.0" text="%password.label" />
+            <TextField fx:id="emailTB" layoutX="175.0" layoutY="249.0" prefHeight="31.0" prefWidth="310.0" promptText="%email.prompt" />
+            <Button fx:id="validateButton" layoutX="124.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleValidateButton" prefHeight="31.0" prefWidth="264.0" text="%validate.button" />
+            <PasswordField fx:id="passwordTB" layoutX="175.0" layoutY="311.0" prefHeight="31.0" prefWidth="310.0" promptText="%password.prompt" />
+            <Button layoutX="124.0" layoutY="475.0" mnemonicParsing="false" onAction="#handleGoBackToWelcomeScreen" prefHeight="31.0" prefWidth="264.0" text="%goBackToWelcomeScreen.button" />
          </children></AnchorPane>
     </children>
 </HBox>
