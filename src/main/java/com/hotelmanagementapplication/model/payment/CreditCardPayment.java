@@ -2,6 +2,7 @@ package com.hotelmanagementapplication.model.payment;
 
 import com.hotelmanagementapplication.model.payment.factory.PaymentMethod;
 import com.hotelmanagementapplication.model.payment.utility.PaymentValidationUtil;
+import com.hotelmanagementapplication.model.user.User;
 import lombok.*;
 
 @Getter
@@ -15,8 +16,15 @@ public class CreditCardPayment extends Payment implements PaymentMethod {
     private String expirationDate;
     private String securityCode;
 
-    public CreditCardPayment(String creditCardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
-        super(amount);
+    public CreditCardPayment(String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        this.creditCardNumber = creditCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
+    public CreditCardPayment(User user, double amount, String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(user, amount);
         this.creditCardNumber = creditCardNumber;
         this.cardHolderName = cardHolderName;
         this.expirationDate = expirationDate;

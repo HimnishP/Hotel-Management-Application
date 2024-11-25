@@ -2,6 +2,7 @@ package com.hotelmanagementapplication.model.payment;
 
 import com.hotelmanagementapplication.model.payment.factory.PaymentMethod;
 import com.hotelmanagementapplication.model.payment.utility.PaymentValidationUtil;
+import com.hotelmanagementapplication.model.user.User;
 import lombok.*;
 
 @NoArgsConstructor
@@ -15,8 +16,15 @@ public class DebitCardPayment extends Payment implements PaymentMethod {
     private String expirationDate;
     private String securityCode;
 
-    public DebitCardPayment(String debitCardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
-        super(amount);
+    public DebitCardPayment(String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        this.debitCardNumber = debitCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
+    public DebitCardPayment(User user, double amount, String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(user, amount);
         this.debitCardNumber = debitCardNumber;
         this.cardHolderName = cardHolderName;
         this.expirationDate = expirationDate;
