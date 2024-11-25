@@ -2,6 +2,7 @@ package com.hotelmanagementapplication.model.payment.factory;
 
 import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
+import com.hotelmanagementapplication.model.user.User;
 
 public class PaymentFactory {
     /**
@@ -15,10 +16,12 @@ public class PaymentFactory {
      * @param amount         amount they need to pay for their booking
      * @return the type of payment that will be made.
      */
-    public static PaymentMethod createPayment(String type, String cardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
+    public static PaymentMethod createPayment(String type, User user, String cardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
         return switch (type.toLowerCase()) {
-            case "debit" -> new DebitCardPayment(cardNumber, cardHolderName, expirationDate, securityCode, amount);
-            case "credit" -> new CreditCardPayment(cardNumber, cardHolderName, expirationDate, securityCode, amount);
+            case "debit" ->
+                    new DebitCardPayment(user, amount, cardNumber, cardHolderName, expirationDate, securityCode);
+            case "credit" ->
+                    new CreditCardPayment(user, amount, cardNumber, cardHolderName, expirationDate, securityCode);
             default -> throw new IllegalArgumentException("Invalid payment type: " + type);
         };
     }
