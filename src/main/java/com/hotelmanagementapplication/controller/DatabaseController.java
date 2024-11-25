@@ -55,6 +55,57 @@ public class DatabaseController {
     }
 
     /**
+     * Method will create payment table
+     */
+    public static void createTablePayment() {
+        String sql = """
+                CREATE TABLE IF NOT EXISTS Payment (
+                    paymentId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    userId INTEGER NOT NULL,
+                    amount REAL NOT NULL,
+                    paymentDate TEXT NOT NULL,
+                    paymentType TEXT NOT NULL CHECK(paymentType IN ('DebitCardPayment', 'CreditCardPayment')),
+                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
+                );
+                """;
+        executeUpdate(sql);
+    }
+
+    /**
+     * Create debit card table
+     */
+    public static void createTableDebitCardPayment() {
+        String sql = """
+                CREATE TABLE IF NOT EXISTS DebitCardPayment (
+                    paymentId INTEGER PRIMARY KEY,
+                    debitCardNumber TEXT NOT NULL,
+                    cardHolderName TEXT NOT NULL,
+                    expirationDate TEXT NOT NULL,
+                    securityCode TEXT NOT NULL,
+                    FOREIGN KEY (paymentId) REFERENCES Payment(paymentId) ON DELETE CASCADE
+                );
+                """;
+        executeUpdate(sql);
+    }
+
+    /**
+     * Create debit card table
+     */
+    public static void createTableCreditCardPayment() {
+        String sql = """
+                 CREATE TABLE IF NOT EXISTS CreditCardPayment (
+                     paymentId INTEGER PRIMARY KEY,
+                     creditCardNumber TEXT NOT NULL,
+                     cardHolderName TEXT NOT NULL,
+                     expirationDate TEXT NOT NULL,
+                     securityCode TEXT NOT NULL,
+                     FOREIGN KEY (paymentId) REFERENCES Payment(paymentId) ON DELETE CASCADE
+                 );               \s
+                \s""";
+        executeUpdate(sql);
+    }
+
+    /**
      * Inserts data into user table
      * @param user The user
      * @param userType The user type
