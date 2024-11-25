@@ -1,385 +1,116 @@
 package com.hotelmanagementapplication.controller;
 
-import com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil;
-import com.hotelmanagementapplication.model.payment.CreditCardPayment;
-import com.hotelmanagementapplication.model.payment.DebitCardPayment;
-import com.hotelmanagementapplication.model.payment.Payment;
+import com.hotelmanagementapplication.controller.utildatabase.UserDatabase;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
 
 import java.util.List;
 
-import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.*;
-
 public class DatabaseController {
     /**
-     * Method will create the user table
+     * Create the user table
      */
     public static void createTableUser() {
-        String sql = """
-            CREATE TABLE IF NOT EXISTS User (
-                userId INTEGER PRIMARY KEY AUTOINCREMENT,
-                firstName TEXT NOT NULL,
-                lastName TEXT NOT NULL,
-                email TEXT UNIQUE NOT NULL,
-                phoneNum TEXT,
-                password TEXT NOT NULL,
-                userType TEXT NOT NULL CHECK(userType IN ('Manager', 'Customer'))
-            );
-            """;
-        executeUpdate(sql);
+        UserDatabase.createTableUser();
     }
 
     /**
-     * Method will create manager table
+     * Create the manager table
      */
     public static void createTableManager() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS Manager (
-                    userId INTEGER PRIMARY KEY,
-                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
-                );
-                """;
-        executeUpdate(sql);
+        UserDatabase.createTableManager();
     }
 
     /**
-     * Method will create customer table
+     * Create the customer table
      */
     public static void createTableCustomer() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS Customer (
-                    userId INTEGER PRIMARY KEY,
-                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
-                );
-                """;
-        executeUpdate(sql);
+        UserDatabase.createTableCustomer();
     }
 
     /**
-     * Method will create payment table
-     */
-    public static void createTablePayment() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS Payment (
-                    paymentId INTEGER PRIMARY KEY AUTOINCREMENT,
-                    userId INTEGER NOT NULL,
-                    amount REAL NOT NULL,
-                    paymentDate TEXT NOT NULL,
-                    paymentType TEXT NOT NULL CHECK(paymentType IN ('DebitCardPayment', 'CreditCardPayment')),
-                    FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
-                );
-                """;
-        executeUpdate(sql);
-    }
-
-    /**
-     * Create debit card table
-     */
-    public static void createTableDebitCardPayment() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS DebitCardPayment (
-                    paymentId INTEGER PRIMARY KEY,
-                    debitCardNumber TEXT NOT NULL,
-                    cardHolderName TEXT NOT NULL,
-                    expirationDate TEXT NOT NULL,
-                    securityCode TEXT NOT NULL,
-                    FOREIGN KEY (paymentId) REFERENCES Payment(paymentId) ON DELETE CASCADE
-                );
-                """;
-        executeUpdate(sql);
-    }
-
-    /**
-     * Create debit card table
-     */
-    public static void createTableCreditCardPayment() {
-        String sql = """
-                 CREATE TABLE IF NOT EXISTS CreditCardPayment (
-                     paymentId INTEGER PRIMARY KEY,
-                     creditCardNumber TEXT NOT NULL,
-                     cardHolderName TEXT NOT NULL,
-                     expirationDate TEXT NOT NULL,
-                     securityCode TEXT NOT NULL,
-                     FOREIGN KEY (paymentId) REFERENCES Payment(paymentId) ON DELETE CASCADE
-                 );               \s
-                \s""";
-        executeUpdate(sql);
-    }
-
-    /**
-     * Inserts data into user table
-     * @param user The user
-     * @param userType The user type
-     * @return The generated key
+     * Insert a user into the user table
+     *
+     * @param user     The user object to be inserted
+     * @param userType The type of user (e.g., Manager, Customer)
+     * @return The generated userId
      */
     public static int insertUser(User user, String userType) {
-        String sql = "INSERT INTO User(firstName, lastName, email, phoneNum, password, userType) VALUES(?, ?, ?, ?, ?, ?)";
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-        String email = user.getEmail();
-        String phoneNum = user.getPhoneNum();
-        String password = user.getPassword();
-        return executeInsert(sql, firstName, lastName, email, phoneNum, password, userType);
+        return UserDatabase.insertUser(user, userType);
     }
 
     /**
-     * Method will insert a manager based on the id generated by the insert method for users
+     * Insert a manager into the manager table based on the userId
      *
-     * @param userId the userID
+     * @param userId The userId of the manager
      */
     public static void insertManager(int userId) {
-        String sql = "INSERT INTO Manager (userId) VALUES(?)";
-        executeInsert(sql, userId);
-        System.out.println("Manager data inserted successfully.");
+        UserDatabase.insertManager(userId);
     }
 
     /**
-     * Method will insert a customer based on the id generated by the insert method for users
+     * Insert a customer into the customer table based on the userId
      *
-     * @param userId the userID
+     * @param userId The userId of the customer
      */
     public static void insertCustomer(int userId) {
-        String sql = "INSERT INTO Customer(userId) VALUES(?)";
-        executeInsert(sql, userId);
-        System.out.println("Customer data inserted successfully.");
+        UserDatabase.insertCustomer(userId);
     }
 
     /**
-     * Inserts a payment into the Payment table.
+     * Select all users from the user table
      *
-     * @param userId      The ID of the user making the payment.
-     * @param amount      The payment amount.
-     * @param paymentDate The payment date.
-     * @param paymentType The type of payment (e.g., "DebitCardPayment" or "CreditCardPayment").
-     * @return The generated payment ID.
-     */
-    public static int insertPayment(int userId, double amount, String paymentDate, String paymentType) {
-        String sql = "INSERT INTO Payment(userId, amount, paymentDate, paymentType) VALUES(?, ?, ?, ?)";
-        return executeInsert(sql, userId, amount, paymentDate, paymentType);
-    }
-
-    /**
-     * Inserts a payment into the Payment table.
-     *
-     * @param payment     The payment
-     * @param paymentType The type of payment (e.g., "DebitCardPayment" or "CreditCardPayment").
-     * @return The generated payment ID.
-     */
-    public static int insertPayment(Payment payment, String paymentType) {
-        String sql = "INSERT INTO Payment(userId, amount, paymentDate, paymentType) VALUES(?, ?, ?, ?)";
-        return insertPayment(payment.getUser().getUserId(), payment.getAmount(), payment.getPaymentDate(), paymentType);
-    }
-
-    /**
-     * Inserts a debit card payment into the DebitCardPayment table.
-     *
-     * @param paymentId       The ID of the payment (referencing the Payment table).
-     * @param debitCardNumber The debit card number.
-     * @param cardHolderName  The name on the card.
-     * @param expirationDate  The card expiration date.
-     * @param securityCode    The card security code.
-     */
-    public static void insertDebitCardPayment(int paymentId, String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
-        String sql = "INSERT INTO DebitCardPayment(paymentId, debitCardNumber, cardHolderName, expirationDate, securityCode) VALUES(?, ?, ?, ?, ?)";
-        executeInsert(sql, paymentId, debitCardNumber, cardHolderName, expirationDate, securityCode);
-    }
-
-    /**
-     * Inserts a debit card payment into the DebitCardPayment table.
-     *
-     * @param debit The debit card payment
-     */
-    public static void insertDebitCardPayment(DebitCardPayment debit) {
-        insertDebitCardPayment(debit.getPaymentId(), debit.getDebitCardNumber(), debit.getCardHolderName(), debit.getExpirationDate(), debit.getSecurityCode());
-    }
-
-    /**
-     * Inserts a credit card payment into the CreditCardPayment table.
-     *
-     * @param paymentId        The ID of the payment (referencing the Payment table).
-     * @param creditCardNumber The credit card number.
-     * @param cardHolderName   The name on the card.
-     * @param expirationDate   The card expiration date.
-     * @param securityCode     The card security code.
-     */
-    public static void insertCreditCardPayment(int paymentId, String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
-        String sql = "INSERT INTO CreditCardPayment(paymentId, creditCardNumber, cardHolderName, expirationDate, securityCode) VALUES(?, ?, ?, ?, ?)";
-        executeInsert(sql, paymentId, creditCardNumber, cardHolderName, expirationDate, securityCode);
-    }
-
-    /**
-     * Inserts a credit card payment into the CreditCardPayment table.
-     *
-     * @param credit The credit payment
-     */
-    public static void insertCreditCardPayment(CreditCardPayment credit) {
-        insertCreditCardPayment(credit.getPaymentId(), credit.getCreditCardNumber(), credit.getCardHolderName(), credit.getExpirationDate(), credit.getSecurityCode());
-    }
-
-    /**
-     * reads the users as plaintext from the user table
-     *
-     * @return the users
+     * @return List of users (Manager, Customer, or Generic)
      */
     public static List<User> selectUsers() {
-        String sql = "SELECT * FROM User";
-        return executeQuery(sql, (rs) -> {
-            String userType = rs.getString("userType");
-            User user = DatabaseUtil.mapUser(rs);
-            if ("Manager".equals(userType)) {
-                return new Manager(user);
-            } else if ("Customer".equals(userType)) {
-                return new Customer(user);
-            }
-            return user;
-        });
+        return UserDatabase.selectUsers();
     }
 
     /**
-     * Method will join the PKs to retrieve manager data
+     * Select all managers from the database
      *
-     * @return the managers
+     * @return List of managers
      */
     public static List<Manager> selectManagers() {
-        String sql = """
-                SELECT * FROM User u
-                JOIN Manager m ON u.userId = m.userId
-                """;
-        return executeQuery(sql, DatabaseUtil::mapManager);
+        return UserDatabase.selectManagers();
     }
 
     /**
-     * Method will join the PKs to retrieve customer data
+     * Select all customers from the database
      *
-     * @return the customers
+     * @return List of customers
      */
     public static List<Customer> selectCustomers() {
-        String sql = """
-                SELECT * FROM User u
-                JOIN Customer c ON u.userId = c.userId
-                """;
-        return executeQuery(sql, DatabaseUtil::mapCustomer);
+        return UserDatabase.selectCustomers();
     }
 
     /**
-     * Retrieves all payments with their basic details.
+     * Remove a user from the database based on their userId
      *
-     * @return a list of Payment objects.
+     * @param userId The userId of the user to be removed
      */
-    public static List<Payment> selectPayments() {
-        String sql = """
-                String sql = ""\"
-                        SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password
-                        FROM Payment p
-                        JOIN User u ON p.userId = u.userId
-                        ""\";
-                """;
-        return executeQuery(sql, (rs) -> {
-            String paymentType = rs.getString("paymentType");
-            Payment payment = DatabaseUtil.mapPayment(rs);
-            if ("DebitCardPayment".equals(paymentType)) {
-                return selectDebitCardPayment(payment.getPaymentId());
-            } else if ("CreditCardPayment".equals(paymentType)) {
-                return selectCreditCardPayment(payment.getPaymentId());
-            }
-            return payment;
-        });
+    public static void removeUser(int userId) {
+        UserDatabase.removeUser(userId);
     }
 
     /**
-     * Retrieves all debit card payments.
+     * Remove a user from the database based on the user object
      *
-     * @return a list of DebitCardPayment objects.
+     * @param user The user object to be removed
      */
-    public static List<DebitCardPayment> selectDebitCardPayments() {
-        String sql = """
-                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
-                       d.debitCardNumber, d.cardHolderName, d.expirationDate, d.securityCode
-                FROM Payment p
-                JOIN User u ON p.userId = u.userId
-                JOIN DebitCardPayment d ON p.paymentId = d.paymentId
-                """;
-        return executeQuery(sql, DatabaseUtil::mapDebitCardPayment);
+    public static void removeUser(User user) {
+        UserDatabase.removeUser(user);
     }
 
     /**
-     * Retrieves all credit card payments.
+     * Update a user's information in the database
      *
-     * @return a list of CreditCardPayment objects.
+     * @param id   The userId of the user to be updated
+     * @param user The user object containing updated information
      */
-    public static List<CreditCardPayment> selectCreditCardPayments() {
-        String sql = """
-                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
-                       c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
-                FROM Payment p
-                JOIN User u ON p.userId = u.userId
-                JOIN CreditCardPayment c ON p.paymentId = c.paymentId
-                """;
-
-        return executeQuery(sql, DatabaseUtil::mapCreditCardPayment);
-    }
-
-    /**
-     * Retrieves a specific debit card payment by payment ID.
-     *
-     * @param paymentId The ID of the payment.
-     * @return A DebitCardPayment object.
-     */
-    public static DebitCardPayment selectDebitCardPayment(int paymentId) {
-        String sql = """
-                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
-                       d.debitCardNumber, d.cardHolderName, d.expirationDate, d.securityCode
-                FROM Payment p
-                JOIN User u ON p.userId = u.userId
-                JOIN DebitCardPayment d ON p.paymentId = d.paymentId
-                WHERE p.paymentId = ?
-                """;
-        return executeQuery(sql, DatabaseUtil::mapDebitCardPayment, paymentId).stream().findFirst().orElse(null);
-    }
-
-    /**
-     * Retrieves a specific credit card payment by payment ID.
-     *
-     * @param paymentId The ID of the payment.
-     * @return A CreditCardPayment object.
-     */
-    public static CreditCardPayment selectCreditCardPayment(int paymentId) {
-        String sql = """
-                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
-                       c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
-                FROM Payment p
-                JOIN User u ON p.userId = u.userId
-                JOIN CreditCardPayment c ON p.paymentId = c.paymentId
-                WHERE p.paymentId = ?
-                """;
-        return executeQuery(sql, DatabaseUtil::mapCreditCardPayment, paymentId).stream().findFirst().orElse(null);
-    }
-
-    /**
-     * Method will remove user from database
-     *
-     * @param userId The userId of the user
-     */
-    public static void removeUser(int userId) throws IllegalStateException {
-        String sql = "DELETE FROM users WHERE userId = ?";
-        try {
-            executeUpdate(sql, userId);
-            System.out.println("User with ID " + userId + " removed from the database.");
-        } catch (RuntimeException e) {
-            throw new IllegalStateException("Failed to remove user with ID: " + userId, e);
-        }
-    }
-
-    /**
-     * Method will remove user from database
-     *
-     * @param user The user to be removed
-     */
-    public static void removeUser(User user) throws IllegalStateException {
-        int userId = user.getUserId();
-        removeUser(userId);
+    public void updateUser(int id, User user) {
+        UserDatabase.alterUser(id, user);
     }
 
     /**
@@ -388,8 +119,6 @@ public class DatabaseController {
      * @param user User to be altered
      */
     public static void alterUser(int id, User user) {
-        String sql = "UPDATE User SET firstName = ?, lastName = ?, email = ?, phoneNum = ?, password = ? WHERE userId = ?";
-        System.out.println("In alter user");
-        executeUpdate(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhoneNum(), user.getPassword(), id);
+        UserDatabase.alterUser(id, user);
     }
 }
