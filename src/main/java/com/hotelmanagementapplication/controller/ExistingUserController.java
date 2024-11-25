@@ -28,12 +28,12 @@ public class ExistingUserController {
     public void handleValidateButton(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         String userType = hotelManagementSystem.validateExistingCustomer(emailTB.getText(), passwordTB.getText());
-        if (userType.equals("Customer")) {
+        if (userType == null || userType.equals("Unknown")) {
+            showAlertBox();
+        } else if (userType.equals("Customer")) {
             ScreenHandler.switchScreens(stage, "CustomerBookingScreen.fxml");
         } else if (userType.equals("Manager")) {
             ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml");
-        } else {
-            showAlertBox();
         }
     }
 
