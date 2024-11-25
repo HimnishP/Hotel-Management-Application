@@ -1,5 +1,8 @@
 package com.hotelmanagementapplication.controller.utildatabase;
 
+import com.hotelmanagementapplication.model.payment.CreditCardPayment;
+import com.hotelmanagementapplication.model.payment.DebitCardPayment;
+import com.hotelmanagementapplication.model.payment.Payment;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
@@ -83,14 +86,21 @@ public class DatabaseUtil {
      * @param processor ResultSet
      * @return The list
      */
-    public static <T> List<T> executeQuery(String sql, ResultSetProcessor<T> processor) {
+    public static <T> List<T> executeQuery(String sql, ResultSetProcessor<T> processor, Object... params) {
         READ_LOCK.lock();
         List<T> resultList = new ArrayList<>();
         try (Connection conn = connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                resultList.add(processor.process(rs));
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the parameters dynamically
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    resultList.add(processor.process(rs));
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error executing query: " + sql, e);
@@ -99,6 +109,7 @@ public class DatabaseUtil {
         }
         return resultList;
     }
+
 
     /**
      * Method will return user object
@@ -140,6 +151,73 @@ public class DatabaseUtil {
     public static Customer mapCustomer(ResultSet rs) throws SQLException {
         User user = mapUser(rs);
         return new Customer(user);
+    }
+
+    /**
+     * Method will map payment object
+     *
+     * @param rs Result set
+     * @return Payment object
+     * @throws SQLException SQL error
+     */
+    public static Payment mapPayment(ResultSet rs) throws SQLException {
+        Payment payment = new Payment();
+        // Map payment fields
+        payment.setPaymentId(rs.getInt("paymentId"));
+        payment.setAmount(rs.getDouble("amount"));
+        payment.setPaymentDate(rs.getString("paymentDate"));
+        //Map user fields
+        User user = DatabaseUtil.mapUser(rs);
+        payment.setUser(user);
+        return payment;
+    }
+
+    /**
+     * Method will map debit card payment
+     *
+     * @param rs Result Set
+     * @return DebitCard object
+     * @throws SQLException SQL Error
+     */
+    public static DebitCardPayment mapDebitCardPayment(ResultSet rs) throws SQLException {
+        DebitCardPayment payment = new DebitCardPayment();
+        // Map Payment fields
+        payment.setPaymentId(rs.getInt("paymentId"));
+        payment.setAmount(rs.getDouble("amount"));
+        payment.setPaymentDate(rs.getString("paymentDate"));
+        // Map associated User
+        User user = DatabaseUtil.mapUser(rs);
+        payment.setUser(user);
+        // Map DebitCardPayment-specific fields
+        payment.setDebitCardNumber(rs.getString("debitCardNumber"));
+        payment.setCardHolderName(rs.getString("cardHolderName"));
+        payment.setExpirationDate(rs.getString("expirationDate"));
+        payment.setSecurityCode(rs.getString("securityCode"));
+        return payment;
+    }
+
+    /**
+     * Method will map credit card payment
+     *
+     * @param rs Result Set
+     * @return CreditCard object
+     * @throws SQLException SQL Error
+     */
+    public static CreditCardPayment mapCreditCardPayment(ResultSet rs) throws SQLException {
+        CreditCardPayment payment = new CreditCardPayment();
+        // Map Payment fields
+        payment.setPaymentId(rs.getInt("paymentId"));
+        payment.setAmount(rs.getDouble("amount"));
+        payment.setPaymentDate(rs.getString("paymentDate"));
+        // Map associated User
+        User user = DatabaseUtil.mapUser(rs);
+        payment.setUser(user);
+        // Map CreditCardPayment-specific fields
+        payment.setCreditCardNumber(rs.getString("creditCardNumber"));
+        payment.setCardHolderName(rs.getString("cardHolderName"));
+        payment.setExpirationDate(rs.getString("expirationDate"));
+        payment.setSecurityCode(rs.getString("securityCode"));
+        return payment;
     }
 
     @FunctionalInterface

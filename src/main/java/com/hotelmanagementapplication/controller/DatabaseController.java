@@ -264,6 +264,100 @@ public class DatabaseController {
     }
 
     /**
+     * Retrieves all payments with their basic details.
+     *
+     * @return a list of Payment objects.
+     */
+    public static List<Payment> selectPayments() {
+        String sql = """
+                String sql = ""\"
+                        SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password
+                        FROM Payment p
+                        JOIN User u ON p.userId = u.userId
+                        ""\";
+                """;
+        return executeQuery(sql, (rs) -> {
+            String paymentType = rs.getString("paymentType");
+            Payment payment = DatabaseUtil.mapPayment(rs);
+            if ("DebitCardPayment".equals(paymentType)) {
+                return selectDebitCardPayment(payment.getPaymentId());
+            } else if ("CreditCardPayment".equals(paymentType)) {
+                return selectCreditCardPayment(payment.getPaymentId());
+            }
+            return payment;
+        });
+    }
+
+    /**
+     * Retrieves all debit card payments.
+     *
+     * @return a list of DebitCardPayment objects.
+     */
+    public static List<DebitCardPayment> selectDebitCardPayments() {
+        String sql = """
+                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
+                       d.debitCardNumber, d.cardHolderName, d.expirationDate, d.securityCode
+                FROM Payment p
+                JOIN User u ON p.userId = u.userId
+                JOIN DebitCardPayment d ON p.paymentId = d.paymentId
+                """;
+        return executeQuery(sql, DatabaseUtil::mapDebitCardPayment);
+    }
+
+    /**
+     * Retrieves all credit card payments.
+     *
+     * @return a list of CreditCardPayment objects.
+     */
+    public static List<CreditCardPayment> selectCreditCardPayments() {
+        String sql = """
+                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
+                       c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
+                FROM Payment p
+                JOIN User u ON p.userId = u.userId
+                JOIN CreditCardPayment c ON p.paymentId = c.paymentId
+                """;
+
+        return executeQuery(sql, DatabaseUtil::mapCreditCardPayment);
+    }
+
+    /**
+     * Retrieves a specific debit card payment by payment ID.
+     *
+     * @param paymentId The ID of the payment.
+     * @return A DebitCardPayment object.
+     */
+    public static DebitCardPayment selectDebitCardPayment(int paymentId) {
+        String sql = """
+                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
+                       d.debitCardNumber, d.cardHolderName, d.expirationDate, d.securityCode
+                FROM Payment p
+                JOIN User u ON p.userId = u.userId
+                JOIN DebitCardPayment d ON p.paymentId = d.paymentId
+                WHERE p.paymentId = ?
+                """;
+        return executeQuery(sql, DatabaseUtil::mapDebitCardPayment, paymentId).stream().findFirst().orElse(null);
+    }
+
+    /**
+     * Retrieves a specific credit card payment by payment ID.
+     *
+     * @param paymentId The ID of the payment.
+     * @return A CreditCardPayment object.
+     */
+    public static CreditCardPayment selectCreditCardPayment(int paymentId) {
+        String sql = """
+                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
+                       c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
+                FROM Payment p
+                JOIN User u ON p.userId = u.userId
+                JOIN CreditCardPayment c ON p.paymentId = c.paymentId
+                WHERE p.paymentId = ?
+                """;
+        return executeQuery(sql, DatabaseUtil::mapCreditCardPayment, paymentId).stream().findFirst().orElse(null);
+    }
+
+    /**
      * Method will remove user from database
      *
      * @param userId The userId of the user
