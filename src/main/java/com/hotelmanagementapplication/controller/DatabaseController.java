@@ -113,7 +113,7 @@ public class DatabaseController {
      * @param id   The userId of the user to be updated
      * @param user The user object containing updated information
      */
-    public void updateUser(int id, User user) {
+    public static void updateUser(int id, User user) {
         UserDatabase.alterUser(id, user);
     }
 
@@ -130,7 +130,7 @@ public class DatabaseController {
      * Creates the Payment table in the database.
      * This table holds basic payment information for each payment.
      */
-    public void createTablePayment() {
+    public static void createTablePayment() {
         PaymentDatabase.createTablePayment();
     }
 
@@ -138,7 +138,7 @@ public class DatabaseController {
      * Creates the DebitCardPayment table in the database.
      * This table holds specific details for debit card payments.
      */
-    public void createTableDebitCardPayment() {
+    public static void createTableDebitCardPayment() {
         PaymentDatabase.createTableDebitCardPayment();
     }
 
@@ -146,7 +146,7 @@ public class DatabaseController {
      * Creates the CreditCardPayment table in the database.
      * This table holds specific details for credit card payments.
      */
-    public void createTableCreditCardPayment() {
+    public static void createTableCreditCardPayment() {
         PaymentDatabase.createTableCreditCardPayment();
     }
 
@@ -157,7 +157,7 @@ public class DatabaseController {
      * @param paymentType The type of the payment (e.g., "DebitCardPayment" or "CreditCardPayment").
      * @return The generated payment ID.
      */
-    public int insertPayment(Payment payment, String paymentType) {
+    public static int insertPayment(Payment payment, String paymentType) {
         return PaymentDatabase.insertPayment(payment, paymentType);
     }
 
@@ -167,7 +167,7 @@ public class DatabaseController {
      *
      * @param debit The DebitCardPayment object containing payment details.
      */
-    public void insertDebitCardPayment(DebitCardPayment debit) {
+    public static void insertDebitCardPayment(DebitCardPayment debit) {
         PaymentDatabase.insertDebitCardPayment(debit);
     }
 
@@ -177,7 +177,7 @@ public class DatabaseController {
      *
      * @param credit The CreditCardPayment object containing payment details.
      */
-    public void insertCreditCardPayment(CreditCardPayment credit) {
+    public static void insertCreditCardPayment(CreditCardPayment credit) {
         PaymentDatabase.insertCreditCardPayment(credit);
     }
 
@@ -187,7 +187,7 @@ public class DatabaseController {
      *
      * @return A list of Payment objects containing basic payment details.
      */
-    public List<Payment> selectPayments() {
+    public static List<Payment> selectPayments() {
         return PaymentDatabase.selectPayments();
     }
 
@@ -197,7 +197,7 @@ public class DatabaseController {
      *
      * @return A list of DebitCardPayment objects containing debit card payment details.
      */
-    public List<DebitCardPayment> selectDebitCardPayments() {
+    public static List<DebitCardPayment> selectDebitCardPayments() {
         return PaymentDatabase.selectDebitCardPayments();
     }
 
@@ -207,7 +207,7 @@ public class DatabaseController {
      *
      * @return A list of CreditCardPayment objects containing credit card payment details.
      */
-    public List<CreditCardPayment> selectCreditCardPayments() {
+    public static List<CreditCardPayment> selectCreditCardPayments() {
         return PaymentDatabase.selectCreditCardPayments();
     }
 
@@ -218,7 +218,7 @@ public class DatabaseController {
      * @param paymentId The ID of the debit card payment to retrieve.
      * @return The DebitCardPayment object corresponding to the payment ID.
      */
-    public DebitCardPayment selectDebitCardPayment(int paymentId) {
+    public static DebitCardPayment selectDebitCardPayment(int paymentId) {
         return PaymentDatabase.selectDebitCardPayment(paymentId);
     }
 
@@ -229,7 +229,7 @@ public class DatabaseController {
      * @param paymentId The ID of the credit card payment to retrieve.
      * @return The CreditCardPayment object corresponding to the payment ID.
      */
-    public CreditCardPayment selectCreditCardPayment(int paymentId) {
+    public static CreditCardPayment selectCreditCardPayment(int paymentId) {
         return PaymentDatabase.selectCreditCardPayment(paymentId);
     }
 }

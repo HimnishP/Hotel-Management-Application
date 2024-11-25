@@ -139,11 +139,9 @@ public class PaymentDatabase {
      */
     public static List<Payment> selectPayments() {
         String sql = """
-                String sql = ""\"
                         SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password
                         FROM Payment p
                         JOIN User u ON p.userId = u.userId
-                        ""\";
                 """;
         return executeQuery(sql, (rs) -> {
             String paymentType = rs.getString("paymentType");
