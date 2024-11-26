@@ -49,6 +49,11 @@ public class RoomDatabase {
         executeUpdate(sql);
     }
 
+    /**
+     * inserts a room records in room table.
+     * @param room the room
+     * @param roomType the type of room.
+     */
     public static void insertRoom(Room room, String roomType) {
         String sql = """
                 INSERT INTO Rooms (room_price, room_status, room_type) VALUES (?, ?, ?)
@@ -57,6 +62,17 @@ public class RoomDatabase {
         Status roomStatus = room.getStatus();
 
         executeInsert(sql, roomPrice, roomStatus, roomType);
+    }
+
+    /**
+     * inserts in records in double-bed room table
+     * @param roomId
+     */
+    public static void insertDoubleBedRoom(int roomId) {
+        String sql = """
+                INSERT INTO DoubleBeds (room_id) VALUES (?)
+                """;
+        executeInsert(sql, roomId);
     }
 
 
