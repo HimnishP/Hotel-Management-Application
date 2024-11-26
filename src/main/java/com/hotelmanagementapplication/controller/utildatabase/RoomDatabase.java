@@ -10,7 +10,7 @@ public class RoomDatabase {
     public static void createRoomTable(){
         String sql = """
                 CREATE TABLE IF NOT EXISTS Rooms (
-                roomId INTEGER PRIMARY KEY AUTOINCREMENT,
+                room_Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 room_price REAL NOT NULL,
                 room_status TEXT NOT NULL,
                 room_type TEXT NOT NULL,
@@ -18,5 +18,19 @@ public class RoomDatabase {
                 """;
         executeUpdate(sql);
     }
+
+    /**
+     * creates a table for the rooms with double bed.
+     */
+    public static void createDoubleBedRoomTable(){
+        String sql = """
+                CREATE TABLE IF NOT EXISTS DoubleBeds (
+                room_Id INTEGER PRIMARY KEY,
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id),
+                )
+                """;
+        executeUpdate(sql);
+    }
+
 
 }
