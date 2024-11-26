@@ -6,6 +6,7 @@ import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 import com.hotelmanagementapplication.model.payment.Payment;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -49,5 +50,39 @@ public class PaymentSystem {
             paymentMap.put(payment.getUser().getUserId(), payment);
             return null;
         });
+    }
+
+    /**
+     * Finds a payment by paymentId.
+     *
+     * @param paymentId the paymentId of the payment to find
+     * @return the payment
+     */
+    public Future<Payment> getPaymentById(int paymentId) {
+        return EXECUTOR_SERVICE.submit(() -> {
+            if (!paymentExistsAsync(paymentId).get()) {
+                throw new NoSuchElementException("ERROR: Payment with id " + paymentId + " does not exist!");
+            }
+            return paymentMap.get(paymentId);
+        });
+    }
+
+    /**
+     * Checks if a payment exists by paymentId.
+     *
+     * @param paymentId the paymentId of the payment
+     * @return true if the payment exists, false otherwise
+     */
+    public Future<Boolean> paymentExistsAsync(int paymentId) {
+        return EXECUTOR_SERVICE.submit(() -> paymentMap.containsKey(paymentId));
+    }
+
+    /**
+     * Counts the total payments.
+     *
+     * @return the total number of payments
+     */
+    public Future<Integer> getPaymentCount() {
+        return EXECUTOR_SERVICE.submit(paymentMap::size);
     }
 }
