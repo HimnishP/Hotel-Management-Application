@@ -22,10 +22,11 @@ public class PaymentSystem {
     public PaymentSystem() {
         paymentMap = DatabaseController.selectPayments()
                 .stream()
-                .filter(payment -> payment != null && payment.getUserId() > 0) // Ensure valid payments with userId
+                .filter(payment -> payment != null && payment.getUserId() > 0)
                 .collect(Collectors.toMap(
-                        Payment::getUserId, // Use userId directly as the key
-                        payment -> payment  // Keep the Payment object as the value
+                        Payment::getUserId,
+                        payment -> payment,
+                        (existingPayment, newPayment) -> newPayment
                 ));
         cardPaymentMap = DatabaseController.selectCreditCardPayments()
                 .stream()
