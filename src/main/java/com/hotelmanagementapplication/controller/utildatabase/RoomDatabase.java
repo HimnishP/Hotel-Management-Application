@@ -32,5 +32,18 @@ public class RoomDatabase {
         executeUpdate(sql);
     }
 
+    /**
+     * creates a table for the rooms with single bed.
+     */
+    public static void createSingleBedRoomTable(){
+        String sql = """
+                CREATE TABLE IF NOT EXISTS SingleBeds (
+                room_Id INTEGER PRIMARY KEY,
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id),
+                )
+                """;
+        executeUpdate(sql);
+    }
+
 
 }
