@@ -92,4 +92,46 @@ public class ManagerAnalyticsController {
         vBoxLayout.setVisible(true);
         listView.setVisible(true);
     }
+
+    /**
+     * Handles the event triggered when the "View Payment" button is clicked.
+     * This method retrieves and display a list of all registered payments,
+     * showing details like payment type, id information, and amount.
+     *
+     * @param actionEvent the event triggered by the "View Payment" button click
+     */
+    public void handlePaymentsButton(ActionEvent actionEvent) {
+        listView.getItems().clear();
+        listView.getItems().addAll(hotelManagementSystem.getAllPayments());
+        vBoxLayout.setVisible(true);
+        listView.setVisible(true);
+    }
+
+    /**
+     * Handles the event triggered when the "View Debit Card Payment" button is clicked.
+     * This method retrieves and display a list of all registered debit card payments,
+     * showing details like card number
+     *
+     * @param actionEvent the event triggered by the "View Debit Payment" button click
+     */
+    public void handleCreditCardPayments(ActionEvent actionEvent) {
+        listView.getItems().clear();
+        listView.getItems().addAll(hotelManagementSystem.getAllCreditCardPayments());
+        vBoxLayout.setVisible(true);
+        listView.setVisible(true);
+    }
+
+    /**
+     * Handles the event triggered when the "View Credit Card Payment" button is clicked.
+     * This method retrieves and display a list of all registered customers,
+     * showing details like card number.
+     *
+     * @param actionEvent the event triggered by the "View Debit card payment" button click
+     */
+    public void handleViewDebitCardPayments(ActionEvent actionEvent) {
+        listView.getItems().clear();
+        listView.getItems().addAll(hotelManagementSystem.getAllDebitCardPayments());
+        vBoxLayout.setVisible(true);
+        listView.setVisible(true);
+    }
 }
