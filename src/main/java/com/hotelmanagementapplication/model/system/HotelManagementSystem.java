@@ -1,5 +1,8 @@
 package com.hotelmanagementapplication.model.system;
 
+import com.hotelmanagementapplication.model.payment.CreditCardPayment;
+import com.hotelmanagementapplication.model.payment.DebitCardPayment;
+import com.hotelmanagementapplication.model.payment.Payment;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
@@ -10,9 +13,11 @@ import java.util.concurrent.ExecutionException;
 public class HotelManagementSystem {
     private static HotelManagementSystem instance;
     private final UserSystem userSystem;
+    private final PaymentSystem paymentSystem;
 
     private HotelManagementSystem() {
         userSystem = new UserSystem();
+        paymentSystem = new PaymentSystem();
     }
 
     public static HotelManagementSystem getInstance() {
@@ -178,6 +183,132 @@ public class HotelManagementSystem {
             return userSystem.validateAndReturnUserType(email, password).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Adds a payment (either CreditCard or DebitCard) to the system.
+     * This method is executed asynchronously.
+     *
+     * @param payment the payment object to be added
+     */
+    public void addPayment(Payment payment) {
+        paymentSystem.addPayment(payment);
+    }
+
+    /**
+     * Retrieves all payments in the system.
+     * This method is executed asynchronously and returns a list of all payments.
+     *
+     * @return a list of all payments
+     */
+    public List<Payment> getAllPayments() {
+        try {
+            return paymentSystem.getAllPayments().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve all payments", e);
+        }
+    }
+
+    /**
+     * Retrieves all credit card payments in the system.
+     * This method is executed asynchronously and returns a list of credit card payments.
+     *
+     * @return a list of all credit card payments
+     */
+    public List<CreditCardPayment> getAllCreditCardPayments() {
+        try {
+            return paymentSystem.getAllCreditCardPayments().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve all credit card payments", e);
+        }
+    }
+
+    /**
+     * Retrieves all debit card payments in the system.
+     * This method is executed asynchronously and returns a list of debit card payments.
+     *
+     * @return a list of all debit card payments
+     */
+    public List<DebitCardPayment> getAllDebitCardPayments() {
+        try {
+            return paymentSystem.getAllDebitCardPayments().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve all debit card payments", e);
+        }
+    }
+
+    /**
+     * Retrieves a payment by its payment ID.
+     * This method is executed asynchronously and throws a `NoSuchElementException`
+     * if the payment with the given ID does not exist.
+     *
+     * @param paymentId the payment ID to search for
+     * @return the payment object
+     */
+    public Payment getPaymentById(int paymentId) {
+        try {
+            return paymentSystem.getPaymentById(paymentId).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve payment by ID " + paymentId, e);
+        }
+    }
+
+    /**
+     * Finds all payments associated with a given user ID.
+     * This method is executed asynchronously and returns a list of payments.
+     *
+     * @param userId the user ID to search for payments
+     * @return a list of payments for the given user ID
+     */
+    public List<Payment> findPaymentsByUserId(int userId) {
+        try {
+            return paymentSystem.findPaymentsByUserId(userId).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve payments for user ID " + userId, e);
+        }
+    }
+
+    /**
+     * Validates and returns the payment type (either "CreditCardPayment" or "DebitCardPayment")
+     * based on the given payment ID. This method is executed asynchronously.
+     *
+     * @param paymentId the payment ID to check
+     * @return the payment type as a string ("CreditCardPayment" or "DebitCardPayment")
+     */
+    public String validateAndReturnPaymentType(int paymentId) {
+        try {
+            return paymentSystem.validateAndReturnPaymentType(paymentId).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to validate payment type for ID " + paymentId, e);
+        }
+    }
+
+    /**
+     * Counts the total number of payments in the system.
+     * This method is executed asynchronously.
+     *
+     * @return the total number of payments
+     */
+    public int getPaymentCount() {
+        try {
+            return paymentSystem.getPaymentCount().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve payment count", e);
+        }
+    }
+
+    /**
+     * Lists all payment IDs in the system.
+     * This method is executed asynchronously.
+     *
+     * @return a list of all payment IDs
+     */
+    public List<Integer> listPaymentIds() {
+        try {
+            return paymentSystem.listPaymentIds().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to list payment IDs", e);
         }
     }
 }

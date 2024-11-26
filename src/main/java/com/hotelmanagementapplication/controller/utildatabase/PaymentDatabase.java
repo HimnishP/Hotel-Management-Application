@@ -178,10 +178,8 @@ public class PaymentDatabase {
      */
     public static List<CreditCardPayment> selectCreditCardPayments() {
         String sql = """
-                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
-                       c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
+                SELECT p.*, c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
                 FROM Payment p
-                JOIN User u ON p.userId = u.userId
                 JOIN CreditCardPayment c ON p.paymentId = c.paymentId
                 """;
 
@@ -196,10 +194,8 @@ public class PaymentDatabase {
      */
     public static DebitCardPayment selectDebitCardPayment(int paymentId) {
         String sql = """
-                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
-                       d.debitCardNumber, d.cardHolderName, d.expirationDate, d.securityCode
+                SELECT p.*, d.debitCardNumber, d.cardHolderName, d.expirationDate, d.securityCode
                 FROM Payment p
-                JOIN User u ON p.userId = u.userId
                 JOIN DebitCardPayment d ON p.paymentId = d.paymentId
                 WHERE p.paymentId = ?
                 """;
@@ -214,10 +210,8 @@ public class PaymentDatabase {
      */
     public static CreditCardPayment selectCreditCardPayment(int paymentId) {
         String sql = """
-                SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password,
-                       c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
+                SELECT p.*,c.creditCardNumber, c.cardHolderName, c.expirationDate, c.securityCode
                 FROM Payment p
-                JOIN User u ON p.userId = u.userId
                 JOIN CreditCardPayment c ON p.paymentId = c.paymentId
                 WHERE p.paymentId = ?
                 """;
