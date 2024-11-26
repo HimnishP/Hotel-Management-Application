@@ -5,6 +5,7 @@ import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 import com.hotelmanagementapplication.model.payment.Payment;
 
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
@@ -53,6 +54,33 @@ public class PaymentSystem {
     }
 
     /**
+     * Lists all payments.
+     *
+     * @return a list of all payments
+     */
+    public Future<List<Payment>> getAllPayments() {
+        return EXECUTOR_SERVICE.submit(() -> paymentMap.values().stream().toList());
+    }
+
+    /**
+     * Lists all credit card payments.
+     *
+     * @return a list of credit card payments
+     */
+    public Future<List<CreditCardPayment>> getAllCreditCardPayments() {
+        return EXECUTOR_SERVICE.submit(() -> cardPaymentMap.values().stream().toList());
+    }
+
+    /**
+     * Lists all debit card payments.
+     *
+     * @return a list of debit card payments
+     */
+    public Future<List<DebitCardPayment>> getAllDebitCardPayments() {
+        return EXECUTOR_SERVICE.submit(() -> debitCardPaymentMap.values().stream().toList());
+    }
+
+    /**
      * Finds a payment by paymentId.
      *
      * @param paymentId the paymentId of the payment to find
@@ -84,5 +112,38 @@ public class PaymentSystem {
      */
     public Future<Integer> getPaymentCount() {
         return EXECUTOR_SERVICE.submit(paymentMap::size);
+    }
+
+    /**
+     * Lists all paymentIds.
+     *
+     * @return a list of paymentIds
+     */
+    public Future<List<Integer>> listPaymentIds() {
+        return EXECUTOR_SERVICE.submit(() -> paymentMap.keySet().stream().toList());
+    }
+
+    /**
+     * Method will check if there is an existing payment by userId.
+     *
+     * @param userId the userId to search for payments
+     * @return a list of matching payments
+     */
+    public Future<List<Payment>> findPaymentsByUserId(int userId) {
+        return EXECUTOR_SERVICE.submit(() -> paymentMap.values().stream()
+                .filter(payment -> payment.getUser().getUserId() == userId)
+                .toList());
+    }
+
+    /**
+     * Validates and returns the payment type based on the paymentId.
+     *
+     * @param paymentId the paymentId to check
+     * @return the type of the payment (CreditCardPayment, DebitCardPayment)
+     */
+    public Future<String> validateAndReturnPaymentType(int paymentId) {
+        return EXECUTOR_SERVICE.submit(() -> {
+            return paymentMap.get(paymentId) != null ? (paymentMap.get(paymentId) instanceof CreditCardPayment ? "CreditCardPayment" : "DebitCardPayment") : null;
+        });
     }
 }
