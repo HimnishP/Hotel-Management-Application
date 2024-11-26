@@ -5,6 +5,8 @@ import com.hotelmanagementapplication.model.payment.utility.PaymentValidationUti
 import com.hotelmanagementapplication.model.user.User;
 import lombok.*;
 
+import java.text.DateFormat;
+
 @NoArgsConstructor
 @ToString
 @Getter
@@ -16,6 +18,14 @@ public class DebitCardPayment extends Payment implements PaymentMethod {
     private String expirationDate;
     private String securityCode;
 
+    public DebitCardPayment(int paymentId, double amount, String paymentDate, DateFormat dateFormat, int userId, String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(paymentId, amount, paymentDate, dateFormat, userId);
+        this.debitCardNumber = debitCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
     public DebitCardPayment(String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
         this.debitCardNumber = debitCardNumber;
         this.cardHolderName = cardHolderName;
@@ -23,8 +33,24 @@ public class DebitCardPayment extends Payment implements PaymentMethod {
         this.securityCode = securityCode;
     }
 
-    public DebitCardPayment(User user, double amount, String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
-        super(user, amount);
+    public DebitCardPayment(int userId, double amount, String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(userId, amount);
+        this.debitCardNumber = debitCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
+    public DebitCardPayment(int paymentId, double amount, String paymentDate, int userId, String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(paymentId, amount, paymentDate, userId);
+        this.debitCardNumber = debitCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
+    public DebitCardPayment(double amount, String debitCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(amount);
         this.debitCardNumber = debitCardNumber;
         this.cardHolderName = cardHolderName;
         this.expirationDate = expirationDate;

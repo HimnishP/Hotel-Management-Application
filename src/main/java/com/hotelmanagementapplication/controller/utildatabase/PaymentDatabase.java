@@ -83,7 +83,7 @@ public class PaymentDatabase {
      */
     public static int insertPayment(Payment payment, String paymentType) {
         String sql = "INSERT INTO Payment(userId, amount, paymentDate, paymentType) VALUES(?, ?, ?, ?)";
-        return insertPayment(payment.getUser().getUserId(), payment.getAmount(), payment.getPaymentDate(), paymentType);
+        return insertPayment(payment.getUserId(), payment.getAmount(), payment.getPaymentDate(), paymentType);
     }
 
     /**
@@ -139,18 +139,18 @@ public class PaymentDatabase {
      */
     public static List<Payment> selectPayments() {
         String sql = """
-                        SELECT p.*, u.userId, u.firstName, u.lastName, u.email, u.phoneNum, u.password
-                        FROM Payment p
-                        JOIN User u ON p.userId = u.userId
+                SELECT p.paymentId, p.amount, p.paymentDate, p.userId
+                FROM Payment p;
                 """;
-        return executeQuery(sql, (rs) -> {
-            String paymentType = rs.getString("paymentType");
-            Payment payment = DatabaseUtil.mapPayment(rs);
-            if ("DebitCardPayment".equals(paymentType)) {
-                return selectDebitCardPayment(payment.getPaymentId());
-            } else if ("CreditCardPayment".equals(paymentType)) {
-                return selectCreditCardPayment(payment.getPaymentId());
-            }
+
+        // Use executeQuery to retrieve and map results
+        return DatabaseUtil.executeQuery(sql, rs -> {
+            // Map Payment fields
+            Payment payment = new Payment();
+            payment.setPaymentId(rs.getInt("paymentId"));
+            payment.setAmount(rs.getDouble("amount"));
+            payment.setPaymentDate(rs.getString("paymentDate"));
+            payment.setUserId(rs.getInt("userId"));
             return payment;
         });
     }

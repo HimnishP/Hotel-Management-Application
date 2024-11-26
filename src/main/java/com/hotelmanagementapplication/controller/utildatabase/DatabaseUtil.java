@@ -24,7 +24,7 @@ public class DatabaseUtil {
      *
      * @return the database connection
      */
-    private static Connection connect() {
+    public static Connection connect() {
         try {
             return DriverManager.getConnection(PATH_DATABASE);
         } catch (SQLException e) {
@@ -168,7 +168,7 @@ public class DatabaseUtil {
         payment.setPaymentDate(rs.getString("paymentDate"));
         //Map user fields
         User user = DatabaseUtil.mapUser(rs);
-        payment.setUser(user);
+        payment.setUserId(user.getUserId());
         return payment;
     }
 

@@ -16,12 +16,12 @@ public class PaymentFactory {
      * @param amount         amount they need to pay for their booking
      * @return the type of payment that will be made.
      */
-    public static PaymentMethod createPayment(String type, User user, String cardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
+    public static PaymentMethod createPayment(String type, int userId, String cardNumber, String cardHolderName, String expirationDate, String securityCode, double amount) {
         return switch (type.toLowerCase()) {
             case "debit" ->
-                    new DebitCardPayment(user, amount, cardNumber, cardHolderName, expirationDate, securityCode);
+                    new DebitCardPayment(userId, amount, cardNumber, cardHolderName, expirationDate, securityCode);
             case "credit" ->
-                    new CreditCardPayment(user, amount, cardNumber, cardHolderName, expirationDate, securityCode);
+                    new CreditCardPayment(userId, amount, cardNumber, cardHolderName, expirationDate, securityCode);
             default -> throw new IllegalArgumentException("Invalid payment type: " + type);
         };
     }

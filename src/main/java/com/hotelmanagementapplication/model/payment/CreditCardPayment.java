@@ -5,6 +5,8 @@ import com.hotelmanagementapplication.model.payment.utility.PaymentValidationUti
 import com.hotelmanagementapplication.model.user.User;
 import lombok.*;
 
+import java.text.DateFormat;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,6 +18,14 @@ public class CreditCardPayment extends Payment implements PaymentMethod {
     private String expirationDate;
     private String securityCode;
 
+    public CreditCardPayment(int paymentId, double amount, String paymentDate, DateFormat dateFormat, int userId, String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(paymentId, amount, paymentDate, dateFormat, userId);
+        this.creditCardNumber = creditCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
     public CreditCardPayment(String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
         this.creditCardNumber = creditCardNumber;
         this.cardHolderName = cardHolderName;
@@ -23,8 +33,24 @@ public class CreditCardPayment extends Payment implements PaymentMethod {
         this.securityCode = securityCode;
     }
 
-    public CreditCardPayment(User user, double amount, String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
-        super(user, amount);
+    public CreditCardPayment(int userId, double amount, String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(userId, amount);
+        this.creditCardNumber = creditCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
+    public CreditCardPayment(int paymentId, double amount, String paymentDate, int userId, String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(paymentId, amount, paymentDate, userId);
+        this.creditCardNumber = creditCardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.securityCode = securityCode;
+    }
+
+    public CreditCardPayment(double amount, String creditCardNumber, String cardHolderName, String expirationDate, String securityCode) {
+        super(amount);
         this.creditCardNumber = creditCardNumber;
         this.cardHolderName = cardHolderName;
         this.expirationDate = expirationDate;

@@ -22,10 +22,10 @@ public class PaymentSystem {
     public PaymentSystem() {
         paymentMap = DatabaseController.selectPayments()
                 .stream()
-                .filter(payment -> payment != null && payment.getUser() != null)
+                .filter(payment -> payment != null && payment.getUserId() > 0) // Ensure valid payments with userId
                 .collect(Collectors.toMap(
-                        payment -> payment.getUser().getUserId(),
-                        payment -> payment
+                        Payment::getUserId, // Use userId directly as the key
+                        payment -> payment  // Keep the Payment object as the value
                 ));
         cardPaymentMap = DatabaseController.selectCreditCardPayments()
                 .stream()
@@ -60,7 +60,7 @@ public class PaymentSystem {
             } else {
                 throw new IllegalArgumentException("Invalid payment type");
             }
-            paymentMap.put(payment.getUser().getUserId(), payment);
+            paymentMap.put(payment.getUserId(), payment);
             return null;
         });
     }
@@ -143,7 +143,7 @@ public class PaymentSystem {
      */
     public Future<List<Payment>> findPaymentsByUserId(int userId) {
         return EXECUTOR_SERVICE.submit(() -> paymentMap.values().stream()
-                .filter(payment -> payment.getUser().getUserId() == userId)
+                .filter(payment -> payment.getUserId() == userId)
                 .toList());
     }
 
