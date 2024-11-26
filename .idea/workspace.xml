@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="uhm idk">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/RoomDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/UserDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/UserDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Manager-Analytics" />
+        <entry key="$PROJECT_DIR$" value="Database" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,7 +45,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/HimnishP/Hotel-Management-Application.git&quot;,
-    &quot;accountId&quot;: &quot;06c5e80c-6516-4a32-8b5a-5ba681e03609&quot;
+    &quot;accountId&quot;: &quot;f344de97-b6f6-42b6-a8f8-68667e4ce1b4&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -66,27 +69,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CustomerLoginScreen.executor": "Run",
-    "Application.WelcomeScreen.executor": "Run",
-    "Application.com.hotelmanagementapplication.guis.WelcomeScreen.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Database",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CustomerLoginScreen.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WelcomeScreen.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.hotelmanagementapplication.guis.WelcomeScreen.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.hotelmanagementapplication.model" />
@@ -196,19 +199,19 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.WelcomeScreen" />
         <item itemvalue="JUnit.HotelManagementSystemTest.listUserIds_ShouldReturnAllUserIds" />
         <item itemvalue="JUnit.HotelManagementSystemTest.getUserCount_ShouldReturnCorrectUserCount" />
         <item itemvalue="JUnit.HotelManagementSystemTest.getAllUsers_ShouldReturnAllUsers" />
         <item itemvalue="JUnit.HotelManagementSystemTest.getAllCustomers_ShouldReturnAllCustomers" />
+        <item itemvalue="Application.WelcomeScreen" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.419" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.419" />
       </set>
     </attachedChunks>
   </component>
@@ -227,6 +230,8 @@
       <workItem from="1729117004340" duration="3962000" />
       <workItem from="1729213167826" duration="1846000" />
       <workItem from="1731623783930" duration="6794000" />
+      <workItem from="1732646550101" duration="279000" />
+      <workItem from="1732646890508" duration="480000" />
     </task>
     <task id="LOCAL-00001" summary="-Added the .gitignore file&#10;-Added the README.md file&#10;-Implemented the MVC architecture&#10;-Developed basic GUI's ( WelcomeScreen , CustomerLoginScreen , ManagerLoginScreen )">
       <option name="closed" value="true" />

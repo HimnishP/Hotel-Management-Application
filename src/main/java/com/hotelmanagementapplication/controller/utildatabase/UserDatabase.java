@@ -9,6 +9,7 @@ import java.util.List;
 import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.*;
 
 public class UserDatabase {
+
     /**
      * Method will create the user table
      */
