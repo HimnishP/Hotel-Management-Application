@@ -8,9 +8,9 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="1001.0" style="-fx-background-color: #C0C0C0;">
          <children>
-            <Button fx:id="viewPaymentsButton" layoutX="53.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleViewPaymentsButton" prefHeight="31.0" prefWidth="354.0" text="%viewPayments" />
+            <Button fx:id="viewPaymentsButton" layoutX="53.0" layoutY="300.0" mnemonicParsing="false" onAction="#handlePaymentsButton" prefHeight="31.0" prefWidth="354.0" text="%viewPayments" />
             <Button fx:id="viewAllUsersButton" layoutX="53.0" layoutY="159.0" mnemonicParsing="false" onAction="#handleViewAllUsersButton" prefHeight="31.0" prefWidth="354.0" text="%viewAllUsers" />
-            <Button fx:id="viewRoomStatusesButton" layoutX="53.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleViewRoomStatusesButton" prefHeight="31.0" prefWidth="354.0" text="%viewRoomStatuses" />
+            <Button fx:id="viewRoomStatusesButton" layoutX="53.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleViewRoomStatusesButton" prefHeight="31.0" prefWidth="354.0" text="%viewRoomStatuses" />
             <Button fx:id="updateProfileButton" layoutX="53.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleUpdateProfileButton" prefHeight="31.0" prefWidth="354.0" text="%updateProfile" />
             <Label layoutX="141.0" layoutY="35.0" text="%selectOption">
                <font>
@@ -19,8 +19,8 @@
             </Label>
             <Button fx:id="viewManagersButton" layoutX="53.0" layoutY="208.0" mnemonicParsing="false" onAction="#handleViewManagersButton" prefHeight="31.0" prefWidth="354.0" text="%viewManagers" />
             <Button fx:id="viewCustomersButton" layoutX="53.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleViewCustomersButton" prefHeight="31.0" prefWidth="354.0" text="%viewCustomers" />
-            <Button layoutX="53.0" layoutY="394.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="Button" />
-            <Button layoutX="53.0" layoutY="443.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="Button" />
+            <Button layoutX="53.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleCreditCardPayments" prefHeight="31.0" prefWidth="354.0" text="%viewCreditCardPayment" />
+            <Button layoutX="53.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleViewDebitCardPayments" prefHeight="31.0" prefWidth="354.0" text="%viewDebitCardPayments" />
             <Button layoutX="50.0" layoutY="491.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="Button" />
             <Button layoutX="50.0" layoutY="535.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="354.0" text="Button" />
             <VBox fx:id="vBoxLayout" layoutX="462.0" layoutY="108.0" prefHeight="465.0" prefWidth="382.0" visible="false">
