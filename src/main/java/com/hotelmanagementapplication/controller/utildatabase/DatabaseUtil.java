@@ -185,9 +185,6 @@ public class DatabaseUtil {
         payment.setPaymentId(rs.getInt("paymentId"));
         payment.setAmount(rs.getDouble("amount"));
         payment.setPaymentDate(rs.getString("paymentDate"));
-        // Map associated User
-        User user = DatabaseUtil.mapUser(rs);
-        payment.setUser(user);
         // Map DebitCardPayment-specific fields
         payment.setDebitCardNumber(rs.getString("debitCardNumber"));
         payment.setCardHolderName(rs.getString("cardHolderName"));
@@ -209,9 +206,6 @@ public class DatabaseUtil {
         payment.setPaymentId(rs.getInt("paymentId"));
         payment.setAmount(rs.getDouble("amount"));
         payment.setPaymentDate(rs.getString("paymentDate"));
-        // Map associated User
-        User user = DatabaseUtil.mapUser(rs);
-        payment.setUser(user);
         // Map CreditCardPayment-specific fields
         payment.setCreditCardNumber(rs.getString("creditCardNumber"));
         payment.setCardHolderName(rs.getString("cardHolderName"));
