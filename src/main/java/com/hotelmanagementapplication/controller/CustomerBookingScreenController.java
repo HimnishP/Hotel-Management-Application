@@ -1,11 +1,16 @@
 package com.hotelmanagementapplication.controller;
 
+import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CustomerBookingScreenController {
     @FXML
@@ -49,7 +54,8 @@ public class CustomerBookingScreenController {
      *
      * @param actionEvent button click
      */
-    public void handleProcessPayments(ActionEvent actionEvent) {
-        //TODO switch screens here
+    public void handleProcessPayments(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "PaymentSelectionScreen.fxml");
     }
 }

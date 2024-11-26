@@ -22,13 +22,25 @@ public class PaymentSystem {
     public PaymentSystem() {
         paymentMap = DatabaseController.selectPayments()
                 .stream()
-                .collect(Collectors.toMap(payment -> payment.getUser().getUserId(), payment -> payment));
+                .filter(payment -> payment != null && payment.getUser() != null)
+                .collect(Collectors.toMap(
+                        payment -> payment.getUser().getUserId(),
+                        payment -> payment
+                ));
         cardPaymentMap = DatabaseController.selectCreditCardPayments()
                 .stream()
-                .collect(Collectors.toMap(CreditCardPayment::getPaymentId, payment -> payment));
+                .filter(payment -> payment != null)
+                .collect(Collectors.toMap(
+                        CreditCardPayment::getPaymentId,
+                        payment -> payment
+                ));
         debitCardPaymentMap = DatabaseController.selectDebitCardPayments()
                 .stream()
-                .collect(Collectors.toMap(DebitCardPayment::getPaymentId, payment -> payment));
+                .filter(payment -> payment != null)
+                .collect(Collectors.toMap(
+                        DebitCardPayment::getPaymentId,
+                        payment -> payment
+                ));
     }
 
     /**
