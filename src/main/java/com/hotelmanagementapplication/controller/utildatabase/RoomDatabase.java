@@ -1,5 +1,9 @@
 package com.hotelmanagementapplication.controller.utildatabase;
 
+import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.room.Status;
+
+import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.executeInsert;
 import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.executeUpdate;
 
 public class RoomDatabase {
@@ -43,6 +47,16 @@ public class RoomDatabase {
                 )
                 """;
         executeUpdate(sql);
+    }
+
+    public static void insertRoom(Room room, String roomType) {
+        String sql = """
+                INSERT INTO Rooms (room_price, room_status, room_type) VALUES (?, ?, ?)
+                """;
+        double roomPrice = room.getPrice();
+        Status roomStatus = room.getStatus();
+
+        executeInsert(sql, roomPrice, roomStatus, roomType);
     }
 
 

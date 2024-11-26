@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="Made Room database">
+    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="Made a method that creates a table for rooms with single bed.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/RoomDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/RoomDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,11 +196,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.WelcomeScreen" />
         <item itemvalue="JUnit.HotelManagementSystemTest.listUserIds_ShouldReturnAllUserIds" />
         <item itemvalue="JUnit.HotelManagementSystemTest.getUserCount_ShouldReturnCorrectUserCount" />
         <item itemvalue="JUnit.HotelManagementSystemTest.getAllUsers_ShouldReturnAllUsers" />
         <item itemvalue="JUnit.HotelManagementSystemTest.getAllCustomers_ShouldReturnAllCustomers" />
-        <item itemvalue="Application.WelcomeScreen" />
       </list>
     </recent_temporary>
   </component>
@@ -227,7 +228,8 @@
       <workItem from="1729213167826" duration="1846000" />
       <workItem from="1731623783930" duration="6794000" />
       <workItem from="1732646550101" duration="279000" />
-      <workItem from="1732646890508" duration="795000" />
+      <workItem from="1732646890508" duration="1556000" />
+      <workItem from="1732652087696" duration="864000" />
     </task>
     <task id="LOCAL-00001" summary="-Added the .gitignore file&#10;-Added the README.md file&#10;-Implemented the MVC architecture&#10;-Developed basic GUI's ( WelcomeScreen , CustomerLoginScreen , ManagerLoginScreen )">
       <option name="closed" value="true" />
@@ -325,7 +327,31 @@
       <option name="project" value="LOCAL" />
       <updated>1732647389263</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Made a createRoomTable method.">
+      <option name="closed" value="true" />
+      <created>1732647716186</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732647716186</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Made a method that creates a table for rooms with double bed.">
+      <option name="closed" value="true" />
+      <created>1732647990631</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1732647990631</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Made a method that creates a table for rooms with single bed.">
+      <option name="closed" value="true" />
+      <created>1732648037403</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732648037403</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,6 +382,9 @@
     <MESSAGE value="made methods to select from users , managers and customers using join queries" />
     <MESSAGE value="uhm idk" />
     <MESSAGE value="Made Room database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made Room database" />
+    <MESSAGE value="Made a createRoomTable method." />
+    <MESSAGE value="Made a method that creates a table for rooms with double bed." />
+    <MESSAGE value="Made a method that creates a table for rooms with single bed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made a method that creates a table for rooms with single bed." />
   </component>
 </project>
