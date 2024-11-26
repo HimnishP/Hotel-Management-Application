@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotelmanagementapplication.controller.DebitPaymentScreenController">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #808080;">
+         <children>
+            <Label layoutX="23.0" layoutY="247.0" text="%title.label">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="WHITE" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label layoutX="176.0" layoutY="526.0" text="%copyright.label" />
+            <Label layoutX="176.0" layoutY="565.0" text="%name.label" />
+            <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="117.0" layoutY="537.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/CopyrightLogopng.png" />
+               </image>
+            </ImageView>
+            <Circle layoutX="75.0" layoutY="60.0" radius="124.0" stroke="BLACK" strokeType="INSIDE">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Circle>
+            <Line endX="100.0" layoutX="176.0" layoutY="301.0" startX="-100.0" strokeWidth="2.0">
+               <stroke>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="BLACK" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </Line>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="563.0" prefWidth="501.0" style="-fx-background-color: #C0C0C0;">
+         <children>
+            <Label layoutX="47.0" layoutY="88.0" text="%form.prompt.label">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="47.0" layoutY="206.0" text="%first.name.label" />
+            <Label layoutX="47.0" layoutY="241.0" text="%last.name.label" />
+            <Label layoutX="47.0" layoutY="279.0" text="%email.label" />
+            <Label layoutX="47.0" layoutY="312.0" text="%password.label" />
+            <Label layoutX="47.0" layoutY="349.0" text="%phone.number.label" />
+            <Button fx:id="validateButton" layoutX="70.0" layoutY="424.0" mnemonicParsing="false" onAction="#validateButtonHandler" prefHeight="31.0" prefWidth="340.0" text="%validate.button" />
+            <TextField fx:id="firstNameTF" layoutX="202.0" layoutY="201.0" prefHeight="31.0" prefWidth="220.0" promptText="%first.name.prompt" />
+            <TextField fx:id="lastNameTF" layoutX="202.0" layoutY="236.0" prefHeight="31.0" prefWidth="220.0" promptText="%last.name.prompt" />
+            <TextField fx:id="emailTF" layoutX="202.0" layoutY="274.0" prefHeight="31.0" prefWidth="220.0" promptText="%email.prompt" />
+            <PasswordField fx:id="passwordTF" layoutX="202.0" layoutY="307.0" prefHeight="31.0" prefWidth="220.0" promptText="%password.prompt" />
+            <TextField fx:id="phoneNumberTF" layoutX="202.0" layoutY="344.0" prefHeight="31.0" prefWidth="220.0" promptText="%phone.number.prompt" />
+            <Button fx:id="returnToWelcomeScreenButton" layoutX="70.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleReturnToWelcomeScreenButton" prefHeight="31.0" prefWidth="340.0" text="%goBackToWelcomeScreen.button" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>
