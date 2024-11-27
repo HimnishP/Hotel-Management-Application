@@ -1,5 +1,6 @@
 package com.hotelmanagementapplication.controller.utildatabase;
 
+import com.hotelmanagementapplication.model.room.DoubleBed;
 import com.hotelmanagementapplication.model.room.Room;
 import com.hotelmanagementapplication.model.room.SingleBed;
 import com.hotelmanagementapplication.model.room.Status;
@@ -83,7 +84,7 @@ public class RoomDatabase {
     }
 
     /**
-     * selects everything from rooms
+     * selects everything from Room table
      * @return
      */
     public static List<Room> selectRooms() {
@@ -91,7 +92,26 @@ public class RoomDatabase {
         return executeQuery(sql, DatabaseUtil::mapRoom);
     }
 
+    /**
+     * selects all records from SingleBed Table
+     * @return
+     */
+    public static List<SingleBed> selectSingleRooms() {
+        String sql = """
+                SELECT * FROM SingleBeds s
+                JOIN Rooms r ON r.room_id = s.room_id
+                """;
+        return executeQuery(sql, DatabaseUtil::mapSingleBed);
+    }
 
+    public static List<DoubleBed> selectDoubleRooms() {
+        String sql = """
+                SELECT * FROM DoubleBeds d
+                JOIN Rooms r ON r.room_id = d.room_id
+                """;
+
+        return executeQuery(sql, DatabaseUtil::mapDoubleBed);
+    }
 
 
 
