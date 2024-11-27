@@ -5,6 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
@@ -19,6 +20,12 @@ public class Room {
         this.roomId = ++idCounter;
         this.price = price;
         this.status = status;
+    }
+
+    public Room(int roomId, double roomPrice, Status roomStatus) {
+        this.roomId = roomId;
+        this.price = roomPrice;
+        this.status = roomStatus;
     }
 
     /**

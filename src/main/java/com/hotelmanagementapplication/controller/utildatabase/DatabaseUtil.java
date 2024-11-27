@@ -3,6 +3,10 @@ package com.hotelmanagementapplication.controller.utildatabase;
 import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 import com.hotelmanagementapplication.model.payment.Payment;
+import com.hotelmanagementapplication.model.room.DoubleBed;
+import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.room.SingleBed;
+import com.hotelmanagementapplication.model.room.Status;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
@@ -251,4 +255,48 @@ public class DatabaseUtil {
                 phoneLabel, phone,
                 passwordLabel, password);
     }
+// For the Room ----------------------------------------------------
+    /**
+     * Method will return Room object
+     *
+     * @param rs The ResultSet
+     * @return Room object
+     * @throws SQLException When SQL error occurs
+     */
+    public static Room mapRoom(ResultSet rs) throws SQLException {
+        // Map common fields for the User class
+        int roomId = rs.getInt("room_Id");
+        double roomPrice = rs.getDouble("room_price");
+        Status roomStatus = Status.valueOf(rs.getString("room_status"));
+
+        return new Room(roomId, roomPrice, roomStatus);
+
+    }
+
+    /**
+     * Method will return DoubleBed object
+     *
+     * @param rs The ResultSet
+     * @return DoubleBed object
+     * @throws SQLException When SQL error occurs
+     */
+    public static DoubleBed mapDoubleBed(ResultSet rs) throws SQLException {
+        Room room = mapRoom(rs);
+        return new DoubleBed(room.getPrice(), room.getStatus());
+    }
+//
+    /**
+     * Method will return SingleBed object
+     *
+     * @param rs The ResultSet
+     * @return SingleBed object
+     * @throws SQLException When SQL error occurs
+     */
+    public static SingleBed mapSingleBed(ResultSet rs) throws SQLException {
+        Room room = mapRoom(rs);
+        return new SingleBed(room.getPrice(), room.getStatus());
+    }
+
+
+
 }
