@@ -19,7 +19,7 @@ public class RoomDatabase {
     /**
      * Creates Room table.
      */
-    public static void createRoomTable(){
+    public static void createRoomTable() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS Rooms (
                 room_Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,7 +34,7 @@ public class RoomDatabase {
     /**
      * creates a table for the rooms with double bed.
      */
-    public static void createDoubleBedRoomTable(){
+    public static void createDoubleBedRoomTable() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS DoubleBeds (
                 room_Id INTEGER PRIMARY KEY,
@@ -47,7 +47,7 @@ public class RoomDatabase {
     /**
      * creates a table for the rooms with single bed.
      */
-    public static void createSingleBedRoomTable(){
+    public static void createSingleBedRoomTable() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS SingleBeds (
                 room_Id INTEGER PRIMARY KEY,
@@ -59,7 +59,8 @@ public class RoomDatabase {
 
     /**
      * inserts a room records in room table.
-     * @param room the room
+     *
+     * @param room     the room
      * @param roomType the type of room.
      */
     public static void insertRoom(Room room, String roomType) {
@@ -74,6 +75,7 @@ public class RoomDatabase {
 
     /**
      * inserts in records in double-bed room table
+     *
      * @param roomId the room id
      */
     public static void insertDoubleBedRoom(int roomId) {
@@ -85,6 +87,7 @@ public class RoomDatabase {
 
     /**
      * selects everything from Room table
+     *
      * @return all the rooms.
      */
     public static List<Room> selectRooms() {
@@ -94,6 +97,7 @@ public class RoomDatabase {
 
     /**
      * selects all records from SingleBed Table
+     *
      * @return the rooms with single bed
      */
     public static List<SingleBed> selectSingleRooms() {
@@ -106,6 +110,7 @@ public class RoomDatabase {
 
     /**
      * selects all records from DoubleBed Table
+     *
      * @return the rooms with double bed.
      */
     public static List<DoubleBed> selectDoubleRooms() {
@@ -119,6 +124,7 @@ public class RoomDatabase {
 
     /**
      * deletes a room from the database.
+     *
      * @param roomId the room id that will be deleted.
      */
     public static void removeRoom(int roomId) {
@@ -129,5 +135,25 @@ public class RoomDatabase {
         } catch (RuntimeException e) {
             throw new IllegalStateException("Failed to remove room with ID: " + roomId, e);
         }
+    }
+
+    /**
+     * Method will remove room from database
+     * @param room the room
+     */
+    public static void removeRoom(Room room) {
+        int roomId = room.getRoomId();
+        removeRoom(roomId);
+    }
+
+    /**
+     * modifies the room specifications.
+     * @param roomId the room id of the room
+     * @param room the room to modify
+     */
+    public static void alterRoom(int roomId, Room room) {
+        String sql = "UPDATE Rooms SET room_price = ?, room_status = ? WHERE room_id = ?";
+        System.out.println("Altered Room");
+        executeUpdate(sql, room.getPrice(), room.getStatus(), roomId);
     }
 }
