@@ -1,28 +1,23 @@
-package com.hotelmanagementapplication.controller;
+package com.hotelmanagementapplication.controller.screens;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
+import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 import static com.hotelmanagementapplication.model.user.User.isValidEmail;
 import static com.hotelmanagementapplication.model.user.User.isValidPhoneNumber;
 
-public class UpdateUserScreenController {
-    @FXML
-    private Label displayLabel;
-    @FXML
-    private TextField idTF;
+public class CustomerLoginScreenController {
     @FXML
     private TextField firstNameTF;
     @FXML
@@ -35,27 +30,24 @@ public class UpdateUserScreenController {
     private TextField phoneNumberTF;
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
-    private final ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
 
-
-    public void handleUpdateUserButton(ActionEvent actionEvent) {
+    /**
+     * This button event handler will validate the customers information and switch screens to the bookings screen
+     *
+     * @param actionEvent Event
+     */
+    public void validateButtonHandler(ActionEvent actionEvent) throws IOException {
         if (validate()) {
-            String id = idTF.getText();
             String firstName = firstNameTF.getText();
             String lastName = lastNameTF.getText();
             String email = emailTF.getText();
             String password = passwordTF.getText();
             String phoneNumber = phoneNumberTF.getText();
-            User newUser = new User(Integer.parseInt(id), firstName, lastName, email, phoneNumber, password);
-            User oldUser = hotelManagementSystem.getUserById(Integer.parseInt(id));
-            hotelManagementSystem.updateUser(oldUser.getUserId(), newUser);
-            displayLabel.setText(resourceBundle.getString("success.label"));
+            User customer = new Customer(firstName, lastName, email, phoneNumber, password);
+            hotelManagementSystem.addUser(customer);
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            ScreenHandler.switchScreens(stage, "CustomerBookingScreen.fxml");
         }
-    }
-
-    public void handleReturnToManagerAnalyticsButton(ActionEvent actionEvent) throws IOException {
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        ScreenHandler.switchScreens(primaryStage, "ManagerAnalyticsScreen.fxml");
     }
 
     /**
@@ -105,5 +97,15 @@ public class UpdateUserScreenController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    /**
+     * Method will switch back to the welcome screen
+     *
+     * @param actionEvent The event
+     */
+    public void handleReturnToWelcomeScreenButton(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "WelcomeScreen.fxml");
     }
 }

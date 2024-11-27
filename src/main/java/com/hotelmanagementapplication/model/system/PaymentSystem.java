@@ -1,6 +1,6 @@
 package com.hotelmanagementapplication.model.system;
 
-import com.hotelmanagementapplication.controller.DatabaseController;
+import com.hotelmanagementapplication.controller.screens.DatabaseController;
 import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 import com.hotelmanagementapplication.model.payment.Payment;

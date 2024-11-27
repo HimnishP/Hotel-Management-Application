@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.controller;
+package com.hotelmanagementapplication.controller.screens;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import javafx.event.ActionEvent;

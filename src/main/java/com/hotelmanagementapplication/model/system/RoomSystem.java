@@ -1,6 +1,6 @@
 package com.hotelmanagementapplication.model.system;
 
-import com.hotelmanagementapplication.controller.DatabaseController;
+import com.hotelmanagementapplication.controller.screens.DatabaseController;
 import com.hotelmanagementapplication.model.room.DoubleBed;
 import com.hotelmanagementapplication.model.room.Room;
 import com.hotelmanagementapplication.model.room.SingleBed;

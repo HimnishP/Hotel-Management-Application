@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.controller;
+package com.hotelmanagementapplication.controller.screens;
 
 import com.hotelmanagementapplication.controller.utildatabase.PaymentDatabase;
 import com.hotelmanagementapplication.controller.utildatabase.RoomDatabase;

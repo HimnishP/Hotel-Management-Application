@@ -1,4 +1,4 @@
-package com.hotelmanagementapplication.controller;
+package com.hotelmanagementapplication.controller.screens;
 
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.payment.utility.PaymentValidationUtil;
@@ -11,37 +11,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CreditPaymentScreenController {
-    @FXML
-    private TextField creditCardNumberTF;
+public class DebitPaymentScreenController {
     @FXML
     private TextField cardHolderNameTF;
     @FXML
     private TextField expirationDateTF;
     @FXML
     private TextField securityCodeTF;
-
+    @FXML
+    private TextField debitCardNumberTF;
     /**
-     * Method will switch back to the welcome screen
-     *
-     * @param actionEvent The event
-     */
-    public void handleReturnToWelcomeScreenButton(ActionEvent actionEvent) throws IOException {
-        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        ScreenHandler.switchScreens(primaryStage, "WelcomeScreen.fxml");
-    }
-
-    /**
-     * Validates the entered credit card details and processes the payment.
+     * Validates the entered debit card details and processes the payment.
      *
      * @param actionEvent The event
      */
     public void validateButtonHandler(ActionEvent actionEvent) {
-        String creditCardNumber = creditCardNumberTF.getText();
+        String debitCardNumber = debitCardNumberTF.getText();
         String cardHolderName = cardHolderNameTF.getText();
         String expirationDate = expirationDateTF.getText();
         String securityCode = securityCodeTF.getText();
-        if (!PaymentValidationUtil.isValidCardNumber(creditCardNumber)) {
+        if (!PaymentValidationUtil.isValidCardNumber(debitCardNumber)) {
             showAlert(Alert.AlertType.ERROR, "Invalid Card Number", "Please enter a valid 16-digit card number.");
             return;
         }
@@ -58,6 +47,16 @@ public class CreditPaymentScreenController {
             return;
         }
         showAlert(Alert.AlertType.INFORMATION, "Payment Successful", "Your payment was successfully processed.");
+    }
+
+    /**
+     * Method will switch back to the welcome screen
+     *
+     * @param actionEvent The event
+     */
+    public void handleReturnToWelcomeScreenButton(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "WelcomeScreen.fxml");
     }
 
     /**

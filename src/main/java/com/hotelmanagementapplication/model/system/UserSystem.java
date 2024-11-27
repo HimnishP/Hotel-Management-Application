@@ -1,6 +1,6 @@
 package com.hotelmanagementapplication.model.system;
 
-import com.hotelmanagementapplication.controller.DatabaseController;
+import com.hotelmanagementapplication.controller.screens.DatabaseController;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
