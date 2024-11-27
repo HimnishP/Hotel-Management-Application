@@ -116,4 +116,39 @@ public class RoomSystem {
                 .map(room -> (DoubleBed) room)
                 .toList());
     }
+
+    /**
+     * Updates an existing room's details.
+     *
+     * @param roomId The ID of the room to update.
+     * @param room   The room object with updated details.
+     */
+    public Future<Void> updateRoom(int roomId, Room room) {
+        return executorService.submit(() -> {
+            if (!roomExistsAsync(roomId).get()) {
+                throw new NoSuchElementException("ERROR: Room with id " + roomId + " does not exist!");
+            }
+            DatabaseController.alterRoom(roomId, room);
+            rooms.put(roomId, room);
+            return null;
+        });
+    }
+
+    /**
+     * Lists all room IDs.
+     *
+     * @return A Future containing a list of all room IDs.
+     */
+    public Future<List<Integer>> listRoomIds() {
+        return executorService.submit(() -> rooms.keySet().stream().toList());
+    }
+
+    /**
+     * Counts the total number of rooms.
+     *
+     * @return A Future containing the total number of rooms.
+     */
+    public Future<Integer> getRoomCount() {
+        return executorService.submit(rooms::size);
+    }
 }
