@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="Made insert method for the double room table.">
+    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="Made a mapRoom, mapDouble, mapSingleBed to return Room object for the database query.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/DatabaseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/DatabaseUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/RoomDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/controller/utildatabase/RoomDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/model/room/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hotelmanagementapplication/model/room/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +231,7 @@
       <workItem from="1732646550101" duration="279000" />
       <workItem from="1732646890508" duration="1556000" />
       <workItem from="1732652087696" duration="1200000" />
-      <workItem from="1732716556880" duration="4009000" />
+      <workItem from="1732716556880" duration="4406000" />
     </task>
     <task id="LOCAL-00001" summary="-Added the .gitignore file&#10;-Added the README.md file&#10;-Implemented the MVC architecture&#10;-Developed basic GUI's ( WelcomeScreen , CustomerLoginScreen , ManagerLoginScreen )">
       <option name="closed" value="true" />
@@ -370,7 +369,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732653257567</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Made a mapRoom, mapDouble, mapSingleBed to return Room object for the database query.">
+      <option name="closed" value="true" />
+      <created>1732720762551</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1732720762551</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,6 +413,7 @@
     <MESSAGE value="Made a method that creates a table for rooms with single bed." />
     <MESSAGE value="Made insert method for the room table." />
     <MESSAGE value="Made insert method for the double room table." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made insert method for the double room table." />
+    <MESSAGE value="Made a mapRoom, mapDouble, mapSingleBed to return Room object for the database query." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made a mapRoom, mapDouble, mapSingleBed to return Room object for the database query." />
   </component>
 </project>

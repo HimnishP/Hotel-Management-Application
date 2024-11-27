@@ -1,10 +1,17 @@
 package com.hotelmanagementapplication.controller.utildatabase;
 
 import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.room.SingleBed;
 import com.hotelmanagementapplication.model.room.Status;
 
-import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.executeInsert;
-import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.executeUpdate;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.*;
 
 public class RoomDatabase {
 
@@ -74,6 +81,19 @@ public class RoomDatabase {
                 """;
         executeInsert(sql, roomId);
     }
+
+    /**
+     * selects everything from rooms
+     * @return
+     */
+    public static List<Room> selectRooms() {
+        String sql = "SELECT * FROM Rooms";
+        return executeQuery(sql, DatabaseUtil::mapRoom);
+    }
+
+
+
+
 
 
 }
