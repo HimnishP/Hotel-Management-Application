@@ -3,6 +3,7 @@ package com.hotelmanagementapplication.model.system;
 import com.hotelmanagementapplication.controller.DatabaseController;
 import com.hotelmanagementapplication.model.room.Room;
 
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
@@ -64,5 +65,29 @@ public class RoomSystem {
      */
     public Future<Boolean> roomExistsAsync(int roomId) {
         return executorService.submit(() -> rooms.containsKey(roomId));
+    }
+
+    /**
+     * Retrieves a room by ID.
+     *
+     * @param roomId The ID of the room to retrieve.
+     * @return A Future containing the room.
+     */
+    public Future<Room> getRoomById(int roomId) {
+        return executorService.submit(() -> {
+            if (!roomExistsAsync(roomId).get()) {
+                throw new NoSuchElementException("ERROR: Room with id " + roomId + " does not exist!");
+            }
+            return rooms.get(roomId);
+        });
+    }
+
+    /**
+     * Retrieves all rooms.
+     *
+     * @return A Future containing a list of all rooms.
+     */
+    public Future<List<Room>> getAllRooms() {
+        return executorService.submit(() -> rooms.values().stream().toList());
     }
 }
