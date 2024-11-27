@@ -69,7 +69,6 @@ public class RoomDatabase {
                 """;
         double roomPrice = room.getPrice();
         Status roomStatus = room.getStatus();
-
         executeInsert(sql, roomPrice, roomStatus, roomType);
     }
 
@@ -81,6 +80,18 @@ public class RoomDatabase {
     public static void insertDoubleBedRoom(int roomId) {
         String sql = """
                 INSERT INTO DoubleBeds (room_id) VALUES (?)
+                """;
+        executeInsert(sql, roomId);
+    }
+
+    /**
+     * inserts in records in single-bed room table
+     *
+     * @param roomId the room id
+     */
+    public static void insertSingleBedRoom(int roomId) {
+        String sql = """
+                INSERT INTO SingleBeds (room_id) VALUES (?)
                 """;
         executeInsert(sql, roomId);
     }

@@ -1,10 +1,14 @@
 package com.hotelmanagementapplication.controller;
 
 import com.hotelmanagementapplication.controller.utildatabase.PaymentDatabase;
+import com.hotelmanagementapplication.controller.utildatabase.RoomDatabase;
 import com.hotelmanagementapplication.controller.utildatabase.UserDatabase;
 import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 import com.hotelmanagementapplication.model.payment.Payment;
+import com.hotelmanagementapplication.model.room.DoubleBed;
+import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.room.SingleBed;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
@@ -231,5 +235,109 @@ public class DatabaseController {
      */
     public static CreditCardPayment selectCreditCardPayment(int paymentId) {
         return PaymentDatabase.selectCreditCardPayment(paymentId);
+    }
+
+    /**
+     * Create the room table
+     */
+    public static void createTableRoom() {
+        RoomDatabase.createRoomTable();
+    }
+
+    /**
+     * Create the double-bed room table
+     */
+    public static void createTableDoubleBedRoom() {
+        RoomDatabase.createDoubleBedRoomTable();
+    }
+
+    /**
+     * Create the single-bed room table
+     */
+    public static void createTableSingleBedRoom() {
+        RoomDatabase.createSingleBedRoomTable();
+    }
+
+    /**
+     * Insert a room into the room table
+     *
+     * @param room     The room object to be inserted
+     * @param roomType The type of room (e.g., SingleBed, DoubleBed)
+     */
+    public static void insertRoom(Room room, String roomType) {
+        RoomDatabase.insertRoom(room, roomType);
+    }
+
+    /**
+     * Insert a double-bed room into the double-bed room table
+     *
+     * @param roomId The roomId of the double-bed room
+     */
+    public static void insertDoubleBedRoom(int roomId) {
+        RoomDatabase.insertDoubleBedRoom(roomId);
+    }
+
+    /**
+     * Insert a single-bed room into the single-bed room table
+     *
+     * @param roomId The roomId of the single-bed room
+     */
+    public static void insertSingleBedRoom(int roomId) {
+        RoomDatabase.insertSingleBedRoom(roomId);
+    }
+
+    /**
+     * Select all rooms from the room table
+     *
+     * @return List of rooms (SingleBed, DoubleBed, or Generic)
+     */
+    public static List<Room> selectRooms() {
+        return RoomDatabase.selectRooms();
+    }
+
+    /**
+     * Select all single-bed rooms from the database
+     *
+     * @return List of single-bed rooms
+     */
+    public static List<SingleBed> selectSingleRooms() {
+        return RoomDatabase.selectSingleRooms();
+    }
+
+    /**
+     * Select all double-bed rooms from the database
+     *
+     * @return List of double-bed rooms
+     */
+    public static List<DoubleBed> selectDoubleRooms() {
+        return RoomDatabase.selectDoubleRooms();
+    }
+
+    /**
+     * Remove a room from the database based on its roomId
+     *
+     * @param roomId The roomId of the room to be removed
+     */
+    public static void removeRoom(int roomId) {
+        RoomDatabase.removeRoom(roomId);
+    }
+
+    /**
+     * Remove a room from the database based on the room object
+     *
+     * @param room The room object to be removed
+     */
+    public static void removeRoom(Room room) {
+        RoomDatabase.removeRoom(room);
+    }
+
+    /**
+     * Update a room's information in the database
+     *
+     * @param roomId The roomId of the room to be updated
+     * @param room   The room object containing updated information
+     */
+    public static void alterRoom(int roomId, Room room) {
+        RoomDatabase.alterRoom(roomId, room);
     }
 }
