@@ -5,11 +5,6 @@ import com.hotelmanagementapplication.model.room.Room;
 import com.hotelmanagementapplication.model.room.SingleBed;
 import com.hotelmanagementapplication.model.room.Status;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.*;
@@ -23,10 +18,10 @@ public class RoomDatabase {
         String sql = """
                 CREATE TABLE IF NOT EXISTS Rooms (
                 room_Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                room_price REAL NOT NULL,
+                room_price TEXT NOT NULL,
                 room_status TEXT NOT NULL,
-                room_type TEXT NOT NULL,
-                )
+                room_type TEXT NOT NULL
+                );
                 """;
         executeUpdate(sql);
     }
@@ -38,7 +33,7 @@ public class RoomDatabase {
         String sql = """
                 CREATE TABLE IF NOT EXISTS DoubleBeds (
                 room_Id INTEGER PRIMARY KEY,
-                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id),
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id)
                 )
                 """;
         executeUpdate(sql);
@@ -51,7 +46,7 @@ public class RoomDatabase {
         String sql = """
                 CREATE TABLE IF NOT EXISTS SingleBeds (
                 room_Id INTEGER PRIMARY KEY,
-                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id),
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id)
                 )
                 """;
         executeUpdate(sql);
@@ -63,13 +58,13 @@ public class RoomDatabase {
      * @param room     the room
      * @param roomType the type of room.
      */
-    public static void insertRoom(Room room, String roomType) {
+    public static int insertRoom(Room room, String roomType) {
         String sql = """
                 INSERT INTO Rooms (room_price, room_status, room_type) VALUES (?, ?, ?)
                 """;
         double roomPrice = room.getPrice();
         Status roomStatus = room.getStatus();
-        executeInsert(sql, roomPrice, roomStatus, roomType);
+        return executeInsert(sql, roomPrice, roomStatus, roomType);
     }
 
     /**
@@ -129,7 +124,6 @@ public class RoomDatabase {
                 SELECT * FROM DoubleBeds d
                 JOIN Rooms r ON r.room_id = d.room_id
                 """;
-
         return executeQuery(sql, DatabaseUtil::mapDoubleBed);
     }
 

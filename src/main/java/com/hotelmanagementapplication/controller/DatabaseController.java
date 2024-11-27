@@ -264,8 +264,8 @@ public class DatabaseController {
      * @param room     The room object to be inserted
      * @param roomType The type of room (e.g., SingleBed, DoubleBed)
      */
-    public static void insertRoom(Room room, String roomType) {
-        RoomDatabase.insertRoom(room, roomType);
+    public static int insertRoom(Room room, String roomType) {
+        return RoomDatabase.insertRoom(room, roomType);
     }
 
     /**
