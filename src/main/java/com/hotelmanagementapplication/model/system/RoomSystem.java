@@ -1,7 +1,9 @@
 package com.hotelmanagementapplication.model.system;
 
 import com.hotelmanagementapplication.controller.DatabaseController;
+import com.hotelmanagementapplication.model.room.DoubleBed;
 import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.room.SingleBed;
 
 import java.util.List;
 import java.util.Map;
@@ -89,5 +91,29 @@ public class RoomSystem {
      */
     public Future<List<Room>> getAllRooms() {
         return executorService.submit(() -> rooms.values().stream().toList());
+    }
+
+    /**
+     * Retrieves all single-bed rooms.
+     *
+     * @return A Future containing a list of single-bed rooms.
+     */
+    public Future<List<SingleBed>> getAllSingleBedRooms() {
+        return executorService.submit(() -> rooms.values().stream()
+                .filter(room -> room instanceof SingleBed)
+                .map(room -> (SingleBed) room)
+                .toList());
+    }
+
+    /**
+     * Retrieves all double-bed rooms.
+     *
+     * @return A Future containing a list of double-bed rooms.
+     */
+    public Future<List<DoubleBed>> getAllDoubleBedRooms() {
+        return executorService.submit(() -> rooms.values().stream()
+                .filter(room -> room instanceof DoubleBed)
+                .map(room -> (DoubleBed) room)
+                .toList());
     }
 }
