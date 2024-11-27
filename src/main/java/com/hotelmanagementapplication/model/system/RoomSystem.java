@@ -17,7 +17,7 @@ public class RoomSystem {
     private final Map<Integer, Room> rooms; // RoomId : Room
     private final ExecutorService executorService = Executors.newCachedThreadPool();
 
-    public RoomSystem(Map<Integer, Room> rooms) {
+    public RoomSystem() {
         this.rooms = DatabaseController.selectRooms()
                 .stream()
                 .collect(Collectors.toMap(Room::getRoomId, room -> room));

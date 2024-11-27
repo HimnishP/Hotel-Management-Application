@@ -3,6 +3,9 @@ package com.hotelmanagementapplication.model.system;
 import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 import com.hotelmanagementapplication.model.payment.Payment;
+import com.hotelmanagementapplication.model.room.DoubleBed;
+import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.room.SingleBed;
 import com.hotelmanagementapplication.model.user.Customer;
 import com.hotelmanagementapplication.model.user.Manager;
 import com.hotelmanagementapplication.model.user.User;
@@ -14,10 +17,12 @@ public class HotelManagementSystem {
     private static HotelManagementSystem instance;
     private final UserSystem userSystem;
     private final PaymentSystem paymentSystem;
+    private final RoomSystem roomSystem;
 
     private HotelManagementSystem() {
         userSystem = new UserSystem();
         paymentSystem = new PaymentSystem();
+        roomSystem = new RoomSystem();
     }
 
     public static HotelManagementSystem getInstance() {
@@ -309,6 +314,137 @@ public class HotelManagementSystem {
             return paymentSystem.listPaymentIds().get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException("Failed to list payment IDs", e);
+        }
+    }
+
+    /**
+     * Adds a room to the system.
+     *
+     * @param room     The room to add.
+     * @param roomType The type of the room (e.g., "SingleBed", "DoubleBed").
+     */
+    public void addRoom(Room room, String roomType) {
+        roomSystem.addRoom(room, roomType);
+    }
+
+    /**
+     * Removes a room by ID and returns the removed room.
+     *
+     * @param roomId The ID of the room to remove.
+     * @return The removed room.
+     */
+    public Room removeRoom(int roomId) {
+        try {
+            return roomSystem.removeRoom(roomId).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to remove room with ID " + roomId, e);
+        }
+    }
+
+    /**
+     * Retrieves a room by ID.
+     *
+     * @param roomId The ID of the room to retrieve.
+     * @return The room.
+     */
+    public Room getRoomById(int roomId) {
+        try {
+            return roomSystem.getRoomById(roomId).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve room with ID " + roomId, e);
+        }
+    }
+
+    /**
+     * Retrieves a list of all rooms.
+     *
+     * @return A list of all rooms.
+     */
+    public List<Room> getAllRooms() {
+        try {
+            return roomSystem.getAllRooms().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve all rooms", e);
+        }
+    }
+
+    /**
+     * Retrieves a list of all single-bed rooms.
+     *
+     * @return A list of single-bed rooms.
+     */
+    public List<SingleBed> getAllSingleBedRooms() {
+        try {
+            return roomSystem.getAllSingleBedRooms().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve all single-bed rooms", e);
+        }
+    }
+
+    /**
+     * Retrieves a list of all double-bed rooms.
+     *
+     * @return A list of double-bed rooms.
+     */
+    public List<DoubleBed> getAllDoubleBedRooms() {
+        try {
+            return roomSystem.getAllDoubleBedRooms().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve all double-bed rooms", e);
+        }
+    }
+
+    /**
+     * Updates the details of an existing room.
+     *
+     * @param roomId The ID of the room to update.
+     * @param room   The updated room object.
+     */
+    public void updateRoom(int roomId, Room room) {
+        try {
+            roomSystem.updateRoom(roomId, room).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to update room with ID " + roomId, e);
+        }
+    }
+
+    /**
+     * Checks if a room exists by its ID.
+     *
+     * @param roomId The ID of the room.
+     * @return True if the room exists, false otherwise.
+     */
+    public boolean roomExists(int roomId) {
+        try {
+            return roomSystem.roomExistsAsync(roomId).get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to check if room exists with ID " + roomId, e);
+        }
+    }
+
+    /**
+     * Retrieves a list of all room IDs.
+     *
+     * @return A list of all room IDs.
+     */
+    public List<Integer> listRoomIds() {
+        try {
+            return roomSystem.listRoomIds().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to list room IDs", e);
+        }
+    }
+
+    /**
+     * Counts the total number of rooms in the system.
+     *
+     * @return The total number of rooms.
+     */
+    public int getRoomCount() {
+        try {
+            return roomSystem.getRoomCount().get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to retrieve room count", e);
         }
     }
 }
