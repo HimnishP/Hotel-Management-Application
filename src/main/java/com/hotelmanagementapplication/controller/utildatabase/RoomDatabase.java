@@ -74,7 +74,7 @@ public class RoomDatabase {
 
     /**
      * inserts in records in double-bed room table
-     * @param roomId
+     * @param roomId the room id
      */
     public static void insertDoubleBedRoom(int roomId) {
         String sql = """
@@ -85,7 +85,7 @@ public class RoomDatabase {
 
     /**
      * selects everything from Room table
-     * @return
+     * @return all the rooms.
      */
     public static List<Room> selectRooms() {
         String sql = "SELECT * FROM Rooms";
@@ -94,7 +94,7 @@ public class RoomDatabase {
 
     /**
      * selects all records from SingleBed Table
-     * @return
+     * @return the rooms with single bed
      */
     public static List<SingleBed> selectSingleRooms() {
         String sql = """
@@ -104,6 +104,10 @@ public class RoomDatabase {
         return executeQuery(sql, DatabaseUtil::mapSingleBed);
     }
 
+    /**
+     * selects all records from DoubleBed Table
+     * @return the rooms with double bed.
+     */
     public static List<DoubleBed> selectDoubleRooms() {
         String sql = """
                 SELECT * FROM DoubleBeds d
@@ -113,7 +117,17 @@ public class RoomDatabase {
         return executeQuery(sql, DatabaseUtil::mapDoubleBed);
     }
 
-
-
-
+    /**
+     * deletes a room from the database.
+     * @param roomId the room id that will be deleted.
+     */
+    public static void removeRoom(int roomId) {
+        String sql = "DELETE FROM Rooms WHERE room_id = ?";
+        try {
+            executeUpdate(sql, roomId);
+            System.out.println("Room with ID " + roomId + " removed from the database.");
+        } catch (RuntimeException e) {
+            throw new IllegalStateException("Failed to remove room with ID: " + roomId, e);
+        }
+    }
 }
