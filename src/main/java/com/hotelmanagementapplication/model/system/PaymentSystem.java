@@ -14,9 +14,9 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class PaymentSystem {
-    private final Map<Integer, Payment> paymentMap;
-    private final Map<Integer, CreditCardPayment> cardPaymentMap;
-    private final Map<Integer, DebitCardPayment> debitCardPaymentMap;
+    private final Map<Integer, Payment> paymentMap; // UserId : Payment
+    private final Map<Integer, CreditCardPayment> cardPaymentMap; // PaymentId : Credit
+    private final Map<Integer, DebitCardPayment> debitCardPaymentMap;// PaymentID : Debit
     private final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
 
     public PaymentSystem() {
