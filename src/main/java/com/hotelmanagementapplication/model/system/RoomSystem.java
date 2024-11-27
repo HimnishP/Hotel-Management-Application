@@ -4,8 +4,10 @@ import com.hotelmanagementapplication.controller.DatabaseController;
 import com.hotelmanagementapplication.model.room.Room;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class RoomSystem {
@@ -28,7 +30,6 @@ public class RoomSystem {
         executorService.submit(() -> {
             rooms.put(room.getRoomId(), room);
             DatabaseController.insertRoom(room, roomType);
-
             if ("SingleBed".equalsIgnoreCase(roomType)) {
                 DatabaseController.insertSingleBedRoom(room.getRoomId());
             } else if ("DoubleBed".equalsIgnoreCase(roomType)) {
@@ -39,5 +40,29 @@ public class RoomSystem {
         });
     }
 
+    /**
+     * Removes a room from the system by ID.
+     *
+     * @param roomId The ID of the room to be removed.
+     * @return A Future containing the removed room.
+     */
+    public Future<Room> removeRoom(int roomId) {
+        return executorService.submit(() -> {
+            if (!roomExistsAsync(roomId).get()) {
+                throw new NoSuchElementException("ERROR: Room with id " + roomId + " does not exist!");
+            }
+            DatabaseController.removeRoom(roomId);
+            return rooms.remove(roomId);
+        });
+    }
 
+    /**
+     * Checks if a room exists by ID.
+     *
+     * @param roomId The ID of the room.
+     * @return A Future containing true if the room exists, false otherwise.
+     */
+    public Future<Boolean> roomExistsAsync(int roomId) {
+        return executorService.submit(() -> rooms.containsKey(roomId));
+    }
 }
