@@ -33,13 +33,13 @@ public class AddNewRoomScreenController {
      * @param actionEvent the event triggered by clicking the "Validate" button
      */
     public void handleValidateButton(ActionEvent actionEvent) {
-        double price = Double.parseDouble(String.valueOf(priceTF));
+        double price = Double.parseDouble(priceTF.getText());
         ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
-        String status = "";
+        String typeOfBed = "";
         if (isSingleBed) {
-            status = "SingleBed";
+            typeOfBed = "SingleBed";
         } else if (isDoubleBed) {
-            status = "DoubleBed";
+            typeOfBed = "DoubleBed";
         }
         Room room = null;
         if (isSingleBed && isAvailable) {
@@ -51,9 +51,11 @@ public class AddNewRoomScreenController {
         } else if (isDoubleBed && isBooked) {
             room = new DoubleBed(price, Status.BOOKED);
         }
-        HotelManagementSystem.getInstance().addRoom(room, status);
-        String successMessage = String.format(resourceBundle.getString("addRoom"), room);
-        displayLabel.setText(successMessage);
+        if (room != null) {
+            HotelManagementSystem.getInstance().addRoom(room, typeOfBed);
+            String successMessage = resourceBundle.getString("success.label");
+            displayLabel.setText(successMessage);
+        }
     }
 
     /**

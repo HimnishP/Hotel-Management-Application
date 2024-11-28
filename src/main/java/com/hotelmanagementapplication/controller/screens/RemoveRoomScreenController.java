@@ -27,7 +27,7 @@ public class RemoveRoomScreenController {
         Room room = HotelManagementSystem.getInstance().removeRoom(Integer.parseInt(roomId.getText()));
         ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
         if (room != null) {
-            String successMessage = String.format(resourceBundle.getString("removeRoom"), room);
+            String successMessage = resourceBundle.getString("removeRoom");
             displayLabel.setText(successMessage);
         } else {
             displayLabel.setText(resourceBundle.getString("roomNotFound"));

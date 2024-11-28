@@ -94,7 +94,7 @@ public class DebitPaymentScreenController {
         double price = currentRoom.getPrice();
         String cardHolderName = cardHolderNameTF.getText();
         String roomDetails = "Room ID: " + currentRoom.getRoomId() + "\n" + "Price: $" + currentRoom.getPrice();
-        String paymentDetails = "Payment Method: Credit Card\n" + "Card Holder: " + cardHolderName + "\n" + "Amount: $" + price;
+        String paymentDetails = "Payment Method: Debit Card\n" + "Card Holder: " + cardHolderName + "\n" + "Amount: $" + price;
         String message = "Payment Successful!\n\n" + "Room Details:\n" + roomDetails + "\n\n" + "Payment Details:\n" + paymentDetails;
         showAlert(Alert.AlertType.INFORMATION, "Your payment has been processed successfully!", message);
     }

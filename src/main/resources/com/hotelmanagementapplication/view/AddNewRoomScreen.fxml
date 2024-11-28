@@ -60,8 +60,8 @@
                         <Font name="System Bold Italic" size="24.0" />
                     </font>
                 </Label>
-                <Button fx:id="validateButton" layoutX="124.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleValidateButton" prefHeight="31.0" prefWidth="264.0" text="%validate.button" />
-                <Button layoutX="124.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleGoBackToWelcomeScreen" prefHeight="31.0" prefWidth="264.0" text="%goBackToManagerAnalytics.button" />
+                <Button fx:id="validateButton" layoutX="66.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleValidateButton" prefHeight="31.0" prefWidth="393.0" text="%validate.button" />
+                <Button layoutX="67.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleGoBackToWelcomeScreen" prefHeight="31.0" prefWidth="393.0" text="%goBackToManagerAnalytics.button" />
                 <Label fx:id="displayLabel" alignment="CENTER" layoutY="416.0" prefHeight="21.0" prefWidth="504.0">
                     <font>
                         <Font size="18.0" />

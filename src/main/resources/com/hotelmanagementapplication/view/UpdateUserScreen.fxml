@@ -11,7 +11,7 @@
     <children>
         <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #808080;">
             <children>
-                <Label layoutX="23.0" layoutY="247.0" text="%title.label">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="247.0" prefHeight="35.0" prefWidth="394.0" text="%title.label">
                     <font>
                         <Font name="System Bold Italic" size="24.0" />
                     </font>
@@ -41,7 +41,7 @@
                         </LinearGradient>
                     </fill>
                 </Circle>
-                <Line endX="100.0" layoutX="176.0" layoutY="301.0" startX="-100.0" strokeWidth="2.0">
+                <Line endX="100.0" layoutX="176.0" layoutY="300.0" startX="-100.0" strokeWidth="2.0">
                     <stroke>
                         <LinearGradient endX="1.0" endY="1.0">
                             <stops>
@@ -55,7 +55,7 @@
         </AnchorPane>
         <AnchorPane prefHeight="563.0" prefWidth="501.0" style="-fx-background-color: #C0C0C0;">
             <children>
-                <Label layoutX="47.0" layoutY="88.0" text="%updateUser.Label">
+                <Label alignment="CENTER" layoutX="8.0" layoutY="88.0" prefHeight="35.0" prefWidth="479.0" text="%updateUser.Label">
                     <font>
                         <Font name="System Bold Italic" size="24.0" />
                     </font>
@@ -65,13 +65,13 @@
                 <Label layoutX="47.0" layoutY="279.0" text="%email.label" />
                 <Label layoutX="47.0" layoutY="312.0" text="%password.label" />
                 <Label layoutX="47.0" layoutY="349.0" text="%phone.number.label" />
-                <Button fx:id="updateUser" layoutX="64.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleUpdateUserButton" prefHeight="31.0" prefWidth="340.0" text="%updateUser.button" />
+                <Button fx:id="updateUser" layoutX="28.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleUpdateUserButton" prefHeight="31.0" prefWidth="419.0" text="%updateUser.button" />
                 <TextField fx:id="firstNameTF" layoutX="202.0" layoutY="201.0" prefHeight="31.0" prefWidth="220.0" promptText="%first.name.prompt" />
                 <TextField fx:id="lastNameTF" layoutX="202.0" layoutY="236.0" prefHeight="31.0" prefWidth="220.0" promptText="%last.name.prompt" />
                 <TextField fx:id="emailTF" layoutX="202.0" layoutY="274.0" prefHeight="31.0" prefWidth="220.0" promptText="%email.prompt" />
                 <PasswordField fx:id="passwordTF" layoutX="202.0" layoutY="307.0" prefHeight="31.0" prefWidth="220.0" promptText="%password.prompt" />
                 <TextField fx:id="phoneNumberTF" layoutX="202.0" layoutY="344.0" prefHeight="31.0" prefWidth="220.0" promptText="%phone.number.prompt" />
-                <Button fx:id="returnToManagerAnalyticsButton" layoutX="64.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleReturnToManagerAnalyticsButton" prefHeight="31.0" prefWidth="340.0" text="%goBackToManagerAnalytics.button" />
+                <Button fx:id="returnToManagerAnalyticsButton" layoutX="28.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleReturnToManagerAnalyticsButton" prefHeight="31.0" prefWidth="419.0" text="%goBackToManagerAnalytics.button" />
             <Label layoutX="47.0" layoutY="170.0" text="%userId.label" />
             <TextField fx:id="idTF" layoutX="202.0" layoutY="165.0" prefHeight="31.0" prefWidth="220.0" promptText="%id.prompt" />
             <Label fx:id="displayLabel" layoutX="167.0" layoutY="400.0">
