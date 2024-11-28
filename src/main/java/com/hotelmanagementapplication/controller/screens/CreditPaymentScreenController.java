@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
 public class CreditPaymentScreenController {
     @FXML
     private TextField creditCardNumberTF;
@@ -29,7 +28,6 @@ public class CreditPaymentScreenController {
     private TextField securityCodeTF;
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
-
 
     /**
      * Method will switch back to the welcome screen

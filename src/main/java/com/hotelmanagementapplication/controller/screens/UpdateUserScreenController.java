@@ -37,7 +37,6 @@ public class UpdateUserScreenController {
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
     private final ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
 
-
     public void handleUpdateUserButton(ActionEvent actionEvent) {
         if (validate()) {
             String id = idTF.getText();

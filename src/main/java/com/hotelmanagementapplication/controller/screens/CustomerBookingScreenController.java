@@ -40,6 +40,7 @@ public class CustomerBookingScreenController implements Initializable {
         String formattedMessage = MessageFormat.format(message, currentUserName);
         welcomeCustomerLabel.setText(formattedMessage);
     }
+
     /**
      * Button will set the vBox and list view visible. It will update the list view by retrieving data from the database for the rooms
      *

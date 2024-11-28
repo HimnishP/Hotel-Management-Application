@@ -27,6 +27,10 @@ public class ScreenHandler {
         primaryStage.show();
     }
 
+    /**
+     * Method will retrieve the current ResourceBundle
+     * @return ResourceBundle
+     */
     public static ResourceBundle getResourceBundle() {
         Locale locale = LocaleSingleton.getInstance().getCurrentLocale();
         String baseName = "messages." + locale.getLanguage() + "_" + locale.getCountry().toLowerCase();

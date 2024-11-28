@@ -26,6 +26,10 @@ public class HotelManagementSystem {
         roomSystem = new RoomSystem();
     }
 
+    /**
+     * Method will get the instance of system
+     * @return The instance
+     */
     public static HotelManagementSystem getInstance() {
         if (instance == null) {
             synchronized (HotelManagementSystem.class) {

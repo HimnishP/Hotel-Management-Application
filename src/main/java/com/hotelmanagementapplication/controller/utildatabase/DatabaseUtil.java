@@ -40,7 +40,6 @@ public class DatabaseUtil {
         }
     }
 
-
     /**
      * Helper method for methods requiring executing update (UPDATE,DELETE,ALTER,CREATE,DROP)
      *
@@ -126,7 +125,6 @@ public class DatabaseUtil {
         }
         return resultList;
     }
-
 
     /**
      * Method will return user object
@@ -268,7 +266,7 @@ public class DatabaseUtil {
                 phoneLabel, phone,
                 passwordLabel, password);
     }
-// For the Room ----------------------------------------------------
+
     /**
      * Method will return Room object
      *
@@ -297,7 +295,7 @@ public class DatabaseUtil {
         Room room = mapRoom(rs);
         return new DoubleBed(room.getPrice(), room.getStatus());
     }
-//
+
     /**
      * Method will return SingleBed object
      *
@@ -309,6 +307,4 @@ public class DatabaseUtil {
         Room room = mapRoom(rs);
         return new SingleBed(room.getPrice(), room.getStatus());
     }
-
-
 }

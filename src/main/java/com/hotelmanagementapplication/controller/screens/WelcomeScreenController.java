@@ -16,7 +16,6 @@ public class WelcomeScreenController {
     private RadioButton englishRadioButton;
 
     private static boolean isExistingUser = false;
-
     /**
      * Once the button is clicked it will load the manager login screen
      *

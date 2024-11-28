@@ -26,7 +26,6 @@ public class ManagerAnalyticsController implements Initializable {
     private ListView listView;
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
-
     /**
      * Method initialized the welcome message with username
      * @param url Url

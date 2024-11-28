@@ -2,7 +2,6 @@ package com.hotelmanagementapplication.model.payment.factory;
 
 import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
-import com.hotelmanagementapplication.model.user.User;
 
 public class PaymentFactory {
     /**

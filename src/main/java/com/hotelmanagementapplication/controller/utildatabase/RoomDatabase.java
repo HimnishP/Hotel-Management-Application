@@ -10,7 +10,6 @@ import java.util.List;
 import static com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil.*;
 
 public class RoomDatabase {
-
     /**
      * Creates Room table.
      */

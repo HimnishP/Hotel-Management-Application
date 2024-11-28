@@ -8,7 +8,6 @@ import java.util.Locale;
 @Getter
 @Setter
 public class LocaleSingleton {
-
     private static LocaleSingleton instance;
     private Locale currentLocale;
 

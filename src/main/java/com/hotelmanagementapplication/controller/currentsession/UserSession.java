@@ -15,6 +15,10 @@ public class UserSession {
     private UserSession() {
     }
 
+    /**
+     * Method will get the UserSession
+     * @return The instance
+     */
     public static UserSession getInstance() {
         if (instance == null) {
             synchronized (UserSession.class) {
