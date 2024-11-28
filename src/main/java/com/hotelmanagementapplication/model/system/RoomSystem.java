@@ -32,11 +32,11 @@ public class RoomSystem {
     public void addRoom(Room room, String roomType) {
         executorService.submit(() -> {
             rooms.put(room.getRoomId(), room);
-            DatabaseController.insertRoom(room, roomType);
+            int roomId = DatabaseController.insertRoom(room, roomType);
             if ("SingleBed".equalsIgnoreCase(roomType)) {
-                DatabaseController.insertSingleBedRoom(room.getRoomId());
+                DatabaseController.insertSingleBedRoom(roomId);
             } else if ("DoubleBed".equalsIgnoreCase(roomType)) {
-                DatabaseController.insertDoubleBedRoom(room.getRoomId());
+                DatabaseController.insertDoubleBedRoom(roomId);
             } else {
                 throw new IllegalArgumentException("Invalid room type: " + roomType);
             }
