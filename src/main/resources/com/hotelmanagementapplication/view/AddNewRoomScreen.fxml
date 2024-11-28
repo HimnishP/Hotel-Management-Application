@@ -60,12 +60,20 @@
                         <Font name="System Bold Italic" size="24.0" />
                     </font>
                 </Label>
-                <Label layoutX="54.0" layoutY="254.0" text="%email.label" />
-                <Label layoutX="54.0" layoutY="316.0" text="%password.label" />
-                <TextField fx:id="emailTB" layoutX="175.0" layoutY="249.0" prefHeight="31.0" prefWidth="310.0" promptText="%email.prompt" />
-                <Button fx:id="validateButton" layoutX="124.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleValidateButton" prefHeight="31.0" prefWidth="264.0" text="%validate.button" />
-                <PasswordField fx:id="passwordTB" layoutX="175.0" layoutY="311.0" prefHeight="31.0" prefWidth="310.0" promptText="%password.prompt" />
-                <Button layoutX="124.0" layoutY="475.0" mnemonicParsing="false" onAction="#handleGoBackToWelcomeScreen" prefHeight="31.0" prefWidth="264.0" text="%goBackToWelcomeScreen.button" />
+                <Button fx:id="validateButton" layoutX="124.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleValidateButton" prefHeight="31.0" prefWidth="264.0" text="%validate.button" />
+                <Button layoutX="124.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleGoBackToWelcomeScreen" prefHeight="31.0" prefWidth="264.0" text="%goBackToManagerAnalytics.button" />
+                <Label fx:id="displayLabel" alignment="CENTER" layoutY="416.0" prefHeight="21.0" prefWidth="504.0">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            <RadioButton layoutX="69.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleSingleBed" text="%singleBed" />
+            <RadioButton layoutX="294.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleDoubleBed" text="%doubleBed" />
+            <Label alignment="CENTER" layoutX="2.0" layoutY="261.0" prefHeight="21.0" prefWidth="501.0" text="%selectStatus" />
+            <RadioButton layoutX="69.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleAvailable" text="%available" />
+            <RadioButton layoutX="299.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleBooked" text="%booked" />
+            <Label alignment="CENTER" layoutX="2.0" layoutY="347.0" prefHeight="21.0" prefWidth="212.0" text="%price" />
+            <TextField fx:id="priceTF" layoutX="223.0" layoutY="342.0" prefHeight="31.0" prefWidth="264.0" promptText="\%price.prompt" />
             </children></AnchorPane>
     </children>
 </HBox>
