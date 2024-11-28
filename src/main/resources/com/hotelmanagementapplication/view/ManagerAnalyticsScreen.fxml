@@ -12,7 +12,7 @@
             <Button fx:id="viewAllUsersButton" layoutX="53.0" layoutY="159.0" mnemonicParsing="false" onAction="#handleViewAllUsersButton" prefHeight="31.0" prefWidth="354.0" text="%viewAllUsers" />
             <Button fx:id="viewRoomStatusesButton" layoutX="53.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleViewRoomStatusesButton" prefHeight="31.0" prefWidth="354.0" text="%viewRoomStatuses" />
             <Button fx:id="updateProfileButton" layoutX="53.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleUpdateProfileButton" prefHeight="31.0" prefWidth="354.0" text="%updateProfile" />
-            <Label layoutX="141.0" layoutY="35.0" text="%selectOption">
+            <Label fx:id="helloManagerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-5.0" layoutY="35.0" prefHeight="35.0" prefWidth="900.0" text="%helloManager">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
