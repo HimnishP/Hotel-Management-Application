@@ -1,5 +1,6 @@
 package com.hotelmanagementapplication.controller.screens;
 
+import com.hotelmanagementapplication.controller.utildatabase.DatabaseUtil;
 import com.hotelmanagementapplication.controller.utildatabase.PaymentDatabase;
 import com.hotelmanagementapplication.controller.utildatabase.RoomDatabase;
 import com.hotelmanagementapplication.controller.utildatabase.UserDatabase;
@@ -339,5 +340,13 @@ public class DatabaseController {
      */
     public static void alterRoom(int roomId, Room room) {
         RoomDatabase.alterRoom(roomId, room);
+    }
+
+    /**
+     * Drops table
+     * @param tableName Table
+     */
+    public static void dropTable(String tableName) {
+        DatabaseUtil.dropTable(tableName);
     }
 }
