@@ -183,7 +183,7 @@ public class HotelManagementSystem {
      * @param password The password
      * @return The type of user found
      */
-    public String validateExistingCustomer(String email, String password) {
+    public User validateExistingCustomer(String email, String password) {
         try {
             return userSystem.validateAndReturnUserType(email, password).get();
         } catch (InterruptedException | ExecutionException e) {

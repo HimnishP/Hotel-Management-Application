@@ -1,9 +1,11 @@
 package com.hotelmanagementapplication.controller.screens;
 
+import com.hotelmanagementapplication.controller.currentsession.UserSession;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -11,8 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 
-public class CustomerBookingScreenController {
+public class CustomerBookingScreenController implements Initializable {
     @FXML
     private Label welcomeCustomerLabel;
     @FXML
@@ -21,16 +26,23 @@ public class CustomerBookingScreenController {
     private ListView listView;
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        resourceBundle = ScreenHandler.getResourceBundle();
+        String currentUserName = UserSession.getInstance().getCurrentUser().getFullName();
+        String message = resourceBundle.getString("helloManager");
+        String formattedMessage = MessageFormat.format(message, currentUserName);
+        welcomeCustomerLabel.setText(formattedMessage);
+    }
     /**
      * Button will set the vBox and list view visible. It will update the list view by retrieving data from the database for the rooms
      *
      * @param actionEvent button click
      */
     public void handleSingleBedButton(ActionEvent actionEvent) {
-        //TODO implement DB to retrieve data here
-        // Simulated data for testing (replace with DB call later)
         listView.getItems().clear();
-        listView.getItems().addAll("Single Room 101", "Single Room 102", "Single Room 103");
+        listView.getItems().addAll(hotelManagementSystem.getAllSingleBedRooms());
         vBox.setVisible(true);
         listView.setVisible(true);
     }
@@ -41,10 +53,8 @@ public class CustomerBookingScreenController {
      * @param actionEvent button click
      */
     public void handleDoubleBedButton(ActionEvent actionEvent) {
-        //TODO implement DB to retrieve data here
-        // Simulated data for testing (replace with DB call later)
         listView.getItems().clear(); // Clear any previous items
-        listView.getItems().addAll("Double Room 201", "Double Room 202", "Double Room 203");
+        listView.getItems().addAll(hotelManagementSystem.getAllDoubleBedRooms());
         vBox.setVisible(true);
         listView.setVisible(true);
     }
