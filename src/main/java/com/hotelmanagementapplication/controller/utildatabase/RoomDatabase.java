@@ -32,8 +32,9 @@ public class RoomDatabase {
     public static void createDoubleBedRoomTable() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS DoubleBeds (
-                room_Id INTEGER PRIMARY KEY,
-                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id)
+                double_bed_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                room_Id INTEGER NOT NULL,
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id) ON DELETE CASCADE
                 )
                 """;
         executeUpdate(sql);
@@ -45,8 +46,9 @@ public class RoomDatabase {
     public static void createSingleBedRoomTable() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS SingleBeds (
-                room_Id INTEGER PRIMARY KEY,
-                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id)
+                single_bed_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                room_Id INTEGER NOT NULL,
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id) ON DELETE CASCADE
                 )
                 """;
         executeUpdate(sql);

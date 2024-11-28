@@ -30,11 +30,16 @@ public class DatabaseUtil {
      */
     public static Connection connect() {
         try {
-            return DriverManager.getConnection(PATH_DATABASE);
+            Connection conn = DriverManager.getConnection(PATH_DATABASE);
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("PRAGMA foreign_keys = ON;"); // ensures that when FK is deleted, it will be deleted on all tables
+            }
+            return conn;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to connect to the database.", e);
         }
     }
+
 
     /**
      * Helper method for methods requiring executing update (UPDATE,DELETE,ALTER,CREATE,DROP)
@@ -53,6 +58,14 @@ public class DatabaseUtil {
         } catch (SQLException e) {
             throw new RuntimeException("Error executing SQL: " + sql, e);
         }
+    }
+
+    /**
+     * Drops table
+     * @param tableName The table
+     */
+    public static void dropTable(String tableName) {
+        executeUpdate("DROP TABLE IF EXISTS "+tableName);
     }
 
     /**

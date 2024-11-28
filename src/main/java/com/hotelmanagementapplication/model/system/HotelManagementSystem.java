@@ -1,5 +1,6 @@
 package com.hotelmanagementapplication.model.system;
 
+import com.hotelmanagementapplication.controller.screens.DatabaseController;
 import com.hotelmanagementapplication.model.payment.CreditCardPayment;
 import com.hotelmanagementapplication.model.payment.DebitCardPayment;
 import com.hotelmanagementapplication.model.payment.Payment;
@@ -34,6 +35,48 @@ public class HotelManagementSystem {
             }
         }
         return instance;
+    }
+
+    /**
+     * Removes all tables
+     */
+    public void clearDatabase() {
+        DatabaseController.dropTable("User");
+        DatabaseController.dropTable("CreditCardPayment");
+        DatabaseController.dropTable("Customer");
+        DatabaseController.dropTable("DebitCardPayment");
+        DatabaseController.dropTable("DoubleBeds");
+        DatabaseController.dropTable("Manager");
+        DatabaseController.dropTable("Payment");
+        DatabaseController.dropTable("Rooms");
+        DatabaseController.dropTable("SingleBeds");
+    }
+
+    /**
+     * Create all tables
+     */
+    public void createUserTables() {
+        DatabaseController.createTableUser();
+        DatabaseController.createTableManager();
+        DatabaseController.createTableCustomer();
+    }
+
+    /**
+     * Create all room tables
+     */
+    public void createRoomTables() {
+        DatabaseController.createTableRoom();
+        DatabaseController.createTableDoubleBedRoom();
+        DatabaseController.createTableSingleBedRoom();
+    }
+
+    /**
+     * Create all payment tables
+     */
+    public void createPaymentTables() {
+        DatabaseController.createTablePayment();
+        DatabaseController.createTableCreditCardPayment();
+        DatabaseController.createTableDebitCardPayment();
     }
 
     /**
