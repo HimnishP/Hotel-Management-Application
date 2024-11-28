@@ -4,6 +4,7 @@ module com.hotelmanagementapplication.hotelmanagementapplication {
     requires static lombok;
     requires java.sql;
     requires javafx.graphics;
+    requires java.desktop;
 
 
     exports com.hotelmanagementapplication;

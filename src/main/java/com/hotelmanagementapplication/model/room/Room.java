@@ -15,6 +15,7 @@ public class Room {
     private double price;
     private Status status;
     private User purchasedBy;
+    private static int userId;
 
     public Room(double price, Status status) {
         this.roomId = ++idCounter;
@@ -28,6 +29,13 @@ public class Room {
         this.status = roomStatus;
     }
 
+    public Room(int roomId, double roomPrice, Status roomStatus, int userId) {
+        this.roomId = roomId;
+        this.price = roomPrice;
+        this.status = roomStatus;
+        Room.userId = userId;
+    }
+
     /**
      * Assigns a room to a user
      *
@@ -38,6 +46,7 @@ public class Room {
         if (room.getStatus() == Status.AVAILABLE) {
             room.setPurchasedBy(user);
             room.setStatus(Status.BOOKED);
+            userId = user.getUserId();
         } else {
             throw new IllegalStateException("Room is not available for purchase");
         }

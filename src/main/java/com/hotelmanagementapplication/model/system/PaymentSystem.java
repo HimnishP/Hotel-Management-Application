@@ -52,16 +52,18 @@ public class PaymentSystem {
      */
     public Future<Void> addPayment(Payment payment) {
         return EXECUTOR_SERVICE.submit(() -> {
-            if (payment instanceof CreditCardPayment) {
-                DatabaseController.insertPayment(payment, "CreditCardPayment");
-                DatabaseController.insertCreditCardPayment((CreditCardPayment) payment);
-            } else if (payment instanceof DebitCardPayment) {
-                DatabaseController.insertPayment(payment, "DebitCardPayment");
-                DatabaseController.insertDebitCardPayment((DebitCardPayment) payment);
-            } else {
-                throw new IllegalArgumentException("Invalid payment type");
+            String paymentType = (payment instanceof CreditCardPayment) ? "CreditCardPayment" : "DebitCardPayment";
+            int paymentId = DatabaseController.insertPayment(payment, paymentType);
+            if (payment instanceof CreditCardPayment creditPayment) {
+                creditPayment.setPaymentId(paymentId);
+                DatabaseController.insertCreditCardPayment(creditPayment);
+                cardPaymentMap.put(paymentId, creditPayment);
+            } else if (payment instanceof DebitCardPayment debitPayment) {
+                debitPayment.setPaymentId(paymentId);
+                DatabaseController.insertDebitCardPayment(debitPayment);
+                debitCardPaymentMap.put(paymentId, debitPayment);
             }
-            paymentMap.put(payment.getUserId(), payment);
+            paymentMap.put(paymentId, payment);
             return null;
         });
     }

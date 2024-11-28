@@ -32,7 +32,8 @@ public class PaymentDatabase {
     public static void createTableDebitCardPayment() {
         String sql = """
                 CREATE TABLE IF NOT EXISTS DebitCardPayment (
-                    paymentId INTEGER PRIMARY KEY,
+                    debitCardId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    paymentId INTEGER NOT NULL,
                     debitCardNumber TEXT NOT NULL,
                     cardHolderName TEXT NOT NULL,
                     expirationDate TEXT NOT NULL,
@@ -49,7 +50,8 @@ public class PaymentDatabase {
     public static void createTableCreditCardPayment() {
         String sql = """
                  CREATE TABLE IF NOT EXISTS CreditCardPayment (
-                     paymentId INTEGER PRIMARY KEY,
+                     creditCardId INTEGER PRIMARY KEY AUTOINCREMENT,
+                     paymentId INTEGER NOT NULL,
                      creditCardNumber TEXT NOT NULL,
                      cardHolderName TEXT NOT NULL,
                      expirationDate TEXT NOT NULL,
@@ -82,7 +84,6 @@ public class PaymentDatabase {
      * @return The generated payment ID.
      */
     public static int insertPayment(Payment payment, String paymentType) {
-        String sql = "INSERT INTO Payment(userId, amount, paymentDate, paymentType) VALUES(?, ?, ?, ?)";
         return insertPayment(payment.getUserId(), payment.getAmount(), payment.getPaymentDate(), paymentType);
     }
 
