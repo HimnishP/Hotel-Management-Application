@@ -1,7 +1,13 @@
 package com.hotelmanagementapplication.controller.screens;
 
+import com.hotelmanagementapplication.controller.currentsession.UserSession;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
+import com.hotelmanagementapplication.model.payment.CreditCardPayment;
+import com.hotelmanagementapplication.model.payment.Payment;
 import com.hotelmanagementapplication.model.payment.utility.PaymentValidationUtil;
+import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.system.HotelManagementSystem;
+import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class CreditPaymentScreenController {
     @FXML
@@ -20,6 +27,9 @@ public class CreditPaymentScreenController {
     private TextField expirationDateTF;
     @FXML
     private TextField securityCodeTF;
+
+    private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+
 
     /**
      * Method will switch back to the welcome screen
@@ -57,7 +67,25 @@ public class CreditPaymentScreenController {
             showAlert(Alert.AlertType.ERROR, "Invalid Cardholder Name", "Please enter the cardholder's name.");
             return;
         }
-        showAlert(Alert.AlertType.INFORMATION, "Payment Successful", "Your payment was successfully processed.");
+        User user = UserSession.getInstance().getCurrentUser();
+        Room room = UserSession.getInstance().getCurrentRoom();
+        Payment creditCardPayment = new CreditCardPayment(user.getUserId(), room.getPrice(), creditCardNumber, cardHolderName, expirationDate, securityCode);
+        HotelManagementSystem.getInstance().addPayment(creditCardPayment);
+        Room.assignRoomToUser(room, user);
+        showRoomAndPaymentInfo();
+    }
+
+    /**
+     * Helper method to display room and payment details after successful payment.
+     */
+    private void showRoomAndPaymentInfo() {
+        Room currentRoom = UserSession.getInstance().getCurrentRoom();
+        double price = currentRoom.getPrice();
+        String cardHolderName = cardHolderNameTF.getText();
+        String roomDetails = "Room ID: " + currentRoom.getRoomId() + "\n" + "Price: $" + currentRoom.getPrice();
+        String paymentDetails = "Payment Method: Credit Card\n" + "Card Holder: " + cardHolderName + "\n" + "Amount: $" + price;
+        String message = "Payment Successful!\n\n" + "Room Details:\n" + roomDetails + "\n\n" + "Payment Details:\n" + paymentDetails;
+        showAlert(Alert.AlertType.INFORMATION, "Your payment has been processed successfully!", message);
     }
 
     /**
