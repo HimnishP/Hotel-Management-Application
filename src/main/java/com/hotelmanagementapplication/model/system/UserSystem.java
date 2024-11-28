@@ -179,18 +179,18 @@ public class UserSystem {
      * @param password The password
      * @return The type of user found
      */
-    public Future<String> validateAndReturnUserType(String email, String password) {
+    public Future<User> validateAndReturnUserType(String email, String password) {
         return EXECUTOR_SERVICE.submit(() -> {
             return userMap.values().stream()
                     .filter(user -> user.getEmail().equals(email)
                             && user.getPassword().equals(password))
                     .map(user -> {
                         if (user instanceof Manager) {
-                            return "Manager";
+                            return (Manager) user;
                         } else if (user instanceof Customer) {
-                            return "Customer";
+                            return (Customer) user;
                         }
-                        return "Unknown";
+                        return null;
                     })
                     .findFirst()
                     .orElse(null);

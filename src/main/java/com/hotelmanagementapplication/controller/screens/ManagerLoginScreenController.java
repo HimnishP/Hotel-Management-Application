@@ -1,5 +1,6 @@
 package com.hotelmanagementapplication.controller.screens;
 
+import com.hotelmanagementapplication.controller.currentsession.UserSession;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import com.hotelmanagementapplication.model.user.Manager;
@@ -45,6 +46,7 @@ public class ManagerLoginScreenController {
             String phoneNumber = phoneNumberTF.getText();
             User manager = new Manager(firstName, lastName, email, phoneNumber, password);
             hotelManagementSystem.addUser(manager);
+            UserSession.getInstance().setCurrentUser(manager);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml");
         }

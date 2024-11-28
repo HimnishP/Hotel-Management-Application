@@ -1,7 +1,11 @@
 package com.hotelmanagementapplication.controller.screens;
 
+import com.hotelmanagementapplication.controller.currentsession.UserSession;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
+import com.hotelmanagementapplication.model.user.Customer;
+import com.hotelmanagementapplication.model.user.Manager;
+import com.hotelmanagementapplication.model.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -27,12 +31,14 @@ public class ExistingUserController {
      */
     public void handleValidateButton(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        String userType = hotelManagementSystem.validateExistingCustomer(emailTB.getText(), passwordTB.getText());
-        if (userType == null || userType.equals("Unknown")) {
+        User user = hotelManagementSystem.validateExistingCustomer(emailTB.getText(), passwordTB.getText());
+        if (user == null) {
             showAlertBox();
-        } else if (userType.equals("Customer")) {
+        } else if (user instanceof Customer) {
+            UserSession.getInstance().setCurrentUser(user);
             ScreenHandler.switchScreens(stage, "CustomerBookingScreen.fxml");
-        } else if (userType.equals("Manager")) {
+        } else if (user instanceof Manager) {
+            UserSession.getInstance().setCurrentUser(user);
             ScreenHandler.switchScreens(stage, "ManagerAnalyticsScreen.fxml");
         }
     }
