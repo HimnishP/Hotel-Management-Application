@@ -3,6 +3,7 @@ package com.hotelmanagementapplication.controller.screens;
 import com.hotelmanagementapplication.controller.currentsession.UserSession;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
 import com.hotelmanagementapplication.model.room.Room;
+import com.hotelmanagementapplication.model.room.Status;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,8 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class CustomerBookingScreenController implements Initializable {
+    @FXML
+    private Label displayLabel;
     @FXML
     private Label welcomeCustomerLabel;
     @FXML
@@ -73,11 +76,17 @@ public class CustomerBookingScreenController implements Initializable {
 
     /**
      * Method will store the room the user has selected
+     * Method will also display an error message in a label if user selects a room which is booked
      *
      * @param actionEvent On mouse click (selecting from list view)
      */
     public void handleSelectedRoom(MouseEvent actionEvent) {
+        ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
         Room selectedRoom = (Room) listView.getSelectionModel().getSelectedItem();
         UserSession.getInstance().setCurrentRoom(selectedRoom);
+        Status status = selectedRoom.getStatus();
+        if (status == Status.BOOKED) {
+            displayLabel.setText(resourceBundle.getString("displayErrorLabel"));
+        }
     }
 }
