@@ -81,7 +81,9 @@ public class ManagerAnalyticsController2 implements Initializable {
      *
      * @param actionEvent The event
      */
-    public void handleAddRoomButton(ActionEvent actionEvent) {
+    public void handleAddRoomButton(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "AddNewRoomScreen.fxml");
     }
 
     /**
@@ -89,6 +91,8 @@ public class ManagerAnalyticsController2 implements Initializable {
      *
      * @param actionEvent The event
      */
-    public void handleDeleteRoomButton(ActionEvent actionEvent) {
+    public void handleDeleteRoomButton(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "RemoveRoomScreen.fxml");
     }
 }
