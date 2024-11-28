@@ -184,7 +184,8 @@ public class ManagerAnalyticsController implements Initializable {
      *
      * @param actionEvent the event triggered by the "Switch Screens" button click
      */
-    public void switchScreensToManagerAnalytics2(ActionEvent actionEvent) {
-
+    public void switchScreensToManagerAnalytics2(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        ScreenHandler.switchScreens(primaryStage, "ManagerAnalyticsScreen2.fxml");
     }
 }
