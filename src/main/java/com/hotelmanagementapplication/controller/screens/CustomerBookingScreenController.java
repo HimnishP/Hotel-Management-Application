@@ -2,6 +2,7 @@ package com.hotelmanagementapplication.controller.screens;
 
 import com.hotelmanagementapplication.controller.currentsession.UserSession;
 import com.hotelmanagementapplication.controller.l10n_i18n.ScreenHandler;
+import com.hotelmanagementapplication.model.room.Room;
 import com.hotelmanagementapplication.model.system.HotelManagementSystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -67,5 +69,15 @@ public class CustomerBookingScreenController implements Initializable {
     public void handleProcessPayments(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         ScreenHandler.switchScreens(primaryStage, "PaymentSelectionScreen.fxml");
+    }
+
+    /**
+     * Method will store the room the user has selected
+     *
+     * @param actionEvent On mouse click (selecting from list view)
+     */
+    public void handleSelectedRoom(MouseEvent actionEvent) {
+        Room selectedRoom = (Room) listView.getSelectionModel().getSelectedItem();
+        UserSession.getInstance().setCurrentRoom(selectedRoom);
     }
 }

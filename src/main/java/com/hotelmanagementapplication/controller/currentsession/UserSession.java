@@ -1,5 +1,6 @@
 package com.hotelmanagementapplication.controller.currentsession;
 
+import com.hotelmanagementapplication.model.room.Room;
 import com.hotelmanagementapplication.model.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 public class UserSession {
     private static UserSession instance;
     private User currentUser;
+    private Room currentRoom;
 
     private UserSession() {
     }
