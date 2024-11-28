@@ -99,10 +99,7 @@ public class RoomSystem {
      * @return A Future containing a list of single-bed rooms.
      */
     public Future<List<SingleBed>> getAllSingleBedRooms() {
-        return executorService.submit(() -> rooms.values().stream()
-                .filter(room -> room instanceof SingleBed)
-                .map(room -> (SingleBed) room)
-                .toList());
+        return executorService.submit(DatabaseController::selectSingleRooms);
     }
 
     /**
@@ -111,10 +108,7 @@ public class RoomSystem {
      * @return A Future containing a list of double-bed rooms.
      */
     public Future<List<DoubleBed>> getAllDoubleBedRooms() {
-        return executorService.submit(() -> rooms.values().stream()
-                .filter(room -> room instanceof DoubleBed)
-                .map(room -> (DoubleBed) room)
-                .toList());
+        return executorService.submit(DatabaseController::selectDoubleRooms);
     }
 
     /**
