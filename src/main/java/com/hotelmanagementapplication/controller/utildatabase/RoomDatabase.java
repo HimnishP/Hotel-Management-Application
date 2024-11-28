@@ -33,7 +33,7 @@ public class RoomDatabase {
         String sql = """
                 CREATE TABLE IF NOT EXISTS DoubleBeds (
                 room_Id INTEGER PRIMARY KEY,
-                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id)
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id) ON DELETE CASCADE
                 )
                 """;
         executeUpdate(sql);
@@ -46,7 +46,7 @@ public class RoomDatabase {
         String sql = """
                 CREATE TABLE IF NOT EXISTS SingleBeds (
                 room_Id INTEGER PRIMARY KEY,
-                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id)
+                FOREIGN KEY (room_id) REFERENCES Rooms (room_Id) ON DELETE CASCADE
                 )
                 """;
         executeUpdate(sql);

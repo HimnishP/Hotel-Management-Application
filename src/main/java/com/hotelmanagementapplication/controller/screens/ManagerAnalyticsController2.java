@@ -75,4 +75,20 @@ public class ManagerAnalyticsController2 implements Initializable {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         ScreenHandler.switchScreens(primaryStage, "WelcomeScreen.fxml");
     }
+
+    /**
+     * Handles the event triggered when the "Add room" button is pressed
+     *
+     * @param actionEvent The event
+     */
+    public void handleAddRoomButton(ActionEvent actionEvent) {
+    }
+
+    /**
+     * Handles the event triggered when the "Add room" button is pressed
+     *
+     * @param actionEvent The event
+     */
+    public void handleDeleteRoomButton(ActionEvent actionEvent) {
+    }
 }
