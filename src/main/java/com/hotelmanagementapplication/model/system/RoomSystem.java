@@ -31,8 +31,8 @@ public class RoomSystem {
      */
     public void addRoom(Room room, String roomType) {
         executorService.submit(() -> {
-            rooms.put(room.getRoomId(), room);
             int roomId = DatabaseController.insertRoom(room, roomType);
+            rooms.put(roomId, room);
             if ("SingleBed".equalsIgnoreCase(roomType)) {
                 DatabaseController.insertSingleBedRoom(roomId);
             } else if ("DoubleBed".equalsIgnoreCase(roomType)) {
