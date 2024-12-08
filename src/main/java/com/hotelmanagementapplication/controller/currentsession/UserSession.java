@@ -17,6 +17,7 @@ public class UserSession {
 
     /**
      * Method will get the UserSession
+     *
      * @return The instance
      */
     public static UserSession getInstance() {

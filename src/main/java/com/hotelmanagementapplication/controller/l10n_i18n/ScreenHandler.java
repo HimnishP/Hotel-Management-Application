@@ -29,6 +29,7 @@ public class ScreenHandler {
 
     /**
      * Method will retrieve the current ResourceBundle
+     *
      * @return ResourceBundle
      */
     public static ResourceBundle getResourceBundle() {

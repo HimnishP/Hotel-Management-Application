@@ -24,6 +24,7 @@ public class RoomFactory {
 
     /**
      * Creates room
+     *
      * @param type Type of room
      * @param room The room
      * @return The type of room

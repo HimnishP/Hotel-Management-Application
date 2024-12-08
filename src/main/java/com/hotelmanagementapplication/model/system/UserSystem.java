@@ -117,7 +117,7 @@ public class UserSystem {
      * Updates an existing user.
      *
      * @param user the user with updated information
-     * @param id id of user
+     * @param id   id of user
      */
     public Future<Void> updateUser(int id, User user) {
         return EXECUTOR_SERVICE.submit(() -> {
@@ -183,7 +183,7 @@ public class UserSystem {
         return EXECUTOR_SERVICE.submit(() -> {
             return userMap.values().stream()
                     .filter(user -> user.getEmail().equals(email)
-                            && user.getPassword().equals(password))
+                                    && user.getPassword().equals(password))
                     .map(user -> {
                         if (user instanceof Manager) {
                             return (Manager) user;

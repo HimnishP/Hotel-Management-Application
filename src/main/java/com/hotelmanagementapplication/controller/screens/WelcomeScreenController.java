@@ -16,6 +16,7 @@ public class WelcomeScreenController {
     private RadioButton englishRadioButton;
 
     private static boolean isExistingUser = false;
+
     /**
      * Once the button is clicked it will load the manager login screen
      *
@@ -82,6 +83,7 @@ public class WelcomeScreenController {
 
     /**
      * Handle no radio button for if user is an existing one
+     *
      * @param actionEvent The event
      */
     public void handleNoRadioButton(ActionEvent actionEvent) {

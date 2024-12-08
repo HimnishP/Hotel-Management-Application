@@ -61,10 +61,11 @@ public class DatabaseUtil {
 
     /**
      * Drops table
+     *
      * @param tableName The table
      */
     public static void dropTable(String tableName) {
-        executeUpdate("DROP TABLE IF EXISTS "+tableName);
+        executeUpdate("DROP TABLE IF EXISTS " + tableName);
     }
 
     /**

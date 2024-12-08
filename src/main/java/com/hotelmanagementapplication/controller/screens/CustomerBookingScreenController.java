@@ -32,6 +32,12 @@ public class CustomerBookingScreenController implements Initializable {
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
 
+    /**
+     * initialize the form depending on the language
+     *
+     * @param url            the url
+     * @param resourceBundle the resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         resourceBundle = ScreenHandler.getResourceBundle();

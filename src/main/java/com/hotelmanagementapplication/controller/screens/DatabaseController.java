@@ -344,6 +344,7 @@ public class DatabaseController {
 
     /**
      * Drops table
+     *
      * @param tableName Table
      */
     public static void dropTable(String tableName) {

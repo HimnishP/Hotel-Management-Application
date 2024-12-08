@@ -31,6 +31,7 @@ public class ManagerLoginScreenController {
     private TextField phoneNumberTF;
 
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+
     /**
      * This button event handler will validate the customers information and switch screens to the manager analytics screen
      *

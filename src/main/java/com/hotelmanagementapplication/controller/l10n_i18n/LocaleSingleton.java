@@ -12,7 +12,7 @@ public class LocaleSingleton {
     private Locale currentLocale;
 
     private LocaleSingleton() {
-        currentLocale = Locale.of("en","us");
+        currentLocale = Locale.of("en", "us");
     }
 
     public static LocaleSingleton getInstance() {

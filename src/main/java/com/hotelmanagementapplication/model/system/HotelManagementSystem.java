@@ -28,6 +28,7 @@ public class HotelManagementSystem {
 
     /**
      * Method will get the instance of system
+     *
      * @return The instance
      */
     public static HotelManagementSystem getInstance() {
@@ -163,7 +164,7 @@ public class HotelManagementSystem {
      * Updates a user asynchronously.
      *
      * @param user the user with updated information
-     * @param id the id of the user
+     * @param id   the id of the user
      */
     public void updateUser(int id, User user) {
         userSystem.updateUser(id, user);

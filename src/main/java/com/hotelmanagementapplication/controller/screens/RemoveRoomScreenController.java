@@ -18,8 +18,10 @@ public class RemoveRoomScreenController {
     private TextField roomId;
     @FXML
     private Label displayLabel;
+
     /**
      * Method will remove room if the room is existing, if not it will display error message
+     *
      * @param actionEvent Event
      */
     public void handleValidateButton(ActionEvent actionEvent) {

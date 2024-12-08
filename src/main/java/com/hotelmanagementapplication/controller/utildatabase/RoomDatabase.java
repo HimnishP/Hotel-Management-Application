@@ -145,6 +145,7 @@ public class RoomDatabase {
 
     /**
      * Method will remove room from database
+     *
      * @param room the room
      */
     public static void removeRoom(Room room) {
@@ -154,8 +155,9 @@ public class RoomDatabase {
 
     /**
      * modifies the room specifications.
+     *
      * @param roomId the room id of the room
-     * @param room the room to modify
+     * @param room   the room to modify
      */
     public static void alterRoom(int roomId, Room room) {
         String sql = "UPDATE Rooms SET room_price = ?, room_status = ? WHERE room_id = ?";

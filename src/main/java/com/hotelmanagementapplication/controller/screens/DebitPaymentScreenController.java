@@ -26,6 +26,7 @@ public class DebitPaymentScreenController {
     private TextField securityCodeTF;
     @FXML
     private TextField debitCardNumberTF;
+
     /**
      * Validates the entered debit card details and processes the payment.
      *

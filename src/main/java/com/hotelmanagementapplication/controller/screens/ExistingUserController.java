@@ -22,6 +22,7 @@ public class ExistingUserController {
     private TextField passwordTB;
 
     HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
+
     /**
      * Method will check if the user is existing in the database, it will then switch screens accordingly
      *

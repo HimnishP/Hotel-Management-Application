@@ -37,6 +37,11 @@ public class UpdateUserScreenController {
     private final HotelManagementSystem hotelManagementSystem = HotelManagementSystem.getInstance();
     private final ResourceBundle resourceBundle = ScreenHandler.getResourceBundle();
 
+    /**
+     * a form for the user update comes when button is pressed
+     *
+     * @param actionEvent the event
+     */
     public void handleUpdateUserButton(ActionEvent actionEvent) {
         if (validate()) {
             String id = idTF.getText();
@@ -52,6 +57,12 @@ public class UpdateUserScreenController {
         }
     }
 
+    /**
+     * Switches to teh ManagerAnalytics Screen when button is pressed.
+     *
+     * @param actionEvent the event
+     * @throws IOException the exception
+     */
     public void handleReturnToManagerAnalyticsButton(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         ScreenHandler.switchScreens(primaryStage, "ManagerAnalyticsScreen.fxml");
