@@ -65,11 +65,12 @@ public class CreditCardPayment extends Payment implements PaymentMethod {
      */
     @Override
     public boolean validatePayment(double amount) {
-        if (PaymentValidationUtil.isValidCardNumber(creditCardNumber) && PaymentValidationUtil.isValidExpirationDate(expirationDate) && PaymentValidationUtil.isValidSecurityCode(securityCode)) {
+        if (PaymentValidationUtil.isValidCardNumber(creditCardNumber) && PaymentValidationUtil.isValidExpirationDate(expirationDate) && PaymentValidationUtil.isValidSecurityCode(securityCode) && PaymentValidationUtil.isValidAmount(amount)) {
             System.out.println(amount + " is processed for your debit card.");
             return true;
         }
         System.out.println("Payment validation failed for debit card.");
         return false;
     }
+
 }

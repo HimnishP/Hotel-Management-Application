@@ -13,4 +13,9 @@ public class PaymentValidationUtil {
     public static boolean isValidSecurityCode(String securityCode) {
         return securityCode != null && securityCode.matches("\\d{3}"); // 3-digit code
     }
+
+    public static boolean isValidAmount(double amount) {
+        return amount > 0;
+    }
+
 }
