@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="Made a unit test for CreditCardPayment and DebitCardPayment">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/hotelmanagementapplication/model/payment/utility/PaymentValidationUtilTest.java" afterDir="false" />
+    <list default="true" id="147e375b-7d39-483f-8184-f118b8eabf47" name="Changes" comment="Made a unit test for PaymentValidationUtil">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/hotelmanagementapplication/model/room/factory/RoomFactoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +83,7 @@
     "JUnit.PaymentServiceTest.processPayment1.executor": "Run",
     "JUnit.PaymentServiceTest.processPayment5.executor": "Run",
     "JUnit.PaymentValidationUtilTest.executor": "Run",
+    "JUnit.RoomFactoryTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
@@ -116,6 +117,7 @@
       <recent name="com.hotelmanagementapplication" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.hotelmanagementapplication.model.room.factory" />
       <recent name="com.hotelmanagementapplication.model.payment.utility" />
       <recent name="com.hotelmanagementapplication.model.payment" />
       <recent name="com.hotelmanagementapplication.model.payment.factory" />
@@ -125,7 +127,7 @@
       <recent name="com.hotelmanagementapplication" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PaymentValidationUtilTest">
+  <component name="RunManager" selected="JUnit.RoomFactoryTest.createRoom5">
     <configuration name="WelcomeScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.hotelmanagementapplication.WelcomeScreen" />
       <module name="HotelManagementApplication" />
@@ -135,21 +137,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CreditCardPaymentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HotelManagementApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.hotelmanagementapplication.model.payment.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.hotelmanagementapplication.model.payment" />
-      <option name="MAIN_CLASS_NAME" value="com.hotelmanagementapplication.model.payment.CreditCardPaymentTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -185,22 +172,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PaymentServiceTest.processPayment5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HotelManagementApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.hotelmanagementapplication.model.payment.factory.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.hotelmanagementapplication.model.payment.factory" />
-      <option name="MAIN_CLASS_NAME" value="com.hotelmanagementapplication.model.payment.factory.PaymentServiceTest" />
-      <option name="METHOD_NAME" value="processPayment5" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PaymentValidationUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HotelManagementApplication" />
       <extension name="coverage">
@@ -216,13 +187,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RoomFactoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HotelManagementApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hotelmanagementapplication.model.room.factory.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hotelmanagementapplication.model.room.factory" />
+      <option name="MAIN_CLASS_NAME" value="com.hotelmanagementapplication.model.room.factory.RoomFactoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RoomFactoryTest.createRoom5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HotelManagementApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hotelmanagementapplication.model.room.factory.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hotelmanagementapplication.model.room.factory" />
+      <option name="MAIN_CLASS_NAME" value="com.hotelmanagementapplication.model.room.factory.RoomFactoryTest" />
+      <option name="METHOD_NAME" value="createRoom5" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RoomFactoryTest.createRoom5" />
+        <item itemvalue="JUnit.RoomFactoryTest" />
         <item itemvalue="JUnit.PaymentValidationUtilTest" />
         <item itemvalue="JUnit.DebitCardPaymentTest" />
         <item itemvalue="JUnit.CreditCardPaymentTest.validatePayment5" />
-        <item itemvalue="JUnit.CreditCardPaymentTest" />
-        <item itemvalue="JUnit.PaymentServiceTest.processPayment5" />
       </list>
     </recent_temporary>
   </component>
@@ -254,7 +256,7 @@
       <workItem from="1732652087696" duration="1200000" />
       <workItem from="1732716556880" duration="4406000" />
       <workItem from="1732721418437" duration="2353000" />
-      <workItem from="1733612200698" duration="3320000" />
+      <workItem from="1733612200698" duration="3638000" />
     </task>
     <task id="LOCAL-00001" summary="-Added the .gitignore file&#10;-Added the README.md file&#10;-Implemented the MVC architecture&#10;-Developed basic GUI's ( WelcomeScreen , CustomerLoginScreen , ManagerLoginScreen )">
       <option name="closed" value="true" />
@@ -456,7 +458,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733623170927</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Made a unit test for PaymentValidationUtil">
+      <option name="closed" value="true" />
+      <created>1733623667435</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1733623667435</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,7 +484,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-.gitignorefile" />
     <MESSAGE value="-formated code &#10;-added extra comments&#10;-including pom.xml and module-info.java files in version control" />
     <MESSAGE value="-modified .gitignore file" />
     <MESSAGE value="-Added a new GUI screen which contains the staff/manager's analytic scree (where he can view list of customers , payments , check room statues and modify his own profile )" />
@@ -499,6 +508,7 @@
     <MESSAGE value="Made PaymentFactoryTest unit test." />
     <MESSAGE value="Made PaymentServiceTest unit test." />
     <MESSAGE value="Made a unit test for CreditCardPayment and DebitCardPayment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made a unit test for CreditCardPayment and DebitCardPayment" />
+    <MESSAGE value="Made a unit test for PaymentValidationUtil" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made a unit test for PaymentValidationUtil" />
   </component>
 </project>
